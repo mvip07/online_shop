@@ -1,35 +1,35 @@
 const getDb = require("../util/db").getDb;
 const { ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
-const Product = require("../models/product");
+const Advertising = require("../models/advertising");
 
-exports.getProducts = (req, res) => {
-    Product.getProducts().then(products => {
+exports.getAdvertisings = (req, res) => {
+    Advertising.getAdvertising().then(products => {
         return res.json(products);
     });
 };
 
-exports.getProductDetail = (req, res) => {
-    Product.getProductDetail(req.params.id)
+exports.getAdvertisingDetail = (req, res) => {
+    Advertising.getAdvertisingDetail(req.params.id)
         .then(product => res.send(product));
 }
 
-exports.createProduct = (req, res) => {
-    const { title, brand, color, price, stars, category, discount, model, quantity, description, type } = req.body;
+exports.createAdvertising = (req, res) => {
+    const { firma, type } = req.body;
 
     try {
-        const product = new Product(title, brand, color, price, stars, category, discount, model, quantity, description, type, req.file.path);
-        product.createProduct();
+        const advertising = new Advertising(firma, type, req.file.path);
+        advertising.createAdvertising();
         return res.status(200).json({ message: "You are cool!" });
     } catch (err) {
         return res.status(500).json({ err: err, message: "Something is wrong!" });
     }
 };
 
-exports.deleteProduct = (req, res) => {
+exports.deleteAdvertising = (req, res) => {
     const db = getDb();
 
-    return db.collection("Product")
+    return db.collection("Advertising")
         .deleteOne({ _id: ObjectId(req.params.id) })
         .then(() => res.status(200).json({ message: "You are cool!" }))
         .catch(() => res.status(500).json({ message: "You are not cool!" }));

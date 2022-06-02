@@ -23,7 +23,7 @@ function AdminMain() {
 
     API.get(`/blogs`).then(res => setBlogs(res.data))
 
-    API.get(`/aboutTeamMembears`).then(res => setAboutTeamMembearData(res.data))
+    API.get(`/aboutTeamMembars`).then(res => setAboutTeamMembearData(res.data))
 
     API.get(`/aboutCompanys`).then(res => setAboutCompany(res.data))
 

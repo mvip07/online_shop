@@ -4,48 +4,16 @@ export const AboutImg1 = require("../../assets/image/demo/about/about-1.jpg");
 export const AboutImg2 = require("../../assets/image/demo/about/about-2.jpg");
 export const AboutImg3 = require("../../assets/image/demo/about/about-3.jpg");
 
-// export const AboutClient1 = require("../../assets/image/demo/about/about-client-1.png")
-// export const AboutClient2 = require("../../assets/image/demo/about/about-client-2.png")
-// export const AboutClient3 = require("../../assets/image/demo/about/about-client-3.png")
-// export const AboutClient4 = require("../../assets/image/demo/about/about-client-4.png")
-// export const AboutClient5 = require("../../assets/image/demo/about/about-client-5.png")
-// export const AboutClient6 = require("../../assets/image/demo/about/about-client-6.png")
-//
-// export const AboutUsDemo3 = require("../../assets/image/demo/about/about-us-demo3.jpg")
-// export const AboutUsDemo4 = require("../../assets/image/demo/about/about-us-demo4.jpg")
-
 export const Ourmember1 = require("../../assets/image/demo/about/ourmember01.png");
 export const Ourmember2 = require("../../assets/image/demo/about/ourmember02.png");
 export const Ourmember3 = require("../../assets/image/demo/about/ourmember03.png");
 export const Ourmember4 = require("../../assets/image/demo/about/ourmember04.png");
-
-// export const WellcometoShop = require("../../assets/image/demo/about/wellcometoshop.png")
-
-// assets / image / demo / blog
-
-// export const Blo1 = require("../../assets/image/demo/blog/blo1.jpg")
-// export const Blo2 = require("../../assets/image/demo/blog/blo2.jpg")
-// export const Blo3 = require("../../assets/image/demo/blog/blo3.jpg")
-// export const Blo4 = require("../../assets/image/demo/blog/blo4.jpg")
-// export const Blo5 = require("../../assets/image/demo/blog/blo5.jpg")
 
 export const Blog1 = require("../../assets/image/demo/blog/blog1.jpg");
 export const Blog2 = require("../../assets/image/demo/blog/blog2.jpg")
 export const Blog4 = require("../../assets/image/demo/blog/blog4.jpg");
 export const Blog5 = require("../../assets/image/demo/blog/blog5.jpg");
 export const Blog6 = require("../../assets/image/demo/blog/blog6.jpg");
-// export const Blog7 = require("../../assets/image/demo/blog/blog7.jpg")
-// export const Blog8 = require("../../assets/image/demo/blog/blog8.jpg")
-// export const Blog9 = require("../../assets/image/demo/blog/blog9.jpg")
-
-// assets / image / demo / blog / clientsay
-
-// export const ClientImg1 = require("../../assets/image/demo/clientsay/client-img1.jpg")
-// export const ClientImg2 = require("../../assets/image/demo/clientsay/client-img2.jpg")
-//
-// export const ClientS1 = require("../../assets/image/demo/clientsay/client-s1.jpg")
-// export const ClientS2 = require("../../assets/image/demo/clientsay/client-s2.jpg")
-// export const ClientS3 = require("../../assets/image/demo/clientsay/client-s3.jpg")
 
 // assets / image / demo / blog / cms
 
@@ -54,9 +22,6 @@ export const Banner2 = require("../../assets/image/demo/cms/banner2.jpg");
 export const Banner3 = require("../../assets/image/demo/cms/banner3.jpg");
 
 export const MenuBg = require("../../assets/image/demo/cms/menu_bg2.jpg");
-
-// export const V2Banner3 = require("../../assets/image/demo/cms/v2-banner3.jpg")
-
 
 // assets / image / demo / blog / content
 

@@ -10,7 +10,7 @@ function About() {
   const [aboutTeamMembearData, setAboutTeamMembearData] = useState([])
   const [aboutCompany, setAboutCompany] = useState([])
   useEffect(() => {
-    API.get(`/aboutTeamMembears`)
+    API.get(`/aboutTeamMembars`)
       .then(res => setAboutTeamMembearData(res.data))
       .catch(err => console.log(err))
 

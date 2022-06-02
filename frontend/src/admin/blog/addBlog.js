@@ -6,14 +6,14 @@ import API from "../../containers/utils/axios";
 function AddBlog() {
     const navigate = useNavigate()
     const [title, setTitle] = useState("");
-    const [descriptions, setDescription] = useState("");
+    const [description, setDescription] = useState("");
     const [postIntruder, setPostIntruder] = useState("");
     const [image, setImage] = useState("");
 
     const Submit = () => {
         let form = new FormData();
         form.append("title", title);
-        form.append("description", descriptions);
+        form.append("description", description);
         form.append("postIntruder", postIntruder)
         form.append("image", image);
 

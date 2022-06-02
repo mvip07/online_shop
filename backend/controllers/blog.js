@@ -1,35 +1,35 @@
 const getDb = require("../util/db").getDb;
 const { ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
-const Product = require("../models/product");
+const Blog = require("../models/blog");
 
-exports.getProducts = (req, res) => {
-    Product.getProducts().then(products => {
+exports.getBlogs = (req, res) => {
+    Blog.getBlog().then(products => {
         return res.json(products);
     });
 };
 
-exports.getProductDetail = (req, res) => {
-    Product.getProductDetail(req.params.id)
+exports.getBlogDetail = (req, res) => {
+    Blog.getBlogDetail(req.params.id)
         .then(product => res.send(product));
 }
 
-exports.createProduct = (req, res) => {
-    const { title, brand, color, price, stars, category, discount, model, quantity, description, type } = req.body;
+exports.createBlog = (req, res) => {
+    const { title, description, postIntruder } = req.body;
 
     try {
-        const product = new Product(title, brand, color, price, stars, category, discount, model, quantity, description, type, req.file.path);
-        product.createProduct();
+        const blog = new Blog(title, description, postIntruder, req.file.path);
+        blog.createBlog();
         return res.status(200).json({ message: "You are cool!" });
     } catch (err) {
         return res.status(500).json({ err: err, message: "Something is wrong!" });
     }
 };
 
-exports.deleteProduct = (req, res) => {
+exports.deleteBlog = (req, res) => {
     const db = getDb();
 
-    return db.collection("Product")
+    return db.collection("Blog")
         .deleteOne({ _id: ObjectId(req.params.id) })
         .then(() => res.status(200).json({ message: "You are cool!" }))
         .catch(() => res.status(500).json({ message: "You are not cool!" }));
