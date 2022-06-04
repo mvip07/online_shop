@@ -8,7 +8,8 @@ const aboutTeamMembar = require("./controllers/aboutTeamMembar")
 const blog = require("./controllers/blog")
 const advertising = require("./controllers/advertising")
 
-const authController = require("./controllers/user");
+const authControllerUser = require("./controllers/user");
+const authControllerAdmin = require("./controllers/adminUser")
 const isAuth = require("./util/isAuth");
 const User = require("./models/user");
 const mongoConnect = require("./util/db").mongoConnect;
@@ -85,8 +86,12 @@ app.get("/advertising/:id", advertising.getAdvertisingDetail);
 app.delete("/advertising/:id", isAuth, advertising.deleteAdvertising);
 app.post("/advertising", isAuth, advertising.createAdvertising);
 
-app.post("/login", authController.login);
-app.post("/signup", authController.signup);
+
+app.post("/adminLogin", authControllerAdmin.login);
+app.post("/adminSignup", authControllerAdmin.signup);
+
+app.post("/login", authControllerUser.login);
+app.post("/signup", authControllerUser.signup);
 
 mongoConnect(() => {
   app.listen(8000, () => console.log("Server Started!"));
