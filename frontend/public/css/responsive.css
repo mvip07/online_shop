@@ -133,7 +133,7 @@
       transform: rotate(0);
       border: 0;
       top: 0;
-      content: "\f101"; }
+ }
     ul.breadcrumb li + li:before {
       display: none; }
 

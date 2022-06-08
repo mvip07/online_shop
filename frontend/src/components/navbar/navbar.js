@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "../cart/cart";
 import {
   Gb,
@@ -18,11 +18,18 @@ import {
   Icons28,
 } from "../../export/exportImg/exportImg";
 
-// image/theme
-function Navbar() {
+function Navbar(setSearch) {
+  const navigate = useNavigate()
   const bag = JSON.parse(localStorage.getItem("onlineShopCart"));
   const [searchDefaultValue, setSearchDefaultValue] = useState("");
-
+  const [open, setOpen] = useState("none")
+  const [menuOpen, setMenuOpen] = useState("none")
+  const [menuOpenLeft, setMenuOpenLeft] = useState(0)
+  const [dropdownLague, setDropdownLague] = useState("none")
+  const [dropdownCredit, setDropdownCredit] = useState("none")
+  const [myAccount, setMyAccount] = useState("none")
+  const [navigatorOpen, setNavigatorOpen] = useState(0)
+  const [moreOpen, setMoreOpen] = useState("none")
   return (
     <header id="header" className=" variantleft type_1">
       <div className="header-top compact-hidden">
@@ -31,47 +38,52 @@ function Navbar() {
             <div className="header-top-left form-inline col-sm-6 col-xs-12 compact-hidden">
               <div className="form-group languages-block ">
                 <form id="bt-language">
-                  <Link
-                    to="/"
+                  <Link to="#"
                     className="btn btn-xs dropdown-toggle"
                     data-toggle="dropdown"
                   >
                     <img src={Gb} alt="English" title="English" />
-                    <span>English</span>
-                    <span className="fa fa-angle-down"></span>
+                    <span className="mr-1">English</span>
+                    {
+                      dropdownLague === "none" ?
+                        <span className="fa fa-angle-down mr-1" onClick={() => setDropdownLague("block")}> </span>
+                        :
+                        <span className="fa fa-angle-up mr-1" onClick={() => setDropdownLague("none")}>  </span>
+                    }
+
                   </Link>
-                  <ul className="dropdown-menu">
+                  <ul className="dropdown-menu" style={{ display: `${dropdownLague}` }}>
                     <li>
                       <Link to="/">
                         <img
-                          className="image_flag mr-1"
+                          className="image_flag "
                           src={Lb}
                           alt="English"
                           title="English"
                         />
-                        English
+                        <span className="mr-1">English</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/">
                         <img
-                          className="image_flag mr-1"
+                          className="image_flag"
                           src={Lb}
                           alt="Russia"
                           title="Russia"
                         />
-                        Russia
+                        <span className="mr-1">Russia</span>
                       </Link>
                     </li>
                     <li>
                       <Link to="/">
                         <img
-                          className="image_flag mr-1"
+                          className="image_flag"
                           src={Gb}
                           alt="Arabic"
                           title="Arabic"
                         />
-                        Arabic
+                        <span className="mr-1">Arabic</span>
                       </Link>
                     </li>
                   </ul>
@@ -86,9 +98,15 @@ function Navbar() {
                     data-toggle="dropdown"
                   >
                     <span className="icon icon-credit "> </span> US Dollar
-                    <span className="fa fa-angle-down"> </span>
+                    {
+                      dropdownCredit === "none" ?
+                        <span className="fa fa-angle-down mr-1" onClick={() => setDropdownCredit("block")}> </span>
+                        :
+                        <span className="fa fa-angle-up mr-1" onClick={() => setDropdownCredit("none")}>  </span>
+
+                    }
                   </Link>
-                  <ul className="dropdown-menu btn-xs">
+                  <ul className="dropdown-menu" style={{ display: `${dropdownCredit}` }}>
                     <li>
                       <Link to="#">(€)&nbsp;Euro</Link>
                     </li>
@@ -105,23 +123,33 @@ function Navbar() {
             <div className="header-top-right collapsed-block text-right  col-sm-6 col-xs-12 compact-hidden">
               <h5 className="tabBlockTitle visible-xs">
                 More
-                <Link className="expander " to="/">
-                  <i className="fa fa-angle-down"></i>
+                <Link to="/" className="expander" >
+                  {
+                    moreOpen === "none" ?
+                      <span className="fa arrow-circle fa-chevron-circle-down mr-1" onClick={() => setMoreOpen("block")}> </span>
+                      :
+                      <span className="fa arrow-circle fa-chevron-circle-up mr-1" onClick={() => setMoreOpen("none")}>  </span>
+
+                  }
                 </Link>
               </h5>
-              <div className="tabBlock" id="TabBlock-1">
+              <div className="tabBlock" id="TabBlock-1" style={{ display: `${moreOpen}` }}>
                 <ul className="top-link list-inline">
-                  <li className="account" id="my_account">
+                  <li className="account">
                     <Link
-                      to="/myAccount"
+                      to="#"
                       title="My Account"
-                      className="btn btn-xs dropdown-toggle"
-                      data-toggle="dropdown"
                     >
-                      <span>My Account</span>
-                      <span className="fa fa-angle-down"></span>
+                      <Link to="/myAccount" style={{ color: "#fff", padding: "0" }}>My Account </Link>
+                      {
+                        myAccount === "none" ?
+                          <span className="fa arrow-circle fa-chevron-circle-down mr-1" onClick={() => setMyAccount("block")}> </span>
+                          :
+                          <span className="fa arrow-circle fa-chevron-circle-up mr-1" onClick={() => setMyAccount("none")}>  </span>
+
+                      }
                     </Link>
-                    <ul className="dropdown-menu ">
+                    <ul className="dropdown-menu " style={{ display: `${myAccount}` }}>
                       <li>
                         <Link to="/register ">
                           <i className="fa fa-user"> </i> Register
@@ -180,33 +208,42 @@ function Navbar() {
                     <select
                       className="no-border"
                       name="category_id"
-                      onChange={({ target }) =>
+                      onChange={({ target }) => {
+
                         setSearchDefaultValue(target.value)
+                      }
                       }
                     >
                       <option defaultValue="">All Categories</option>
                       <option defaultValue="Apparel">Apparel</option>
-                      <option defaultValue="Cables &amp; Connectors">
-                        Cables &amp; Connectors
+                      <option defaultValue="Cables">
+                        Cables
                       </option>
-                      <option defaultValue="Cameras &amp; Photo">
-                        Cameras &amp; Photo
-                      </option>
-                      <option defaultValue="Flashlights &amp; Lamps">
-                        Flashlights &amp; Lamps
+                      <option defaultValue="Cameras">
+                        Cameras
                       </option>
                       <option defaultValue="Flashlights &amp; Lamps">
                         Flashlights &amp; Lamps
                       </option>
-                      <option defaultValue="Video Games">Video Games</option>
-                      <option defaultValue="Jewelry &amp; Watches">
-                        Jewelry &amp; Watches
+                      <option defaultValue="Jewelry">
+                        Jewelry
+                      </option>
+                      <option defaultValue="Watches">
+                        Watches
                       </option>
                       <option defaultValue="Earings ">Earings</option>
-                      <option defaultValue="Wedding Rings">
-                        Wedding Rings
+                      <option defaultValue="Notebook Computer">
+                        Notebook Computer
                       </option>
-                      <option defaultValue="Men Watches">Men Watches</option>
+                      <option defaultValue="Tablet">
+                        Tablet
+                      </option>
+                      <option defaultValue="Bags">
+                        Bags
+                      </option>
+                      <option defaultValue="Headphones">
+                        Headphones
+                      </option>
                     </select>
                   </div>
                   <input
@@ -251,14 +288,23 @@ function Navbar() {
                         <div className="megamenuToogle-wrapper">
                           <div className="megamenuToogle-pattern">
                             <div className="container">
-                              <div>
-                                <span> </span>
-                                <span> </span>
-                                <span> </span>
-                              </div>
-                              <i className="fa pull-right arrow-circle fa-chevron-circle-up">
-                                {" "}
-                              </i>
+
+                              {
+                                menuOpen === "block" ?
+                                  ""
+                                  :
+                                  <div onClick={() => setMenuOpen("block")}>
+                                    <span> </span>
+                                    <span> </span>
+                                    <span> </span>
+                                  </div>
+                              }
+
+                              {
+                                menuOpen === "block" ? <i className="fa pull-right arrow-circle fa-chevron-circle-up" onClick={() => setMenuOpen("none")}>  {" "}
+                                </i> : ""
+                              }
+
                               All Categories
                             </div>
                           </div>
@@ -270,13 +316,24 @@ function Navbar() {
                           id="show-verticalmenu"
                           data-toggle="collapse"
                           className="navbar-toggle fa fa-list-alt"
+                          onClick={() => {
+                            setMenuOpenLeft(280);
+                            setMenuOpen("block");
+                          }}
+
                         >
                           {" "}
                         </button>
                         All Categories
                       </div>
-                      <div className="vertical-wrapper">
-                        <span id="remove-verticalmenu" className="fa fa-times">
+                      <div className="vertical-wrapper" style={{ display: `${menuOpen}`, left: `${menuOpenLeft}px` }}>
+                        <span
+                          id="remove-verticalmenu"
+                          className="fa fa-times"
+                          onClick={() => {
+                            setMenuOpenLeft(0);
+                            setMenuOpen("none");
+                          }}>
                           {" "}
                         </span>
                         <div className="megamenu-pattern">
@@ -374,6 +431,7 @@ function Navbar() {
                         id="show-megamenu"
                         data-toggle="collapse"
                         className="navbar-toggle"
+                        onClick={() => setNavigatorOpen(280)}
                       >
                         <span className="icon-bar"> </span>
                         <span className="icon-bar"> </span>
@@ -382,8 +440,8 @@ function Navbar() {
                       Navigator
                     </div>
 
-                    <div className="megamenu-wrapper">
-                      <span id="remove-megamenu" className="fa fa-times"></span>
+                    <div className="megamenu-wrapper" style={{ left: `${navigatorOpen}px` }}>
+                      <span id="remove-megamenu" className="fa fa-times" onClick={() => setNavigatorOpen(0)}></span>
                       <div className="megamenu-pattern">
                         <div className="container">
                           <ul
@@ -395,16 +453,23 @@ function Navbar() {
                               <Link to="/">Home</Link>
                             </li>
                             <li className="with-sub-menu hover">
-                              <p className="close-menu"> </p>
-                              <Link to="#" className="clearfix">
+                              <Link to="#" >
                                 <strong>Features</strong>
-                                <b className="caret"> </b>
+
+                                {
+                                  open === "block" ?
+                                    <i className="fa fa-chevron-circle-up mr-1" onClick={() => setOpen("none")}></i>
+                                    :
+                                    <b className="caret mr-1" style={{ display: "inline-block" }} onClick={() => setOpen("block")}> </b>
+                                }
                               </Link>
                               <div
                                 className="sub-menu"
-                                style={{ width: "100%", right: "auto" }}
+                                style={{ width: "100%", right: "auto", display: `${open}` }}
                               >
-                                <div className="content">
+                                <div className="content"
+                                  style={{ display: `${open}` }}
+                                >
                                   <div className="row">
                                     <div className="col-md-3">
                                       <div className="column">
@@ -525,9 +590,9 @@ function Navbar() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </header>
+        </div >
+      </div >
+    </header >
   );
 }
 export default Navbar 

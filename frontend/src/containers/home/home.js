@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
-import API from "../utils/axios";
 import Navbar from "../../components/navbar/navbar";
-
 import Advertising from "../../components/advertising/advertising";
 import Products from "../products/products";
 import Footer from "../../components/footer/footer";
+import { useState } from "react";
 
 function Home() {
-  const [product, setproduct] = useState([]);
-  useEffect(() => {
-    API.get("/products").then((res) => {
-      setproduct(res.data);
-    });
-  }, []);
+  const [search, setSearch] = useState("")
+  console.log(search)
   return (
     <div id="wrapper" className="wrapper-full">
-      <Navbar />
-      {/* <Advertising />
-      <Products product={product} />
-      <Footer /> */}
+      <Navbar setSearch={setSearch} />
+      <Advertising />
+      <Products search={search} />
+      <Footer />
     </div>
   );
 }

@@ -29,7 +29,7 @@ exports.createProduct = (req, res) => {
 exports.deleteProduct = (req, res) => {
     const db = getDb();
 
-    return db.collection("Product")
+    return db.collection("products")
         .deleteOne({ _id: ObjectId(req.params.id) })
         .then(() => res.status(200).json({ message: "You are cool!" }))
         .catch(() => res.status(500).json({ message: "You are not cool!" }));

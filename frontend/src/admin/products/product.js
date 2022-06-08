@@ -46,13 +46,20 @@ function AdminProduct({ data }) {
                 {data.stars == "5" ? <Five /> : ""}
               </div>
               <div className="price">
-                <span className="price-new">{data.price}</span>
-                <span className="price-old">$623.00</span>
+                <span className="price-new">$ {data.price} </span>
+                {
+
+                  data.discount === "No" || data.discount === ""
+                    ?
+                    " "
+                    :
+                    <span className="price-old mr-1">$ {Number(((data.price * data.discount) / 100).toFixed(2)) + Number(data.price)}</span>
+                }
               </div>
             </div>
             <div className="button-group">
               <button
-                className="addToCart mr-1 p-1"
+                className="addToCart p-1"
                 type="button"
                 data-toggle="tooltip"
                 title="Edit"

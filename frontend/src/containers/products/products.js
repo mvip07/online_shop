@@ -1,6 +1,16 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Product from "../../components/product/product";
+import API from "../utils/axios";
 
-function Products({ product, searchDefaultValue }) {
+function Products() {
+  const [products, setproduct] = useState([]);
+  useEffect(() => {
+    API.get("/products").then((res) => {
+      setproduct(res.data);
+    });
+  }, []);
+
   return (
     <div id="wrapper" className="wrapper-full banners-effect-7">
       <div className="main-container container">
@@ -35,7 +45,12 @@ function Products({ product, searchDefaultValue }) {
                       data-total="10"
                     >
                       <div className="ltabs-items-inner ltabs-slider">
-                        <Product product={product} searchDefaultValue={searchDefaultValue} />
+
+                        {
+                          products.map((product) => (
+                            <Product product={product} key={Math.random()} />
+                          ))
+                        }
                       </div>
                     </div>
                   </div>
@@ -50,32 +65,32 @@ function Products({ product, searchDefaultValue }) {
                   <ul className="width6">
                     <li className="collect collection_0">
                       <div className="color_co">
-                        <a href="#">Furniture</a>
+                        <Link to="#">Furniture</Link>
                       </div>
                     </li>
                     <li className="collect collection_1">
                       <div className="color_co">
-                        <a href="#">Gift idea</a>
+                        <Link to="#">Gift idea</Link>
                       </div>
                     </li>
                     <li className="collect collection_2">
                       <div className="color_co">
-                        <a href="#">Cool gadgets</a>
+                        <Link to="#">Cool gadgets</Link>
                       </div>
                     </li>
                     <li className="collect collection_3">
                       <div className="color_co">
-                        <a href="#">Outdoor activities</a>
+                        <Link to="#">Outdoor activities</Link>
                       </div>
                     </li>
                     <li className="collect collection_4">
                       <div className="color_co">
-                        <a href="#">Accessories for</a>
+                        <Link to="#">Accessories for</Link>
                       </div>
                     </li>
                     <li className="collect collection_5">
                       <div className="color_co">
-                        <a href="#">Women world</a>
+                        <Link to="#">Women world</Link>
                       </div>
                     </li>
                   </ul>
@@ -86,7 +101,7 @@ function Products({ product, searchDefaultValue }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default Products;

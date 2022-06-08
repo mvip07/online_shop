@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AboutSlide from "../../components/aboutSlide/aboutSlide";
 import BlogCard from "../../components/blogCard/blogCard";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";

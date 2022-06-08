@@ -68,7 +68,6 @@
       display: inline-block;
       position: relative;
       border-right: 1px solid #ddd;
-      float: left;
       list-style: outside none none;
       height: 34px;
       line-height: 34px; }

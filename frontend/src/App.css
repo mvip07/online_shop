@@ -242,7 +242,7 @@ body {
 }
 
 .mr-1 {
-  margin-right: 10px;
+  margin-left: 10px ;
 }
 
 .p-1 {
@@ -280,9 +280,6 @@ body {
   display: none;
 }
 
-.owl-theme {
-  height: 600px;    
-}
 
 .member-image img {
   min-width: 100%;

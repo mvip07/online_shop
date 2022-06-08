@@ -22,7 +22,7 @@ exports.login = async (req, res, next) => {
             }
 
             const token = jwt.sign({
-                username: currentUser.username,
+                user: currentUser.username,
                 userId: currentUser._id,
             },
                 "mysecr8yGU&a=?k$&NpQzt9ev&kE=TPB7+HNAf7@kYd=EhUncxKhP&uC4aPN%GwZtM5v4?tWET4yN=Y263V3xd-uZ*EaN%et",
@@ -32,7 +32,7 @@ exports.login = async (req, res, next) => {
             res.status(201).json({
                 token: token,
                 admin: {
-                    username: currentUser.username,
+                    user: currentUser.username,
                     id: currentUser._id,
                 },
             });

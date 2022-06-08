@@ -14,7 +14,6 @@ import {
   TwoAndHalf,
 } from "../stars/stars";
 
-import { Blue, Brown, Green } from "../../export/exportImg/exportImg";
 function ProductDetail() {
   const navigate = useNavigate()
   const [productDetail, setproductDetail] = useState([]);
@@ -70,11 +69,23 @@ function ProductDetail() {
   }, []);
   return (
     <div id="wrapper" className="wrapper-full productDetailCenter">
+      <div
+        className="cart mr-1" onClick={() => navigate(-1)}>
+        <input
+          type="button"
+          data-toggle="tooltip"
+          defaultValue="Back"
+          data-loading-text="Loading..."
+          id="button-cart"
+          className="btn btn-mega btn-lg"
+        />
+      </div>
       {productDetail
         .filter((item) => item.id === id)
         .map((data) => {
           return (
             <div className="main-container container" key={Math.random()}>
+
               <div className="row">
                 <div id="content" className="col-md-12 col-sm-12">
                   <div className="product-view row">
@@ -89,51 +100,51 @@ function ProductDetail() {
                             />
                           </div>
 
-                          {/*<div id="thumb-slider" className="owl-theme owl-loaded owl-drag full_slider">*/}
-                          {/*  <a*/}
-                          {/*    data-index="0"*/}
-                          {/*    className="img thumbnail "*/}
-                          {/*  >*/}
-                          {/*    <img src="../image/demo/shop/product/J9.jpg" alt="bint-Beef"/>*/}
-                          {/*  </a>*/}
-                          {/*  <a*/}
-                          {/*    data-index="1"*/}
-                          {/*    className="img thumbnail"*/}
-                          {/*    data-image="../image/demo/shop/product/J6.jpg"*/}
-                          {/*  >*/}
-                          {/*    <img*/}
-                          {/*      src="../image/demo/shop/product/J6.jpg"*/}
-                          {/*      title="Bint Beef"*/}
-                          {/*      alt="Bint Beef"*/}
-                          {/*    />*/}
-                          {/*  </a>*/}
-                          {/*  <a*/}
-                          {/*    data-index="2"*/}
-                          {/*    className="img thumbnail"*/}
-                          {/*    data-image="../image/demo/shop/product/J5.jpg"*/}
-                          {/*    title="Bint Beef"*/}
-                          {/*  >*/}
-                          {/*    <img*/}
-                          {/*      src="../image/demo/shop/product/J5.jpg"*/}
-                          {/*      title="Bint Beef"*/}
-                          {/*      alt="Bint Beef"*/}
-                          {/*    />*/}
-                          {/*  </a>*/}
-                          {/*  <a*/}
-                          {/*    data-index="3"*/}
-                          {/*    className="img thumbnail"*/}
-                          {/*    data-image="../image/demo/shop/product/J4.jpg"*/}
-                          {/*    title="Bint Beef"*/}
-                          {/*  >*/}
-                          {/*    <img*/}
-                          {/*      src="../image/demo/shop/product/J4.jpg"*/}
-                          {/*      title="Bint Beef"*/}
-                          {/*      alt="Bint Beef"*/}
-                          {/*    />*/}
-                          {/*  </a>*/}
-                          {/*</div>*/}
-                          {/*</div>*/}
+                          <div id="thumb-slider" className="owl-theme owl-loaded owl-drag full_slider">
+                            <a
+                              data-index="0"
+                              className="img thumbnail "
+                            >
+                              <img src={`http://localhost:8000/${data.image}`} alt="bint-Beef" />
+                            </a>
+                            <a
+                              data-index="1"
+                              className="img thumbnail"
+                              data-image={`http://localhost:8000/${data.image}`}
+                            >
+                              <img
+                                src={`http://localhost:8000/${data.image}`}
+                                title="Bint Beef"
+                                alt="Bint Beef"
+                              />
+                            </a>
+                            <a
+                              data-index="2"
+                              className="img thumbnail"
+                              data-image={`http://localhost:8000/${data.image}`}
+                              title="Bint Beef"
+                            >
+                              <img
+                                src={`http://localhost:8000/${data.image}`}
+                                title="Bint Beef"
+                                alt="Bint Beef"
+                              />
+                            </a>
+                            <a
+                              data-index="3"
+                              className="img thumbnail"
+                              data-image={`http://localhost:8000/${data.image}`}
+                              title="Bint Beef"
+                            >
+                              <img
+                                src={`http://localhost:8000/${data.image}`}
+                                title="Bint Beef"
+                                alt="Bint Beef"
+                              />
+                            </a>
+                          </div>
                         </div>
+
                         <div className="content-product-right col-sm-6 col-xs-12">
                           <div className="title-product">
                             <h1>{data.title}</h1>
@@ -204,75 +215,19 @@ function ProductDetail() {
                               >
 
                                 {
-                                  data.color.map((items) => {
-
-                                    return (
-                                      items.map((item) => {
-
-                                        return (
-                                          <li className="radio" key={Math.random()}>
-
-                                            <div
-                                              style={{ background: `${item}` }}
-                                              className="img-thumbnail icon icon-color"
-                                            ></div>
-                                            <i className="fa fa-check"> </i>
-                                          </li>
-                                        )
-
-                                      })
-                                    )
-
-                                  })
+                                  data.color.map((items) => (
+                                    <li className="radio" key={Math.random()}>
+                                      <div
+                                        style={{ background: `${items}` }}
+                                        className="img-thumbnail icon icon-color"
+                                      ></div>
+                                      <i className="fa fa-check"> </i>
+                                    </li>
+                                  )
+                                  )
                                 }
                               </ul>
                             </div>
-
-                            {/*<div className="box-checkbox form-group required">*/}
-                            {/*  <label className="control-label">Checkbox </label>*/}
-                            {/*  <div id="input-option232">*/}
-                            {/*    <div className="checkbox">*/}
-                            {/*      <label>*/}
-                            {/*        <input*/}
-                            {/*          type="checkbox"*/}
-                            {/*          name="option[232][]"*/}
-                            {/*          defaultValue="36"*/}
-                            {/*        />*/}
-                            {/*        Checkbox 1 (+$12.00){" "}*/}
-                            {/*      </label>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="checkbox">*/}
-                            {/*      <label>*/}
-                            {/*        <input*/}
-                            {/*          type="checkbox"*/}
-                            {/*          name="option[232][]"*/}
-                            {/*          defaultValue="37"*/}
-                            {/*        />*/}
-                            {/*        Checkbox 2 (+$36.00){" "}*/}
-                            {/*      </label>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="checkbox">*/}
-                            {/*      <label>*/}
-                            {/*        <input*/}
-                            {/*          type="checkbox"*/}
-                            {/*          name="option[232][]"*/}
-                            {/*          defaultValue="38"*/}
-                            {/*        />*/}
-                            {/*        Checkbox 3 (+$24.00){" "}*/}
-                            {/*      </label>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="checkbox">*/}
-                            {/*      <label>*/}
-                            {/*        <input*/}
-                            {/*          type="checkbox"*/}
-                            {/*          name="option[232][]"*/}
-                            {/*          defaultValue="39"*/}
-                            {/*        />*/}
-                            {/*        Checkbox 4 (+$48.00){" "}*/}
-                            {/*      </label>*/}
-                            {/*    </div>*/}
-                            {/*  </div>*/}
-                            {/*</div>*/}
 
                             <div className="form-group box-info-product d-flex">
                               <div className="option quantity">
@@ -328,17 +283,7 @@ function ProductDetail() {
                                   data-original-title="Add to Cart"
                                 />
                               </div>
-                              <div
-                                className="cart" onClick={() => navigate(-1)}>
-                                <input
-                                  type="button"
-                                  data-toggle="tooltip"
-                                  defaultValue="Back"
-                                  data-loading-text="Loading..."
-                                  id="button-cart"
-                                  className="btn btn-mega btn-lg"
-                                />
-                              </div>
+
                               <div className="add-to-links wish_comp">
                                 <ul className="blank list-inline">
                                   <li
@@ -385,9 +330,9 @@ function ProductDetail() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                </div >
+              </div >
+            </div >
           );
         })}
     </div >

@@ -27,13 +27,9 @@ function BlogCard({ data }) {
           <div className="article-description">
             {data.description}
           </div>
-          <div className="blog-meta">
-            {/* <span className="comment_count">
-              <a href="#">0 Comments</a>
-            </span> */}
-            <span className="author">
-              <span>Post by </span>{data.postIntruder}
-            </span>
+          <div className="blog-meta" >
+            <span style={{ padding: "0" }}>{data.postIntruder}</span>
+
           </div>
         </div>
       </div>
