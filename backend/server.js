@@ -96,8 +96,6 @@ app.post("/login", authControllerUser.login);
 app.post("/signup", authControllerUser.signup);
 
 mongoConnect(() => {
-  app.listen(8000, () => console.log("Server Started!"));
+  app.listen(process.env.PORT || 8000, () => console.log("Server Started!"));
 
-  // const user = new User("admin", "admin");
-  // user.save();
 });
