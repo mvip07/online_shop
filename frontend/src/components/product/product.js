@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { host } from "../../containers/utils/url";
 import {
   Five,
   Four,
@@ -62,7 +63,7 @@ function Product({ product }) {
         <div className="left-block">
           <div className="product-image-container second_img product-img">
             <img
-              src={`http://localhost:8000/${product.image}`}
+              src={`${host}/${product.image}`}
               alt='Apple Cinema 30"'
               className="img-responsive"
             />

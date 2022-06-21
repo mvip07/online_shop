@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import API from "../../containers/utils/axios";
+import { host } from "../../containers/utils/url";
 
 import {
   Five,
@@ -95,12 +96,12 @@ function ProductDetail() {
                           <div className="large-image  ">
                             <img
                               className="product-image-zoom"
-                              src={`http://localhost:8000/${data.image}`}
+                              src={`${host}/${data.image}`}
                               alt="bnt-Beef"
                             />
                           </div>
 
-                          <div id="thumb-slider" className="owl-theme owl-loaded owl-drag full_slider">
+                          {/* <div id="thumb-slider" className="owl-theme owl-loaded owl-drag full_slider">
                             <a
                               data-index="0"
                               className="img thumbnail "
@@ -142,7 +143,7 @@ function ProductDetail() {
                                 alt="Bint Beef"
                               />
                             </a>
-                          </div>
+                          </div> */}
                         </div>
 
                         <div className="content-product-right col-sm-6 col-xs-12">

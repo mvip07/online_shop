@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useContext } from "react";
+import { host } from "./url";
 
 const defaultOptions = {
 
-  baseURL: "http://localhost:8000/",
+  baseURL: `${host}`,
   headers: {
     "Content-Type": "application/json",
   },

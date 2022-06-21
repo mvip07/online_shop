@@ -11,19 +11,21 @@ import {
   TwoAndHalf,
 } from "../../components/stars/stars";
 import API from "../../containers/utils/axios";
+import { host } from "../../containers/utils/url";
+import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components";
 function AdminProduct({ data }) {
   function DeleteProduct(id) {
-    API.delete(`/products/${id}`).then((res) => console.log(res));
+    API.delete(`/products/62b027065609250016f25da5`).then((res) => console.log(res));
   }
 
   return (
-    <Wrapper>
+    <Wrapper style={ComponentsStyle}>
       <div className="ltabs-item product-layout flex">
         <div className="product-item-container">
           <div className="left-block">
             <div className="product-image-container second_img product-img">
               <img
-                src={`http://localhost:8000/${data.image}`}
+                src={`${host}/${data.image}`}
                 alt='Apple Cinema 30"'
                 className="img-responsive"
               />
@@ -57,7 +59,7 @@ function AdminProduct({ data }) {
                 }
               </div>
             </div>
-            <div className="button-group">
+            <div className="button-group" style={ComponentsStyleBtn}>
               <button
                 className="addToCart p-1"
                 type="button"

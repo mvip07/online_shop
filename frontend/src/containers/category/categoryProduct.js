@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Five,
   Four,
@@ -12,6 +12,7 @@ import {
   TwoAndHalf,
 } from "../../components/stars/stars";
 import API from "../utils/axios";
+import { host } from "../utils/url";
 
 function CategoryProduct({ inputSearch }) {
   const [categoryProduct, setCategoryProduct] = useState([]);
@@ -78,7 +79,7 @@ function CategoryProduct({ inputSearch }) {
             <div className="left-block col-md-4">
               <div className="product-image-container second_img ">
                 <img
-                  src={`${process.env.baseURL}/${data.image}`}
+                  src={`${host}/${data.image}`}
                   alt='Apple Cinema 30"'
                   className="img-responsive category-img"
                 />
@@ -96,7 +97,7 @@ function CategoryProduct({ inputSearch }) {
             <div className="right-block col-md-8">
               <div className="caption">
                 <h4>
-                  <a href={`/productDetail/${data.id}`}>{data.title}</a>
+                  <Link to={`/productDetail/${data.id}`}>{data.title}</Link>
                 </h4>
                 <div className="ratings">
                   <div className="rating-box">

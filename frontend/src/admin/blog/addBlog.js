@@ -78,6 +78,5 @@ function AddBlog() {
 export default AddBlog;
 
 const Wrapper = styled.div`
-  display: block;
-  margin: 150px;
+  
 `;

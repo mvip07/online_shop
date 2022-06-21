@@ -17,10 +17,10 @@ function CreateProduct() {
 	const [color5, setColor5] = useState("");
 
 	const [image1, setImage1] = useState("")
-	const [image2, setImage2] = useState("")
-	const [image3, setImage3] = useState("")
-	const [image4, setImage4] = useState("")
-	const [image5, setImage5] = useState("")
+	// const [image2, setImage2] = useState("")
+	// const [image3, setImage3] = useState("")
+	// const [image4, setImage4] = useState("")
+	// const [image5, setImage5] = useState("")
 
 	const [title, setTitle] = useState("");
 	const [brand, setBrand] = useState("");
@@ -54,10 +54,10 @@ function CreateProduct() {
 		form.append("type", type);
 
 		form.append("image", image1);
-		form.append("image", image2);
-		form.append("image", image3);
-		form.append("image", image4);
-		form.append("image", image5);
+		// form.append("image", image2);
+		// form.append("image", image3);
+		// form.append("image", image4);
+		// form.append("image", image5);
 
 		API.post("/product", form);
 
@@ -228,10 +228,10 @@ function CreateProduct() {
 							<label className="control-label">Enter your Image</label>
 							<div className="color-flex">
 								<input type="file" className="form-control file" onChange={({ target }) => setImage1(target.files[0])} />
-								<input type="file" className="form-control file" onChange={({ target }) => setImage2(target.files[0])} />
+								{/* <input type="file" className="form-control file" onChange={({ target }) => setImage2(target.files[0])} />
 								<input type="file" className="form-control file" onChange={({ target }) => setImage3(target.files[0])} />
 								<input type="file" className="form-control file" onChange={({ target }) => setImage4(target.files[0])} />
-								<input type="file" className="form-control file" onChange={({ target }) => setImage5(target.files[0])} />
+								<input type="file" className="form-control file" onChange={({ target }) => setImage5(target.files[0])} /> */}
 							</div>
 						</div>
 					</div>

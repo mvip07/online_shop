@@ -10,6 +10,7 @@ import {
   Product9,
 } from "../../export/exportImg/exportImg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Category() {
   const [inputSearch, setInputSearch] = useState("");
@@ -21,12 +22,12 @@ function Category() {
       <div className="main-container container">
         <ul className="breadcrumb">
           <li>
-            <a href="/">
+            <Link to="/">
               <i className="fa fa-home"> </i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">Smartphone & Tablets</a>
+            <Link to="#">Smartphone & Tablets</Link>
           </li>
         </ul>
         <div className="row">
@@ -54,34 +55,34 @@ function Category() {
               <div className="refine-search form-group">
                 <div className="row">
                   <div className="form-group col-md-15 col-sm-4 col-xs-4 ">
-                    <a href="#" className="thumbnail">
+                    <Link to="#" className="thumbnail">
                       <img src={Product8} alt="Car Alarms and Security" />
-                    </a>
-                    <a href="#">Car Alarms and Security</a>
+                    </Link>
+                    <Link to="#">Car Alarms and Security</Link>
                   </div>
                   <div className="form-group col-md-15 col-sm-4 col-xs-4 ">
-                    <a href="#" className="thumbnail">
+                    <Link to="#" className="thumbnail">
                       <img src={Product2} alt="Car Audio &amp; Speakers" />
-                    </a>
-                    <a href="#">Car Audio &amp; Speakers</a>
+                    </Link>
+                    <Link to="#">Car Audio &amp; Speakers</Link>
                   </div>
                   <div className="form-group col-md-15 col-sm-4 col-xs-4 ">
-                    <a href="#" className="thumbnail">
+                    <Link to="#" className="thumbnail">
                       <img src={Product9} alt="Gadgets &amp; Auto Parts" />
-                    </a>
-                    <a href="#">Gadgets &amp; Auto Parts</a>
+                    </Link>
+                    <Link to="#">Gadgets &amp; Auto Parts</Link>
                   </div>
                   <div className="form-group col-md-15 col-sm-4 col-xs-4 ">
-                    <a href="#" className="thumbnail">
+                    <Link to="#" className="thumbnail">
                       <img src={Product10} alt="More Car Accessories" />
-                    </a>
-                    <a href="#">More Car Accessories</a>
+                    </Link>
+                    <Link to="#">More Car Accessories</Link>
                   </div>
                   <div className="form-group col-md-15 col-sm-4 col-xs-4">
-                    <a href="#" className="thumbnail">
+                    <Link to="#" className="thumbnail">
                       <img src={Product11} alt="More Car Accessories" />
-                    </a>
-                    <a href="#">More Car Accessories</a>
+                    </Link>
+                    <Link to="#">More Car Accessories</Link>
                   </div>
                 </div>
               </div>
@@ -144,13 +145,13 @@ function Category() {
                         <span>1</span>
                       </li>
                       <li>
-                        <a href="#">2</a>
+                        <Link to="#">2</Link>
                       </li>
                       <li>
-                        <a href="#">&gt;</a>
+                        <Link to="#">&gt;</Link>
                       </li>
                       <li>
-                        <a href="#">&gt;|</a>
+                        <Link to="#">&gt;|</Link>
                       </li>
                     </ul>
                   </div>
@@ -337,94 +338,94 @@ function Category() {
               <div className="modcontent ">
                 <ul className="tags_cloud">
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       allergy
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       baby
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       beauty
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       ear care
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       for her
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       for him
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       first aid
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       gift sets
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       spa
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       hair care
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       herbs
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       medicine
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       natural
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       oral care
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       pain
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       pedicure
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       personal care
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="button_grey">
+                    <Link to="#" className="button_grey">
                       probiotics
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

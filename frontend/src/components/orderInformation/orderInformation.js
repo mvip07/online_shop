@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 
@@ -9,12 +10,12 @@ function OrderInformation() {
       <div className="main-container container">
         <ul className="breadcrumb">
           <li>
-            <a href="#">
+            <Link to="/">
               <i className="fa fa-home"></i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">Order Infomation</a>
+            <Link to="#">Order Infomation</Link>
           </li>
         </ul>
 
@@ -112,24 +113,24 @@ function OrderInformation() {
                     <td className="text-right">$123.20</td>
                     <td style={{ whiteSpace: "nowrap" }} className="text-right">
                       {" "}
-                      <a
+                      <Link
                         className="btn btn-primary"
                         title=""
                         data-toggle="tooltip"
-                        href="#"
+                        to="#"
                         data-original-title="Reorder"
                       >
                         <i className="fa fa-shopping-cart"></i>
-                      </a>
-                      <a
+                      </Link>
+                      <Link
                         className="btn btn-danger"
                         title=""
                         data-toggle="tooltip"
-                        href="return.html"
+                        to="/return"
                         data-original-title="Return"
                       >
                         <i className="fa fa-reply"></i>
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -202,9 +203,9 @@ function OrderInformation() {
             </table>
             <div className="buttons clearfix">
               <div className="pull-right">
-                <a className="btn btn-primary" href="#">
+                <Link className="btn btn-primary" to="#">
                   Continue
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -213,43 +214,43 @@ function OrderInformation() {
             <div className="list-group">
               <ul className="list-item">
                 <li>
-                  <a href="login.html">Login</a>
+                  <Link to="login.html">Login</Link>
                 </li>
                 <li>
-                  <a href="register.html">Register</a>
+                  <Link to="register.html">Register</Link>
                 </li>
                 <li>
-                  <a href="#">Forgotten Password</a>
+                  <Link to="#">Forgotten Password</Link>
                 </li>
                 <li>
-                  <a href="#">My Account</a>
+                  <Link to="#">My Account</Link>
                 </li>
                 <li>
-                  <a href="#">Address Books</a>
+                  <Link to="#">Address Books</Link>
                 </li>
                 <li>
-                  <a href="/wishlist">Wish List</a>
+                  <Link to="/wishlist">Wish List</Link>
                 </li>
                 <li>
-                  <a href="#">Order History</a>
+                  <Link to="#">Order History</Link>
                 </li>
                 <li>
-                  <a href="#">Downloads</a>
+                  <Link to="#">Downloads</Link>
                 </li>
                 <li>
-                  <a href="#">Reward Points</a>
+                  <Link to="#">Reward Points</Link>
                 </li>
                 <li>
-                  <a href="#">Returns</a>
+                  <Link to="#">Returns</Link>
                 </li>
                 <li>
-                  <a href="#">Transactions</a>
+                  <Link to="#">Transactions</Link>
                 </li>
                 <li>
-                  <a href="#">Newsletter</a>
+                  <Link to="#">Newsletter</Link>
                 </li>
                 <li>
-                  <a href="#">Recurring payments</a>
+                  <Link to="#">Recurring payments</Link>
                 </li>
               </ul>
             </div>

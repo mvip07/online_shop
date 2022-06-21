@@ -5,7 +5,6 @@ import API from "../../containers/utils/axios"
 
 function AddAboutTeamMembear() {
     const navigate = useNavigate()
-    // title, job, description, githubUrl, facebookUrl, twitterUrl, linkedinUrl
     const [title, setTitle] = useState("")
     const [job, setJob] = useState("")
     const [description, setDescription] = useState("")
@@ -30,7 +29,7 @@ function AddAboutTeamMembear() {
     };
 
     return (
-        <Wrapper>
+        <Wrapper >
             <div>
                 <div className="col-lg-12 customer-login">
                     <div className="well">

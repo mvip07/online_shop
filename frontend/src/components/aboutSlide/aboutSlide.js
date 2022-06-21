@@ -1,18 +1,13 @@
 import { Link } from "react-router-dom"
+import { host } from "../../containers/utils/url";
 function AboutTeamMembearCard({ data }) {
-  // const [aboutTeamMembearData, setAboutTeamMembearData] = useState([])
-
-  // useEffect(() => {
-  //   API.get(`/aboutTeamMembears`).then(res => setAboutTeamMembearData(res.data))
-  // }, [])
-
   return (
-    <div className="yt-content-slide yt-clearfix yt-content-wrap" key={Math.random()}>
+    <div className="yt-content-slide yt-clearfix yt-content-wrap">
       <div className="item">
         <div className="member">
           <div className="member-image">
             <img
-              src={`http://localhost:8000/${data.image}`}
+              src={`${host}/${data.image}`}
               alt=""
             />
           </div>

@@ -1,6 +1,7 @@
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import { Product4, Product5 } from "../../export/exportImg/exportImg";
+import { Link } from "react-router-dom";
 
 function OrderHistory() {
   return (
@@ -9,12 +10,12 @@ function OrderHistory() {
       <div className="main-container container">
         <ul className="breadcrumb">
           <li>
-            <a href="#">
+            <Link to="/">
               <i className="fa fa-home"> </i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">Order History</a>
+            <Link to="#">Order History</Link>
           </li>
         </ul>
 
@@ -38,7 +39,7 @@ function OrderHistory() {
                 <tbody>
                   <tr>
                     <td className="text-center">
-                      <a href="/product">
+                      <Link to="/product">
                         <img
                           width="85"
                           className="img-thumbnail"
@@ -46,10 +47,10 @@ function OrderHistory() {
                           alt="Aspire Ultrabook Laptop"
                           src={Product4}
                         />
-                      </a>
+                      </Link>
                     </td>
                     <td className="text-left">
-                      <a href="/product">Aspire Ultrabook Laptop</a>
+                      <Link to="/product">Aspire Ultrabook Laptop</Link>
                     </td>
                     <td className="text-center">#214521</td>
                     <td className="text-center">1</td>
@@ -57,20 +58,20 @@ function OrderHistory() {
                     <td className="text-center">21/06/2016</td>
                     <td className="text-right">$228.00</td>
                     <td className="text-center">
-                      <a
+                      <Link
                         className="btn btn-info"
                         title=""
                         data-toggle="tooltip"
-                        href="/order-information"
+                        to="/order-information"
                         data-original-title="View"
                       >
                         <i className="fa fa-eye"> </i>
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                   <tr>
                     <td className="text-center">
-                      <a href="/product">
+                      <Link to="/product">
                         <img
                           width="85"
                           className="img-thumbnail"
@@ -78,10 +79,10 @@ function OrderHistory() {
                           alt="Xitefun Causal Wear Fancy Shoes"
                           src={Product5}
                         />
-                      </a>
+                      </Link>
                     </td>
                     <td className="text-left">
-                      <a href="/product">Xitefun Causal Wear Fancy Shoes</a>
+                      <Link to="/product">Xitefun Causal Wear Fancy Shoes</Link>
                     </td>
                     <td className="text-center">#1565245</td>
                     <td className="text-center">1</td>
@@ -89,15 +90,15 @@ function OrderHistory() {
                     <td className="text-center">20/06/2016</td>
                     <td className="text-right">$133.20</td>
                     <td className="text-center">
-                      <a
+                      <Link
                         className="btn btn-info"
                         title=""
                         data-toggle="tooltip"
-                        href="/order-information"
+                        to="/order-information"
                         data-original-title="View"
                       >
                         <i className="fa fa-eye"> </i>
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 </tbody>
@@ -109,43 +110,43 @@ function OrderHistory() {
             <div className="list-group">
               <ul className="list-item">
                 <li>
-                  <a href="/login">Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
                 <li>
-                  <a href="/register">Register</a>
+                  <Link to="/register">Register</Link>
                 </li>
                 <li>
-                  <a href="#">Forgotten Password</a>
+                  <Link to="#">Forgotten Password</Link>
                 </li>
                 <li>
-                  <a href="#">My Account</a>
+                  <Link to="#">My Account</Link>
                 </li>
                 <li>
-                  <a href="#">Address Books</a>
+                  <Link to="#">Address Books</Link>
                 </li>
                 <li>
-                  <a href="/wishlist">Wish List</a>
+                  <Link to="/wishlist">Wish List</Link>
                 </li>
                 <li>
-                  <a href="#">Order History</a>
+                  <Link to="#">Order History</Link>
                 </li>
                 <li>
-                  <a href="#">Downloads</a>
+                  <Link to="#">Downloads</Link>
                 </li>
                 <li>
-                  <a href="#">Reward Points</a>
+                  <Link to="#">Reward Points</Link>
                 </li>
                 <li>
-                  <a href="#">Returns</a>
+                  <Link to="#">Returns</Link>
                 </li>
                 <li>
-                  <a href="#">Transactions</a>
+                  <Link to="#">Transactions</Link>
                 </li>
                 <li>
-                  <a href="#">Newsletter</a>
+                  <Link to="#">Newsletter</Link>
                 </li>
                 <li>
-                  <a href="#">Recurring payments</a>
+                  <Link to="#">Recurring payments</Link>
                 </li>
               </ul>
             </div>

@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { host } from "../../containers/utils/url";
 
 function WishlistCard() {
   const [likeData, setLikeData] = useState(
@@ -23,17 +25,17 @@ function WishlistCard() {
     return (
       <tr key={Math.random()}>
         <td className="text-center">
-          <a href="/product">
+          <Link to="/product">
             <img
               width="70px"
-              src={`http://localhost:8000/${item.image}`}
+              src={`${host}/${item.image}`}
               alt="Xitefun Causal Wear Fancy Shoes"
               title="Xitefun Causal Wear Fancy Shoes"
             />
-          </a>
+          </Link>
         </td>
         <td className="text-left">
-          <a href="/product">{item.title}</a>
+          <Link to="/product">{item.title}</Link>
         </td>
         <td className="text-left">{item.model}</td>
         <td className="text-right">{item.discount}</td>
@@ -56,15 +58,15 @@ function WishlistCard() {
           >
             <i className="fa fa-shopping-cart"> </i>
           </button>
-          <a
+          <Link
             className="btn btn-danger"
             title=""
             data-toggle="tooltip"
-            href=""
+            to=""
             data-original-title="Remove"
           >
             <i className="fa fa-times"> </i>
-          </a>
+          </Link>
         </td>
       </tr>
     );

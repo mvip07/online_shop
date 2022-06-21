@@ -1,11 +1,12 @@
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
-import {useState} from "react";
+import { useState } from "react";
 import ShoppingList from "../../components/shoppingCartList/shoppingList";
+import { Link } from "react-router-dom";
 
 function ShoppingCart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
-  const [total, setTotal] =useState(1)
+  const [total, setTotal] = useState(1)
 
   return (
     <div id="wrapper" className="wrapper-full ">
@@ -13,12 +14,12 @@ function ShoppingCart() {
       <div className="main-container container">
         <ul className="breadcrumb">
           <li>
-            <a href="#">
+            <Link to="/">
               <i className="fa fa-home"></i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">Shopping Cart</a>
+            <Link to="#">Shopping Cart</Link>
           </li>
         </ul>
 
@@ -38,13 +39,13 @@ function ShoppingCart() {
                   </tr>
                 </thead>
                 <tbody>
-                {
-                  cart.map(({title, image, model, price}) => {
-                    return (
-                    <ShoppingList title={title} image={image} model={model} price={price} key={Math.random()} />
-                    )
-                  })
-                }
+                  {
+                    cart.map(({ title, image, model, price }) => {
+                      return (
+                        <ShoppingList title={title} image={image} model={model} price={price} key={Math.random()} />
+                      )
+                    })
+                  }
 
                 </tbody>
               </table>
@@ -53,15 +54,15 @@ function ShoppingCart() {
               What would you like to do next?
             </h3>
             <p>
-              Choose if you have a discount code or reward points you want to
+              Choose if you have Link discount code or reward points you want to
               use or would like to estimate your delivery cost.
             </p>
             <div className="panel-group" id="accordion">
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h4 className="panel-title">
-                    <a
-                      href="#collapse-coupon"
+                    <Link
+                      to="#collapse-coupon"
                       className="accordion-toggle"
                       data-toggle="collapse"
                       data-parent="#accordion"
@@ -69,7 +70,7 @@ function ShoppingCart() {
                     >
                       Use Coupon Code
                       <i className="fa fa-caret-down"></i>
-                    </a>
+                    </Link>
                   </h4>
                 </div>
                 <div
@@ -108,8 +109,8 @@ function ShoppingCart() {
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h4 className="panel-title">
-                    <a
-                      href="#collapse-shipping"
+                    <Link
+                      to="#collapse-shipping"
                       className="accordion-toggle collapsed"
                       data-toggle="collapse"
                       data-parent="#accordion"
@@ -117,7 +118,7 @@ function ShoppingCart() {
                     >
                       Estimate Shipping &amp; Taxes
                       <i className="fa fa-caret-down"></i>
-                    </a>
+                    </Link>
                   </h4>
                 </div>
                 <div
@@ -127,7 +128,7 @@ function ShoppingCart() {
                   style={{ height: "0px" }}
                 >
                   <div className="panel-body">
-                    <p>Enter your destination to get a shipping estimate.</p>
+                    <p>Enter your destination to get Link shipping estimate.</p>
                     <div className="form-horizontal">
                       <div className="form-group required">
                         <label
@@ -206,8 +207,8 @@ function ShoppingCart() {
               <div className="panel panel-default">
                 <div className="panel-heading">
                   <h4 className="panel-title">
-                    <a
-                      href="#collapse-voucher"
+                    <Link
+                      to="#collapse-voucher"
                       data-toggle="collapse"
                       data-parent="#accordion"
                       className="accordion-toggle collapsed"
@@ -215,7 +216,7 @@ function ShoppingCart() {
                     >
                       Use Gift Certificate
                       <i className="fa fa-caret-down"></i>
-                    </a>
+                    </Link>
                   </h4>
                 </div>
                 <div
@@ -295,14 +296,14 @@ function ShoppingCart() {
 
             <div className="buttons">
               <div className="pull-left">
-                <a href="index.html" className="btn btn-primary">
+                <Link to="index.html" className="btn btn-primary">
                   Continue Shopping
-                </a>
+                </Link>
               </div>
               <div className="pull-right">
-                <a href="checkout.html" className="btn btn-primary">
+                <Link to="checkout.html" className="btn btn-primary">
                   Checkout
-                </a>
+                </Link>
               </div>
             </div>
           </div>

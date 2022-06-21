@@ -29,7 +29,7 @@ function AdminSignup() {
                             <div className="col-lg-12 customer-login">
                                 <div className="well">
                                     <p>
-                                        <strong>I am a returning customer</strong>
+                                        <strong>Register</strong>
                                     </p>
                                     <div className="form-group">
                                         <label className="control-label ">E-Mail Address</label>

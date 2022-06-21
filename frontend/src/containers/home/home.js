@@ -6,7 +6,6 @@ import { useState } from "react";
 
 function Home() {
   const [search, setSearch] = useState("")
-  console.log(search)
   return (
     <div id="wrapper" className="wrapper-full">
       <Navbar setSearch={setSearch} />

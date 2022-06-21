@@ -2,12 +2,14 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
 // Containner file da import qilingalar
-import Home from "./containers/home/home.js";
+import Home from "./containers/home/home";
 import Category from "./containers/category/category";
 import Blog from "./containers/blog/blog";
 import About from "./containers/about/about";
 import ProductsContainer from "./containers/products/products";
 import ShoppingCart from "./containers/shoppingCartPage/shoppingCart";
+import Compare from "./containers/compare/compare";
+import Wishlist from "./containers/wishlist/wishlist";
 
 // Admin file da import qilganlar
 import AdminLogin from "./admin/adminLogin";
@@ -22,15 +24,13 @@ import AdminPrivateRouter from "./admin/utils/adminPrivateRouter";
 // Components file da import qilganlar
 import PrivateRouter from "./components/privateRouter/privateRouter";
 import ProductDetail from "./components/product/productDetail";
-import Checkout from "./components/chekout/chekout";
-import Compare from "./components/compare/compare";
-import Wishlist from "./components/wishlist/wishlist";
+import Checkout from "./containers/chekout/chekout";
 import OrderHistory from "./components/orderHistory/orderHistory";
 import OrderInformation from "./components/orderInformation/orderInformation";
 import ProductReturn from "./components/productReturn/productReturn";
 import GiftVoucher from "./components/giftVoucher/giftVoucher";
-import Contact from "./components/contact/contact";
-import Faq from "./components/faq/faq";
+import Contact from "./containers/contact/contact";
+import Faq from "./containers/faq/faq";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import MyAccount from "./components/myAccount/myAccount";
@@ -98,8 +98,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/"
+			<Route path="/"
 				element={
 					<PrivateRouter>
 						<Home />
@@ -107,8 +106,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/cart"
+			<Route path="/cart"
 				element={
 					<PrivateRouter>
 						<ProductsContainer />
@@ -116,8 +114,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/productDetail/:id"
+			<Route path="/productDetail/:id"
 				element={
 					<PrivateRouter>
 						<ProductDetail />
@@ -125,8 +122,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/category"
+			<Route path="/category"
 				element={
 					<PrivateRouter>
 						<Category />
@@ -134,8 +130,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/shoppingCartPage"
+			<Route path="/shoppingCartPage"
 				element={
 					<PrivateRouter>
 						<ShoppingCart />
@@ -143,8 +138,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/checkout"
+			<Route path="/checkout"
 				element={
 					<PrivateRouter>
 						<Checkout />
@@ -152,8 +146,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/compare"
+			<Route path="/compare"
 				element={
 					<PrivateRouter>
 						<Compare />
@@ -161,8 +154,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/wishlist"
+			<Route path="/wishlist"
 				element={
 					<PrivateRouter>
 						<Wishlist />
@@ -170,8 +162,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/order-history"
+			<Route path="/order-history"
 				element={
 					<PrivateRouter>
 						<OrderHistory />
@@ -179,8 +170,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/order-information"
+			<Route path="/order-information"
 				element={
 					<PrivateRouter>
 						<OrderInformation />
@@ -188,8 +178,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/return"
+			<Route path="/return"
 				element={
 					<PrivateRouter>
 						<ProductReturn />
@@ -197,8 +186,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/gift-voucher"
+			<Route path="/gift-voucher"
 				element={
 					<PrivateRouter>
 						<GiftVoucher />
@@ -206,8 +194,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/blog"
+			<Route path="/blog"
 				element={
 					<PrivateRouter>
 						<Blog />
@@ -215,8 +202,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/about"
+			<Route path="/about"
 				element={
 					<PrivateRouter>
 						<About />
@@ -224,8 +210,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/contact"
+			<Route path="/contact"
 				element={
 					<PrivateRouter>
 						<Contact />
@@ -233,8 +218,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/faq"
+			<Route path="/faq"
 				element={
 					<PrivateRouter>
 						<Faq />
@@ -242,8 +226,7 @@ function App() {
 				}
 			/>
 
-			<Route
-				path="/myAccount"
+			<Route path="/myAccount"
 				element={
 					<PrivateRouter>
 						<MyAccount />

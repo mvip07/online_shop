@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { host } from "../../containers/utils/url";
 function BlogCard({ data }) {
 
   return (
@@ -7,16 +9,16 @@ function BlogCard({ data }) {
         <div className="itemBlogImg col-md-4 col-sm-12">
           <div className="article-image banners">
             <div>
-              <a className="popup-gallery" href="#">
-                <img src={`http://localhost:8000/${data.image}`} alt="Kire tuma demonstraverunt lector" />
-              </a>
+              <Link className="popup-gallery" tp="#">
+                <img src={`${host}/${data.image}`} alt="Kire tuma demonstraverunt lector" />
+              </Link>
             </div>
           </div>
         </div>
         <div className="itemBlogContent col-md-8 col-sm-12">
           <div className="article-title">
             <h4>
-              <a href="/blog-detail">{data.title}</a>
+              <Link tp="/blog-detail">{data.title}</Link>
             </h4>
           </div>
           <div className="article-sub-title">

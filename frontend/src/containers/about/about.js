@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import AboutTeamMembearCard from "../../components/aboutSlide/aboutSlide";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires Link loader
 import { Carousel } from 'react-responsive-carousel';
 import API from "../utils/axios";
 import styled from "styled-components";
+import { host } from "../utils/url";
+import { Link } from "react-router-dom";
 function About() {
   const [aboutTeamMembearData, setAboutTeamMembearData] = useState([])
   const [aboutCompany, setAboutCompany] = useState([])
@@ -23,12 +25,12 @@ function About() {
       <div className="main-container container">
         <ul className="breadcrumb">
           <li>
-            <a href="#">
+            <Link to="/">
               <i className="fa fa-home"> </i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="#">About Us</a>
+            <Link to="#">About Us</Link>
           </li>
         </ul>
 
@@ -43,7 +45,7 @@ function About() {
                       aboutCompany.map((data) => {
                         return (
                           <div className="yt-content-slide yt-clearfix yt-content-wrap" key={Math.random()}>
-                            <img src={`http://localhost:8000/${data.image}`} alt="About Us" />
+                            <img src={`${host}/${data.image}`} alt="About Us" />
                           </div>
                         )
                       })

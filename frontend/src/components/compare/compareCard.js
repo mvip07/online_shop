@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { host } from "../../containers/utils/url";
 import {
   One,
   OneAndHalf,
@@ -47,7 +48,7 @@ function CompareCard() {
               title="Laptop Silver black"
               alt="Laptop Silver black"
               width="200px"
-              src={`http://localhost:8000/${data.image}`}
+              src={`${host}/${data.image}`}
             />
           </td>
         </tr>
