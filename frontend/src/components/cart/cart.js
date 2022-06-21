@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { host } from "../../containers/utils/url";
-import { Icons53 } from "../../export/exportImg/exportImg";
 
 function Cart({ bag }) {
   const [bagData, setBagData] = useState(bag || []);
+
+  useEffect(() => {
+    setBagData(bag || [])
+  }, [bag])
 
   return (
     <div className="col-md-2 col-sm-5 col-xs-12 shopping_cart pull-right">

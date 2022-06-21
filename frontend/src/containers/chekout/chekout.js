@@ -1,11 +1,15 @@
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 import ShoppingList from "../../components/shoppingCartList/shoppingList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Checkout() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("onlineShopCart")))
+  }, [])
 
   return (
     <div id="wrapper" className="wrapper-full ">

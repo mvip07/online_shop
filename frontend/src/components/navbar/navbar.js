@@ -1,27 +1,13 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cart from "../cart/cart";
 import {
   Gb,
   Lb,
   Logo,
-  Icons2,
-  Icons4,
-  Icons7,
-  Icons10,
-  Icons12,
-  Icons13,
-  Icons15,
-  Icons17,
-  Icons19,
-  Icons20,
-  Icons28,
 } from "../../export/exportImg/exportImg";
 
 function Navbar(setSearch) {
-  const navigate = useNavigate()
-  const bag = JSON.parse(localStorage.getItem("onlineShopCart"));
-  const [searchDefaultValue, setSearchDefaultValue] = useState("");
   const [languageMenu, setLanguageMenu] = useState("none")
   const [currency, setCurrency] = useState("none")
   const [more, setMore] = useState("none")

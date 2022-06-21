@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
@@ -8,6 +8,10 @@ function Wishlist() {
   const [like, setLike] = useState(
     JSON.parse(localStorage.getItem("onlineShopLike")) || []
   );
+
+  useEffect(() => {
+    setLike(JSON.parse(localStorage.getItem("onlineShopLike")))
+  }, [])
 
   return (
     <div id="wrapper" className="wrapper-full ">

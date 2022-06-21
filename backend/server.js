@@ -60,8 +60,8 @@ app.use(express.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
 );
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/images", express.static(path.join(__dirname, "images")));
+// app.use(express.static(path.join(__dirname, "public")));
+app.use("./images", express.static(path.join(__dirname, "images")));
 
 app.get("/products", productController.getProducts);
 app.get("/product/:id", productController.getProductDetail);

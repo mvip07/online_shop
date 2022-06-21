@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import API from "../../containers/utils/axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires Link loader
-import { Carousel } from 'react-responsive-carousel';
-import { host } from "../../containers/utils/url";
 import { Banner1, Banner2, Banner3, Slider1, Slider2, Slider3 } from "../../export/exportImg/exportImg";
 import { Link } from "react-router-dom";
 
 function Advertising() {
-	const [advertisings, setAdvertisings] = useState([]);
 	const [widthWindows, setWidthWindows] = useState(window.innerWidth)
 	const [advertisingsCount, setAdvertisingsCount] = useState(0)
 	const [next, setNext] = useState(widthWindows)

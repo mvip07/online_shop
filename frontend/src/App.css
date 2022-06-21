@@ -10,9 +10,9 @@ body {
 
 }
 
-/* * ::-webkit-scrollbar  {
+* ::-webkit-scrollbar {
   display: none;
-} */
+}
 
 .col-md-3.col-sm-3.col-xs-11.alert-jpn.alert-custom.animated.fadeIn {
   display: none !important;

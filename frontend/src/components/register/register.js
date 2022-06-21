@@ -22,16 +22,16 @@ function Register() {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  function generatePassword() {
-    var length = 20,
-      charset =
-        "!@#$%^&*()_+=<,>.?/|{}[]~`abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-      retVal = "";
-    for (var i = 0, n = charset.length; i < length; ++i) {
-      retVal += charset.charAt(Math.floor(Math.random() * n));
-    }
-    setPassword(retVal);
-  }
+  // function generatePassword() {
+  //   var length = 20,
+  //     charset =
+  //       "!@#$%^&*()_+=<,>.?/|{}[]~`abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+  //     retVal = "";
+  //   for (var i = 0, n = charset.length; i < length; ++i) {
+  //     retVal += charset.charAt(Math.floor(Math.random() * n));
+  //   }
+  //   setPassword(retVal);
+  // }
 
   function RegisterSubmit() {
     if (

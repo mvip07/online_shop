@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import API from "../../containers/utils/axios";
 import { host } from "../../containers/utils/url";
 
@@ -19,7 +19,6 @@ function ProductDetail() {
   const navigate = useNavigate()
   const [productDetail, setproductDetail] = useState([]);
   const [count, setCount] = useState(1);
-  const [oldPrice, setOldPrice] = useState("")
   const { id } = useParams();
 
   const [bag, setBag] = useState(
@@ -102,13 +101,13 @@ function ProductDetail() {
                           </div>
 
                           {/* <div id="thumb-slider" className="owl-theme owl-loaded owl-drag full_slider">
-                            <a
+                            <Link
                               data-index="0"
                               className="img thumbnail "
                             >
                               <img src={`http://localhost:8000/${data.image}`} alt="bint-Beef" />
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                               data-index="1"
                               className="img thumbnail"
                               data-image={`http://localhost:8000/${data.image}`}
@@ -118,8 +117,8 @@ function ProductDetail() {
                                 title="Bint Beef"
                                 alt="Bint Beef"
                               />
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                               data-index="2"
                               className="img thumbnail"
                               data-image={`http://localhost:8000/${data.image}`}
@@ -130,8 +129,8 @@ function ProductDetail() {
                                 title="Bint Beef"
                                 alt="Bint Beef"
                               />
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                               data-index="3"
                               className="img thumbnail"
                               data-image={`http://localhost:8000/${data.image}`}
@@ -142,7 +141,7 @@ function ProductDetail() {
                                 title="Bint Beef"
                                 alt="Bint Beef"
                               />
-                            </a>
+                            </Link>
                           </div> */}
                         </div>
 
@@ -162,9 +161,9 @@ function ProductDetail() {
                               {data.stars === "4.5" ? <FourAndHalf /> : ""}
                               {data.stars === "5" ? <Five /> : ""}
                             </div>
-                            <a className="reviews_button" href="#">
-                              0 reviews{" "}
-                            </a>
+                            <Link className="reviews_button" to="#">
+                              0 reviews
+                            </Link>
                           </div>
 
                           <div className="product-label form-group">
@@ -195,7 +194,7 @@ function ProductDetail() {
                               </div>
                               <div className="brand">
                                 <span>Brand: </span>
-                                <a href="#">{data.brand} </a>
+                                <Link to="#">{data.brand} </Link>
                               </div>
                               <div className="model">
                                 <span>Product Code: </span> Product 15
@@ -296,13 +295,13 @@ function ProductDetail() {
                                         : "",
                                     }}
                                   >
-                                    <a
+                                    <Link
                                       className="icon"
                                       data-toggle="tooltip"
                                       data-original-title="Add to Wish List"
                                     >
                                       <i className="fa fa-heart"> </i>
-                                    </a>
+                                    </Link>
                                   </li>
                                   <li
                                     className="compare"
@@ -315,13 +314,13 @@ function ProductDetail() {
                                         : "",
                                     }}
                                   >
-                                    <a
+                                    <Link
                                       className="icon"
                                       data-toggle="tooltip"
                                       data-original-title="Compare this Product"
                                     >
                                       <i className="fa fa-exchange"> </i>
-                                    </a>
+                                    </Link>
                                   </li>
                                 </ul>
                               </div>

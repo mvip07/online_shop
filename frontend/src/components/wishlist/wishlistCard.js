@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { host } from "../../containers/utils/url";
 
 function WishlistCard() {
   const [likeData, setLikeData] = useState(
     JSON.parse(localStorage.getItem("onlineShopLike")) || []
   );
+
+  useEffect(() => {
+    setLikeData(JSON.parse(localStorage.getItem("onlineShopLike")))
+  }, [])
 
   const [bag, setBag] = useState(
     JSON.parse(localStorage.getItem("onlineShopCart")) || []
@@ -74,4 +77,3 @@ function WishlistCard() {
 }
 
 export default WishlistCard;
-const Wrapper = styled.div``;

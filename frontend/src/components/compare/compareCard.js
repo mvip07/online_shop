@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { host } from "../../containers/utils/url";
 import {
   One,
@@ -16,6 +16,10 @@ function CompareCard() {
   const [compare, setCompare] = useState(
     JSON.parse(localStorage.getItem("onlineShopComparison")) || []
   );
+
+  useEffect(() => {
+    setCompare(JSON.parse(localStorage.getItem("onlineShopComparison")))
+  }, [])
 
   const [bag, setBag] = useState(
     JSON.parse(localStorage.getItem("onlineShopCart")) || []
