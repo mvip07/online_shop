@@ -34,27 +34,27 @@ function Blog() {
                 <ul className="list-group ">
                   <li className="list-group-item">
                     {" "}
-                    <Link to="/blog-page" className="group-item">
+                    <Link to="#" className="group-item">
                       Our Blog
                     </Link>
                   </li>
                   <li className="list-group-item">
-                    <Link to="/blog-page" className="group-item">
+                    <Link to="#" className="group-item">
                       Demo Category 2
                     </Link>
                   </li>
                   <li className="list-group-item">
-                    <Link to="/blog-page" className="group-item">
+                    <Link to="#" className="group-item">
                       Demo Category 3
                     </Link>
                   </li>
                   <li className="list-group-item">
-                    <Link to="/blog-page" className="group-item">
+                    <Link to="#" className="group-item">
                       Demo Category 4
                     </Link>
                   </li>
                   <li className="list-group-item">
-                    <Link to="/blog-page" className="group-item">
+                    <Link to="#" className="group-item">
                       Demo Category 5
                     </Link>
                   </li>

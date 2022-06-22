@@ -9,7 +9,7 @@ function BlogCard({ data }) {
         <div className="itemBlogImg col-md-4 col-sm-12">
           <div className="article-image banners">
             <div>
-              <Link className="popup-gallery" tp="#">
+              <Link className="popup-gallery" to="#">
                 <img src={`${host}/${data.image}`} alt="Kire tuma demonstraverunt lector" />
               </Link>
             </div>
@@ -18,7 +18,7 @@ function BlogCard({ data }) {
         <div className="itemBlogContent col-md-8 col-sm-12">
           <div className="article-title">
             <h4>
-              <Link tp="/blog-detail">{data.title}</Link>
+              <Link to="/blog-detail">{data.title}</Link>
             </h4>
           </div>
           <div className="article-sub-title">
