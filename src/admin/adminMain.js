@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import API from "../containers/utils/axios";
@@ -12,7 +11,6 @@ import AdminLogin from "./adminLogin";
 import AdminSignup from "./adminSignUp";
 import AdminLogOut from "./adminLogOut";
 function AdminMain() {
-  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [advertisings, setAdvertisings] = useState([]);
   const [blogs, setBlogs] = useState([])

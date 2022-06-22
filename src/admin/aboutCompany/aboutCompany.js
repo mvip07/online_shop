@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
 import { host } from "../../containers/utils/url";
@@ -11,7 +12,7 @@ function AboutCompany({ data }) {
     return (
         <Wrapper style={ComponentsStyle}>
             <div className="yt-content-slide" key={Math.random()}>
-                <a href="#">
+                <Link to="#">
 
                     {
                         data.type === "video/mp4" ?
@@ -31,7 +32,7 @@ function AboutCompany({ data }) {
                             />
                     }
 
-                </a>
+                </Link>
                 <div className="button-group mr-1 " style={ComponentsStyleBtn}>
                     <button
                         className="addToCart mr-1 p-1"

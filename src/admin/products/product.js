@@ -37,15 +37,15 @@ function AdminProduct({ data }) {
                 <p href="/product">{data.title}</p>
               </h4>
               <div className="ratings">
-                {data.stars == "1" ? <One /> : ""}
-                {data.stars == "1.5" ? <OneAndHalf /> : ""}
-                {data.stars == "2" ? <Two /> : ""}
-                {data.stars == "2.5" ? <TwoAndHalf /> : ""}
-                {data.stars == "3" ? <Three /> : ""}
-                {data.stars == "3.5" ? <ThreeAndHalf /> : ""}
-                {data.stars == "4" ? <Four /> : ""}
-                {data.stars == "4.5" ? <FourAndHalf /> : ""}
-                {data.stars == "5" ? <Five /> : ""}
+                {data.stars === "1" ? <One /> : ""}
+                {data.stars === "1.5" ? <OneAndHalf /> : ""}
+                {data.stars === "2" ? <Two /> : ""}
+                {data.stars === "2.5" ? <TwoAndHalf /> : ""}
+                {data.stars === "3" ? <Three /> : ""}
+                {data.stars === "3.5" ? <ThreeAndHalf /> : ""}
+                {data.stars === "4" ? <Four /> : ""}
+                {data.stars === "4.5" ? <FourAndHalf /> : ""}
+                {data.stars === "5" ? <Five /> : ""}
               </div>
               <div className="price">
                 <span className="price-new">$ {data.price} </span>

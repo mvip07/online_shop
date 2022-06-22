@@ -2,6 +2,7 @@ import styled from "styled-components";
 import API from "../../containers/utils/axios";
 import { host } from "../../containers/utils/url";
 import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components"
+import { Link } from "react-router-dom"
 
 function AboutTeamMembear({ data }) {
     function DeleteAdvertising(id) {
@@ -13,10 +14,7 @@ function AboutTeamMembear({ data }) {
                 <div className="item">
                     <div className="member">
                         <div className="member-image">
-                            <img
-                                src={`${host}/${data.image}`}
-                                alt="Image Client"
-                            />
+                            <img src={`${host}/${data.image}`} alt="" />
                         </div>
                         <div className="member-info">
                             <h3 className="name-member">{data.title}</h3>
@@ -26,24 +24,24 @@ function AboutTeamMembear({ data }) {
                             </p>
                             <ul className="social-member">
                                 <li className="social-icon rss">
-                                    <a href={data.githubUrl} title="RSS">
+                                    <Link to={data.githubUrl} title="RSS">
                                         <span>Git Hub</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="social-icon facebook">
-                                    <a href="#" title="Facebook">
+                                    <Link to="#" title="Facebook">
                                         <span>Facebook</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="social-icon twitter">
-                                    <a href="#" title="Twitter">
+                                    <Link to="#" title="Twitter">
                                         <span>Twitter</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="social-icon google">
-                                    <a href="#" title="Google">
+                                    <Link to="#" title="Google">
                                         <span>Linked in</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

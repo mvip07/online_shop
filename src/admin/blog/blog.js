@@ -2,6 +2,7 @@ import styled from "styled-components"
 import API from "../../containers/utils/axios";
 import { host } from "../../containers/utils/url";
 import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components";
+import { Link } from "react-router-dom"
 
 function Blog({ data }) {
     function DeleteAdvertising(id) {
@@ -13,16 +14,16 @@ function Blog({ data }) {
                 <div className="itemBlogImg ">
                     <div className="article-image banners">
                         <div>
-                            <a className="popup-gallery" href="#">
+                            <Link className="popup-gallery" to="#">
                                 <img src={`${host}/${data.image}`} alt="Kire tuma demonstraverunt lector" />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
                 <div className="itemBlogContent ">
                     <div className="article-title">
                         <h4>
-                            <a href="/blog-detail">{data.title}</a>
+                            <Link to="/blog-detail">{data.title}</Link>
                         </h4>
                     </div>
                     <div className="article-sub-title">
