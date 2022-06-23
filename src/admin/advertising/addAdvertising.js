@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
+import { bottomForm } from "../adminComponents/components"
 
 function AddAdvertising() {
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ function AddAdvertising() {
         <div className="col-lg-12 customer-login">
           <div className="well">
             <p>
-              <strong>I am a returning customer</strong>
+              <strong>Create Advertising</strong>
             </p>
             <div className="form-group">
               <label className="control-label ">Enter your Firma</label>
@@ -44,13 +45,20 @@ function AddAdvertising() {
               }} />
             </div>
           </div>
-          <div className="bottom-form">
+          <div className="bottom-form" style={bottomForm}>
 
             <button
-              className="btn btn-default pull-right"
+              className="btn btn-default pull-right col-lg-4"
               onClick={Submit}
             >
               Create Advertising
+            </button>
+
+            <button
+              className="btn btn-default pull-right col-lg-4"
+              onClick={() => navigate(-1)}
+            >
+              Back
             </button>
           </div>
         </div>

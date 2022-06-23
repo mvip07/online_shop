@@ -10,14 +10,15 @@ import AboutCompany from "./aboutCompany/aboutCompany";
 import AdminLogin from "./adminLogin";
 import AdminSignup from "./adminSignUp";
 import AdminLogOut from "./adminLogOut";
+import { Link } from "react-router-dom";
 function AdminMain() {
   const [products, setProducts] = useState([]);
   const [advertisings, setAdvertisings] = useState([]);
   const [blogs, setBlogs] = useState([])
   const [aboutTeamMembear, setAboutTeamMembear] = useState([])
   const [aboutCompany, setAboutCompany] = useState([])
-
   const [components, setComponents] = useState("")
+  const [dropdown, setDropdown] = useState("none")
 
   useEffect(() => {
     API.get(`/products`).then((res) => setProducts(res.data));
@@ -32,18 +33,42 @@ function AdminMain() {
 
   }, []);
 
+  console.log(components)
+
   return (
 
     <Wrapper>
       <div className="navbar-admin">
-        <button onClick={() => setComponents("products")}>Products</button>
-        <button onClick={() => setComponents("blogs")}> Blogs</button>
-        <button onClick={() => setComponents("advertisings")}>Advertisings</button>
-        <button onClick={() => setComponents("aboutCompanys")}>About Companys</button>
-        <button onClick={() => setComponents("aboutTeamMembears")}>About Team Membears</button>
-        <button onClick={() => setComponents("login")}>Login</button>
-        <button onClick={() => setComponents("register")}>Register</button>
-        <button onClick={() => setComponents("logOut")}>Log Out</button>
+        <div className="form-group currencies-block">
+          <form post="/" method="post" id="currency">
+            <Link to="#" className="btn dropdown-toggle" data-toggle="dropdown">
+              <span className="mr-1">Page</span>
+
+
+              {
+                dropdown === "none" ?
+                  <span className="caret mr-1" onClick={() => setDropdown("block")}></span>
+                  :
+                  <span className="caret mr-1 bottom" onClick={() => setDropdown("none")}></span>
+              }
+
+            </Link>
+            <ul className="dropdown-menu" style={{ display: `${dropdown}` }} >
+              <li onClick={() => setComponents("products")}> <Link to="#">Products</Link></li>
+              <li> <Link to="/createProduct">Create Product</Link></li>
+              <li onClick={() => setComponents("blogs")}> <Link to="#">Blogs</Link></li>
+              <li> <Link to="/createBlog">Create Blog</Link></li>
+              <li onClick={() => setComponents("advertisings")}> <Link to="#">Advertisings</Link></li>
+              <li> <Link to="/createAdvertising">Create Advertising</Link></li>
+              <li onClick={() => setComponents("aboutCompanys")}> <Link to="#">About Company</Link></li>
+              <li> <Link to="/createAboutCompany">Create About Company</Link></li>
+              <li onClick={() => setComponents("aboutTeamMembears")}> <Link to="#">About Team Membear</Link></li>
+              <li> <Link to="/createAboutTeamMember">Create About Team Membear</Link></li>
+              <li> <Link to="/adminSignUp">Register</Link></li>
+              <li onClick={() => setComponents("logOut")}> <Link to="#">Log Out</Link></li>
+            </ul>
+          </form>
+        </div>
       </div>
 
       {
@@ -113,36 +138,35 @@ function AdminMain() {
           <AdminLogOut />
           : ""
       }
-    </Wrapper>
+    </Wrapper >
   );
 }
 
 export default AdminMain;
 const Wrapper = styled.div`
-  overflow-x: hidden;
+
   .navbar-admin {
     width: 100%;
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    height: 35px;
     background-color: #232f3e;
 
-  }
+    .form-group.currencies-block {
+      width: 225px;
+      height: 100%;
+    }
 
-  button {
-    padding: 8px 16px;
-  }
+    .caret {
+      margin-left: 50px;
+    }
 
-  @media (max-width: 1030px) {
-    .navbar-admin {
-      width: 1030px;
-      overflow-x: scroll;
+    .btn.dropdown-toggle {
+      color: #fff;
     }
   }
 
   .container-admin {
+    position: fixed;
+    top: 35px;
     width: 100%;
     height: 100%;
     padding: 20px 30px;
@@ -155,10 +179,8 @@ const Wrapper = styled.div`
     text-transform: uppercase;
     margin: 0;
     font-size: 18px;
-  }
-
-  
-`;
+  } 
+`
 
 
 

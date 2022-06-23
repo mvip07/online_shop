@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import API from "../../containers/utils/axios"
+import { bottomForm } from "../adminComponents/components"
+
 
 function AddAboutTeamMembear() {
     const navigate = useNavigate()
@@ -34,7 +36,7 @@ function AddAboutTeamMembear() {
                 <div className="col-lg-12 customer-login">
                     <div className="well">
                         <p>
-                            <strong>I am a returning customer</strong>
+                            <strong>Create About Team Membear</strong>
                         </p>
                         <div className="form-group">
                             <label className="control-label ">Enter your Title</label>
@@ -104,13 +106,20 @@ function AddAboutTeamMembear() {
                             <input type="file" className="form-control" onChange={({ target }) => setImage(target.files[0])} />
                         </div>
                     </div>
-                    <div className="bottom-form">
+                    <div className="bottom-form" style={bottomForm}>
 
                         <button
-                            className="btn btn-default pull-right"
+                            className="btn btn-default pull-right col-lg-4"
                             onClick={Submit}
                         >
-                            Create blog
+                            Create About Team Membear
+                        </button>
+
+                        <button
+                            className="btn btn-default pull-right col-lg-4"
+                            onClick={() => navigate(-1)}
+                        >
+                            Back
                         </button>
                     </div>
                 </div>

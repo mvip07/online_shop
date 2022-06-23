@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
+import { bottomForm } from "../adminComponents/components"
 
 function AddBlog() {
     const navigate = useNavigate()
@@ -26,7 +27,7 @@ function AddBlog() {
                 <div className="col-lg-12 customer-login">
                     <div className="well">
                         <p>
-                            <strong>I am a returning customer</strong>
+                            <strong>Create Blog</strong>
                         </p>
                         <div className="form-group">
                             <label className="control-label ">Enter your Title</label>
@@ -60,13 +61,20 @@ function AddBlog() {
                             <input type="file" className="form-control" onChange={({ target }) => setImage(target.files[0])} />
                         </div>
                     </div>
-                    <div className="bottom-form">
+                    <div className="bottom-form" style={bottomForm}>
 
                         <button
-                            className="btn btn-default pull-right"
+                            className="btn btn-default pull-right col-lg-4"
                             onClick={Submit}
                         >
-                            Create blog
+                            Create Blog
+                        </button>
+
+                        <button
+                            className="btn btn-default pull-right col-lg-4"
+                            onClick={() => navigate(-1)}
+                        >
+                            Back
                         </button>
                     </div>
                 </div>
@@ -78,5 +86,10 @@ function AddBlog() {
 export default AddBlog;
 
 const Wrapper = styled.div`
-  
+ .bottom-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+ }
 `;

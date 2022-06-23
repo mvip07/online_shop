@@ -136,6 +136,7 @@
 .type_6 .header-top-right ul.top-link {
   list-style: none;
   margin: 6px 0;
+  display: block;
 }
 
 .type_6 .header-top-right ul.top-link>li {

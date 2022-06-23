@@ -86,7 +86,7 @@ function Footer() {
               </div>
             </div>
 
-            <div className="col-md-4 col-sm-12 col-xs-12">
+            <div className="col-md-12 col-sm-12 col-xs-12">
               <div className="module clearfix modLine footer--social">
                 <h3 className="modtitle">Follow Us</h3>
                 <div className="modcontent">

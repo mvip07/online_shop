@@ -11,3 +11,11 @@ export const ComponentsStyleBtn = {
     display: "flex",
     justifyContent: "space-around",
 }
+
+export const bottomForm = {
+    margin: "20px",
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+
+}

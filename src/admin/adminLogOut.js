@@ -7,7 +7,7 @@ function AdminLogOut() {
             <h2><span>Log Out</span></h2>
             <p>You will not be able to track new products or read messages when you log out of your account.</p>
             <div className="btn group">
-                <button><span>NO</span></button>
+                <button onClick={navigate(-1)}><span>NO</span></button>
                 <button onClick={() => {
                     localStorage.removeItem("onlineShopAdminToken");
                     navigate("/adminLogin")

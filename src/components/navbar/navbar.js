@@ -79,7 +79,7 @@ function Navbar(setSearch) {
                 </Link>
                 <div className="tabBlock" id="TabBlock-1" style={{ display: `${more}` }}>
                   <ul className="top-link list-inline" >
-                    <li className="account" id="my_account"><Link to="/myAccount" title="My Account" className="btn btn-xs dropdown-toggle" > <i className="fa fa-user" ></i> My Account </Link></li>
+                    <li className="account"><Link to="/myAccount" className="top-link-account" title="My Account"> <i className="fa fa-user" ></i> My Account </Link></li>
                     <li className="wishlist"><Link to="/wishlist" className="top-link-wishlist" title="wishlist"><i className="fa fa-heart" ></i> My Wish List</Link></li>
                     <li className="checkout"><Link to="/checkout" className="top-link-checkout" title="Checkout"><i className="fa fa-check-square-o" ></i> Checkout</Link></li>
                     <li className="signin"><Link to="/login" className="top-link-checkout" title="login"><i className="fa fa-lock" ></i> Sign In</Link></li>

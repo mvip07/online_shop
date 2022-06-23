@@ -434,10 +434,6 @@ ul.megamenu li .sub-menu .content .hover-menu .menu ul ul li {
     color: #666;
 }
 
-.vertical ul.megamenu>li.active>a {
-    /*background: #f6f6f6 ;*/
-}
-
 .vertical ul.megamenu>li>a.description {
     padding: 12px 20px 12px 21px;
 }

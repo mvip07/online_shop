@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
-
+import { bottomForm } from "../adminComponents/components"
 
 
 function CreateProduct() {
@@ -70,7 +70,7 @@ function CreateProduct() {
 				<div className="col-lg-12 customer-login">
 					<div className="well">
 						<p>
-							<strong>I am a returning customer</strong>
+							<strong>Create Product</strong>
 						</p>
 						<div className="form-group">
 							<label className="control-label ">Enter your Title</label>
@@ -235,7 +235,7 @@ function CreateProduct() {
 							</div>
 						</div>
 					</div>
-					<div className="bottom-form">
+					<div className="bottom-form" style={bottomForm}>
 
 						<button
 							className="btn btn-default pull-right col-lg-4"
@@ -259,13 +259,6 @@ function CreateProduct() {
 
 export default CreateProduct;
 const Wrapper = styled.div`
- .bottom-form {
-   margin: 20px;
-   display: flex;
-   justify-content: center;
-   gap: 20px;
- }
-
  .color-flex {
   display: flex;
  }
