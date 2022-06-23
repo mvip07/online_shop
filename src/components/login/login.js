@@ -42,7 +42,7 @@ function Login() {
               <div className="col-lg-12 customer-login">
                 <div className="well">
                   <p>
-                    <strong>I am a returning customer</strong>
+                    <strong>Login</strong>
                   </p>
                   <div className="form-group">
                     <label className="control-label ">E-Mail Address</label>
@@ -63,9 +63,9 @@ function Login() {
                   </div>
                 </div>
                 <div className="bottom-form">
-                  {/* <a href="#" className="forgot">
+                  <Link to="/register" className="forgot">
                     Forgotten Password
-                  </a> */}
+                  </Link>
                   <button
                     className="btn btn-default pull-right"
                     onClick={Submit}

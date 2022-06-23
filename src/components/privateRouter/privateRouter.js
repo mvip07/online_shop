@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const PrivateRouter = ({ children }) => {
   let Usertoken = localStorage.getItem("onlineShopUserToken");
-  //let Admintoken = localStorage.getItem("onlineShopAdminToken");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!Usertoken) navigate("/");
+    if (!Usertoken) navigate("/login");
   }, [Usertoken, navigate]);
 
   return children;
