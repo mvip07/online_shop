@@ -2206,6 +2206,10 @@ STRUCTURE
   display: block;
 }
 
+.languages-block {
+  z-index: 100;
+}
+
 .languages-block form>a,
 .currencies-block form>a {
   color: #666;
@@ -2225,11 +2229,16 @@ STRUCTURE
   color: #fff;
 }
 
-.languages-block form .dropdown-menu,
 .currencies-block form .dropdown-menu {
-  position: relative;
-  z-index: 100;
+  position: absolute;
+  z-index: 0;
   margin: 0;
+}
+
+.languages-block form .dropdown-menu {
+  position: absolute;
+  margin: 0;
+  z-index: 10000000000000000000;
 }
 
 .languages-block form span.fa-angle-down,
