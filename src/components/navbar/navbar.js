@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cart from "../cart/cart";
 import {
@@ -7,7 +7,16 @@ import {
   Logo,
 } from "../../export/exportImg/exportImg";
 
-function Navbar(setSearch) {
+function Navbar() {
+
+  const [cart, setCart] = useState(
+    []
+  );
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
+  }, [])
+
   const [languageMenu, setLanguageMenu] = useState("none")
   const [currency, setCurrency] = useState("none")
   const [more, setMore] = useState("none")
@@ -16,6 +25,7 @@ function Navbar(setSearch) {
   const [navbar, setNavbar] = useState("none")
   const [navbarLeft, setNavbarLeft] = useState(0)
   const [features, setFeatures] = useState("none")
+  const [cartMenu, setCartMenu] = useState("none")
 
   // style
   return (
@@ -133,7 +143,83 @@ function Navbar(setSearch) {
               </div>
             </div>
 
-            <Cart />
+
+
+            <div className="col-md-2 col-sm-5 col-xs-12 shopping_cart pull-right">
+              <div id="cart" className=" btn-group btn-shopping-cart">
+                <Link
+                  to="/"
+                  data-loading-text="Loading..."
+                  className="top_cart dropdown-toggle"
+                  data-toggle="dropdown"
+                >
+                  <div className="shopcart" onClick={() => setCartMenu("block")}>
+                    <span className="handle pull-left"></span>
+                    <span className="title">My cart</span>
+                    <p className="text-shopping-cart cart-total-full">
+                      {cart.length} item(s)
+                    </p>
+                  </div>
+                </Link>
+
+                <ul className="tab-content content dropdown-menu pull-right shoppingcart-box" role="menu" style={{ display: `${cartMenu}` }}>
+                  {
+                    cart.map((data) => (
+                      <Cart data={data} key={Math.random()} />
+                    ))
+                  }
+
+                  <li>
+
+                    <div>
+                      <table className="table table-bordered">
+                        <tbody>
+                          <tr>
+                            <td className="text-left">
+                              <strong>Sub-Total</strong>
+                            </td>
+                            <td className="text-right">$1,060.00</td>
+                          </tr>
+                          <tr>
+                            <td className="text-left">
+                              <strong>Eco Tax (-2.00)</strong>
+                            </td>
+                            <td className="text-right">$2.00</td>
+                          </tr>
+                          <tr>
+                            <td className="text-left">
+                              <strong>VAT (20%)</strong>
+                            </td>
+                            <td className="text-right">$200.00</td>
+                          </tr>
+                          <tr>
+                            <td className="text-left">
+                              <strong>Total</strong>
+                            </td>
+                            <td className="text-right">$1,262.00</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <p className="text-right">
+                        <Link className="btn mr-1" to="#" onClick={() => setCartMenu("none")}>
+                          <i id="remove-vertical" className="fa fa-times"></i>
+                        </Link>
+                        {" "}
+                        <Link className="btn view-cart" to="/shoppingCartPage">
+                          <i className="fa fa-shopping-cart"> </i>View Cart
+                        </Link>
+                        {"  "}
+                        <Link className="btn btn-mega checkout-cart" to="/checkout">
+                          <i className="fa fa-share"> </i>Checkout
+                        </Link>
+                      </p>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
           </div>
 
         </div>

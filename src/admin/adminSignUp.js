@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useState } from "react";
 import API from "../containers/utils/axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { bottomForm } from "./adminComponents/components";
 
 function AdminSignup() {
     const navigate = useNavigate();
@@ -9,20 +12,31 @@ function AdminSignup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("")
+    const notify = (text, status) => {
 
+        if (status === 200 || status === 201) toast.success(`${text}`)
+        if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+    }
     function Submit() {
         API.post(`/adminSignup`, {
             username: username,
             password: password,
             passwordConfirm: passwordConfirm
-        }).then((res) => {
-            navigate("/adminLogin");
-        });
+        })
+            .then(res => {
+                notify(`Success`, res.status)
+                setTimeout(() => {
+                    navigate("/adminLogin")
+                }, 5500)
+            })
+            .catch(err => notify(err.response?.data?.message, err.response?.status))
     }
+
 
     return (
         <Wrapper>
-            <div className="main-container container">
+            <ToastContainer />
+            <div className="main-container">
                 <div className="row">
                     <div id="content" className="col-lg-12 ">
                         <div>
@@ -58,13 +72,24 @@ function AdminSignup() {
                                         />
                                     </div>
                                 </div>
-                                <div className="bottom-form ">
+                                <div className="bottom-form" style={bottomForm}>
                                     <button
-                                        className="btn btn-default pull-right col-lg-12"
-                                        onClick={Submit}
+                                        className="btn btn-default pull-right col-lg-4"
+                                        onClick={() => navigate(-1)}
                                     >
-                                        Sign Up
+                                        Back
                                     </button>
+                                    <button
+                                        className="btn btn-default pull-right col-lg-4"
+                                        onClick={() => {
+                                            Submit();
+                                            notify();
+                                        }}
+                                    >
+                                        Register
+                                    </button>
+
+
                                 </div>
                             </div>
                         </div>
@@ -77,10 +102,14 @@ function AdminSignup() {
 
 export default AdminSignup;
 const Wrapper = styled.div`
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+
+.container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+  }
+  
 
   .bottom-form {
     min-width: 100%;

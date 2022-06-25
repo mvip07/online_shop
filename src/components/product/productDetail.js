@@ -299,6 +299,7 @@ function ProductDetail() {
                                       className="icon"
                                       data-toggle="tooltip"
                                       data-original-title="Add to Wish List"
+                                      to="#"
                                     >
                                       <i className="fa fa-heart"> </i>
                                     </Link>
@@ -315,6 +316,7 @@ function ProductDetail() {
                                     }}
                                   >
                                     <Link
+                                      to="#"
                                       className="icon"
                                       data-toggle="tooltip"
                                       data-original-title="Compare this Product"

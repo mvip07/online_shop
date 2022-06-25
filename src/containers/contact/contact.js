@@ -3,24 +3,30 @@ import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 import emailjs from '@emailjs/browser';
 import { Link } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Contact() {
   const form = useRef();
+  const notify = (text, status) => {
+    if (status === 200 || status === 201) toast.success(`${text}`)
+    if (status === 400 || status === 400) toast.error(`${text}`)
+  }
   const sendEmail = (e) => {
 
     e.preventDefault();
 
     emailjs.sendForm('onlineShop', 'onlineShopContact', form.current, '7LwV_dO-zVUJxhGVE')
       .then((result) => {
-        console.log(result.text);
+        notify(result.text, result.status);
       }, (error) => {
-        console.log(error.text);
+        notify(error.text, error.status);
       });
   };
 
   return (
     <div id="wrapper" className="wrapper-full ">
+      <ToastContainer />
       <Navbar />
       <div className="main-container container">
         <ul className="breadcrumb">
@@ -147,6 +153,7 @@ function Contact() {
                       <button
                         className="btn btn-default buttonGray"
                         type="submit"
+                        onClick={notify}
                       >
                         <span>Submit</span>
                       </button>

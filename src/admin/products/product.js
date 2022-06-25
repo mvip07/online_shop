@@ -15,7 +15,8 @@ import { host } from "../../containers/utils/url";
 import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components";
 function AdminProduct({ data }) {
   function DeleteProduct(id) {
-    API.delete(`/products/${id}`).then((res) => console.log(res));
+    console.log(id)
+    API.delete(`/product/${id}`).then((res) => console.log(res));
   }
 
   return (

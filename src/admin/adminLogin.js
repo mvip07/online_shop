@@ -2,26 +2,39 @@ import styled from "styled-components";
 import { useState } from "react";
 import API from "../containers/utils/axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { bottomForm } from "./adminComponents/components";
 
 function AdminLogin() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const notify = (text, status) => {
+    if (status === 200 || status === 201) toast.success(`${text}`)
+    if (status === 400 || status === 401) toast.error(`${text}`)
+  }
   function Submit() {
     API.post(`/adminLogin`, {
       username: username,
       password: password,
-    }).then((res) => {
-      localStorage.setItem("onlineShopAdminToken", res.data.token);
-      navigate("/adminMain");
-    });
+    })
+      .then((res) => {
+        notify(`Success`, res.status)
+        setTimeout(() => {
+          localStorage.setItem("onlineShopAdminToken", res.data.token);
+          navigate("/adminMain");
+        }, 5500)
+      })
+      .catch(err => notify(err.response?.data?.message, err.response?.status))
+
   }
 
   return (
     <Wrapper>
-      <div className="main-container container">
+      <ToastContainer />
+      <div className="container">
         <div className="row">
           <div id="content" className="col-lg-12 ">
             <div>
@@ -49,12 +62,23 @@ function AdminLogin() {
                   </div>
                 </div>
                 <div className="bottom-form ">
-                  <button
-                    className="btn btn-default pull-right col-lg-12"
-                    onClick={Submit}
-                  >
-                    Login
-                  </button>
+                  <div className="bottom-form" style={bottomForm}>
+                    <button
+                      className="btn btn-default pull-right col-lg-4"
+                      onClick={() => navigate("/adminSingUp")}
+                    >
+                      Register
+                    </button>
+                    <button
+                      className="btn btn-default pull-right col-lg-4"
+                      onClick={() => {
+                        Submit();
+                        notify();
+                      }}
+                    >
+                      Login
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -67,11 +91,7 @@ function AdminLogin() {
 
 export default AdminLogin;
 const Wrapper = styled.div`
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-
+ 
   .bottom-form {
     min-width: 100%;
   }

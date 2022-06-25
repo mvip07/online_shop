@@ -1,11 +1,17 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CompareCard from "../../components/compare/compareCard";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 
 function Compare() {
-  //
+  const [compare, setCompare] = useState(
+    []
+  );
 
+  useEffect(() => {
+    setCompare(JSON.parse(localStorage.getItem("onlineShopComparison")) || [])
+  }, [])
   return (
     <div id="wrapper" className="wrapper-full ">
       <Navbar />
@@ -33,7 +39,11 @@ function Compare() {
                     </td>
                   </tr>
                 </thead>
-                <CompareCard />
+                {
+                  compare.map((data) => (
+                    <CompareCard data={data} key={Math.random()} />
+                  ))
+                }
               </table>
             </div>
           </div>

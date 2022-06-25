@@ -317,3 +317,8 @@ body {
     display: block !important;
   }
 }
+
+.grid {
+  display: flex;
+  gap: 3px;
+}

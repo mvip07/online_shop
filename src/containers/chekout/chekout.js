@@ -8,7 +8,7 @@ function Checkout() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
 
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("onlineShopCart")))
+    setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
   }, [])
 
   return (
@@ -488,9 +488,9 @@ function Checkout() {
                             </thead>
                             <tbody>
                               {
-                                cart.map(({ title, image, model, price }) => {
+                                cart.map((data) => {
                                   return (
-                                    <ShoppingList title={title} image={image} model={model} price={price} key={Math.random()} />
+                                    <ShoppingList data={data} key={Math.random()} />
                                   )
                                 })
                               }

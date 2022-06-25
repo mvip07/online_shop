@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 import API from "../containers/utils/axios";
 import AdminProduct from "./products/product";
 import AdvertisingCard from "./advertising/advertising";
@@ -10,7 +10,7 @@ import AboutCompany from "./aboutCompany/aboutCompany";
 import AdminLogin from "./adminLogin";
 import AdminSignup from "./adminSignUp";
 import AdminLogOut from "./adminLogOut";
-import { Link } from "react-router-dom";
+
 function AdminMain() {
   const [products, setProducts] = useState([]);
   const [advertisings, setAdvertisings] = useState([]);
@@ -32,9 +32,6 @@ function AdminMain() {
     API.get(`/aboutCompanys`).then(res => setAboutCompany(res.data))
 
   }, []);
-
-  console.log(components)
-
   return (
 
     <Wrapper>

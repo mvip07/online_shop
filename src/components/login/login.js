@@ -3,26 +3,38 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../footer/footer";
 import Navbar from "../navbar/navbar";
 import API from "../../containers/utils/axios";
-// or
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const notify = (text, status) => {
 
+    if (status === 200 || status === 201) toast.success(`${text}`)
+    if (status === 401) toast.error(`${text}`)
+  }
   function Submit() {
     const resBody = {
       email: email,
       password: password,
     };
-    API.post(`/login`, resBody).then((res) => {
-      localStorage.setItem("onlineShopUserToken", res.data.token);
-      navigate("/");
-    });
+    API.post(`/login`, resBody)
+      .then((res) => {
+        notify(`Success`, res.status)
+        localStorage.setItem("onlineShopUserToken", res.data.token);
+        setTimeout(() => {
+          navigate("/")
+        }, 5500)
+
+      })
+      .catch(err => notify(err.response?.data.message, err.response?.status))
   }
 
   return (
     <div id="wrapper" className="wrapper-full ">
+      <ToastContainer />
       <Navbar />
       <div className="main-container container">
         <ul className="breadcrumb">
@@ -68,7 +80,10 @@ function Login() {
                   </Link>
                   <button
                     className="btn btn-default pull-right"
-                    onClick={Submit}
+                    onClick={() => {
+                      Submit();
+                      notify()
+                    }}
                   >
                     Login
                   </button>
@@ -79,7 +94,7 @@ function Login() {
         </div>
       </div>
       <Footer />
-    </div>
+    </div >
   );
 }
 

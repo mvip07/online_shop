@@ -10,7 +10,7 @@ function Wishlist() {
   );
 
   useEffect(() => {
-    setLike(JSON.parse(localStorage.getItem("onlineShopLike")))
+    setLike(JSON.parse(localStorage.getItem("onlineShopLike")) || [])
   }, [])
 
   return (
@@ -44,7 +44,11 @@ function Wishlist() {
                   </tr>
                 </thead>
                 <tbody>
-                  <WishlistCard like={like} key={Math.random()} />
+                  {
+                    like.map((data) => (
+                      <WishlistCard data={data} key={Math.random()} />
+                    ))
+                  }
                 </tbody>
               </table>
             </div>

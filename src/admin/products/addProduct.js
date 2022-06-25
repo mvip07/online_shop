@@ -3,13 +3,18 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
 import { bottomForm } from "../adminComponents/components"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateProduct() {
 	const navigate = useNavigate();
 
 	const numberDiscount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
+	const notify = (text, status) => {
 
+		if (status === 200 || status === 201) toast.success(`${text}`)
+		if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+	}
 	const [color1, setColor1] = useState("");
 	const [color2, setColor2] = useState("");
 	const [color3, setColor3] = useState("");
@@ -17,11 +22,6 @@ function CreateProduct() {
 	const [color5, setColor5] = useState("");
 
 	const [image1, setImage1] = useState("")
-	// const [image2, setImage2] = useState("")
-	// const [image3, setImage3] = useState("")
-	// const [image4, setImage4] = useState("")
-	// const [image5, setImage5] = useState("")
-
 	const [title, setTitle] = useState("");
 	const [brand, setBrand] = useState("");
 	const [price, setPrice] = useState("");
@@ -54,18 +54,19 @@ function CreateProduct() {
 		form.append("type", type);
 
 		form.append("image", image1);
-		// form.append("image", image2);
-		// form.append("image", image3);
-		// form.append("image", image4);
-		// form.append("image", image5);
-
-		API.post("/product", form);
-
-		navigate("/adminMain")
+		API.post("/product", form)
+			.then(res => {
+				notify(`Success`, res.status)
+				setTimeout(() => {
+					navigate("/adminMain")
+				}, 5500)
+			})
+			.catch(err => notify(err.response?.data?.message, err.response?.status))
 	};
 
 	return (
 		<Wrapper >
+			<ToastContainer />
 			<div>
 				<div className="col-lg-12 customer-login">
 					<div className="well">
@@ -228,27 +229,24 @@ function CreateProduct() {
 							<label className="control-label">Enter your Image</label>
 							<div className="color-flex">
 								<input type="file" className="form-control file" onChange={({ target }) => setImage1(target.files[0])} />
-								{/* <input type="file" className="form-control file" onChange={({ target }) => setImage2(target.files[0])} />
-								<input type="file" className="form-control file" onChange={({ target }) => setImage3(target.files[0])} />
-								<input type="file" className="form-control file" onChange={({ target }) => setImage4(target.files[0])} />
-								<input type="file" className="form-control file" onChange={({ target }) => setImage5(target.files[0])} /> */}
 							</div>
 						</div>
 					</div>
 					<div className="bottom-form" style={bottomForm}>
-
-						<button
-							className="btn btn-default pull-right col-lg-4"
-							onClick={Submit}
-						>
-							Create Product
-						</button>
-
 						<button
 							className="btn btn-default pull-right col-lg-4"
 							onClick={() => navigate(-1)}
 						>
 							Back
+						</button>
+						<button
+							className="btn btn-default pull-right col-lg-4"
+							onClick={() => {
+								Submit();
+								notify();
+							}}
+						>
+							Create Product
 						</button>
 					</div>
 				</div>

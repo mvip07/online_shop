@@ -19,23 +19,23 @@ function AboutTeamMembearCard({ data }) {
             </p>
             <ul className="social-member">
               <li className="social-icon rss">
-                <Link className="fa fa-rss" href="#">
+                <Link className="fa fa-rss" to="#">
                   <span>RSS</span>
                 </Link>
               </li>
               <li className="social-icon facebook">
-                <Link className="fa fa-facebook" href="#" title="Facebook">
+                <Link className="fa fa-facebook" to="#" title="Facebook">
 
                   <span>Facebook</span>
                 </Link>
               </li>
               <li className="social-icon twitter">
-                <Link className="fa fa-twitter" href="#" title="Twitter">
+                <Link className="fa fa-twitter" to="#" title="Twitter">
                   <span>Twitter</span>
                 </Link>
               </li>
               <li className="social-icon google">
-                <Link className="fa fa-google" href="#" title="Google">
+                <Link className="fa fa-google" to="#" title="Google">
                   <span>Google</span>
                 </Link>
               </li>

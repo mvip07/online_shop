@@ -3,24 +3,37 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../containers/utils/axios";
 import { bottomForm } from "../adminComponents/components"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddAdvertising() {
   const navigate = useNavigate()
   const [firma, setFirma] = useState("");
   const [type, setType] = useState("")
   const [image, setImage] = useState("");
-
+  const notify = (text, status) => {
+    if (status === 200 || status === 201) toast.success(`${text}`)
+    if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+  }
   const Submit = () => {
     let form = new FormData();
     form.append("firma", firma);
     form.append("type", type)
     form.append("image", image);
 
-    API.post("/advertising", form).then((res) => navigate(-1));
+    API.post("/advertising", form)
+      .then((res) => {
+        notify(`Success`, res.status)
+        setTimeout(() => {
+          navigate("/adminMain")
+        }, 5500)
+      })
+      .catch(err => notify(err.response?.data?.message, err.response?.status))
   };
 
   return (
     <Wrapper>
+      <ToastContainer />
       <div>
         <div className="col-lg-12 customer-login">
           <div className="well">
@@ -46,19 +59,20 @@ function AddAdvertising() {
             </div>
           </div>
           <div className="bottom-form" style={bottomForm}>
-
-            <button
-              className="btn btn-default pull-right col-lg-4"
-              onClick={Submit}
-            >
-              Create Advertising
-            </button>
-
             <button
               className="btn btn-default pull-right col-lg-4"
               onClick={() => navigate(-1)}
             >
               Back
+            </button>
+            <button
+              className="btn btn-default pull-right col-lg-4"
+              onClick={() => {
+                Submit();
+                notify();
+              }}
+            >
+              Create Advertising
             </button>
           </div>
         </div>

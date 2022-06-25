@@ -5,6 +5,8 @@ import Navbar from "../navbar/navbar";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import API from "../../containers/utils/axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
   const navigate = useNavigate();
@@ -21,7 +23,11 @@ function Register() {
   const [country, setCountry] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const notify = (text, status) => {
 
+    if (status === 200 || status === 201) toast.success(`${text}`)
+    if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+  }
   // function generatePassword() {
   //   var length = 20,
   //     charset =
@@ -64,11 +70,19 @@ function Register() {
         password: password,
         passwordConfirm: passwordConfirm,
       };
-      API.post(`/signup`, reqBody).then((res) => navigate("/login"));
+      API.post(`/signup`, reqBody)
+        .then((res) => {
+          notify(`Success`, res.status)
+          setTimeout(() => {
+            navigate("/login")
+          }, 5500)
+        })
+        .catch(err => notify(err.response?.data?.message, err.response?.status))
     }
   }
   return (
     <div id="wrapper" className="wrapper-full ">
+      <ToastContainer />
       <Navbar />
       <div className="main-container container">
         <ul className="breadcrumb">
@@ -703,7 +717,10 @@ function Register() {
                     type="submit"
                     defaultValue="Continue"
                     className="btn btn-primary"
-                    onClick={RegisterSubmit}
+                    onClick={() => {
+                      RegisterSubmit();
+                      notify();
+                    }}
                   >
                     Register
                   </button>

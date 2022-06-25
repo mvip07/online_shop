@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 
 function ShoppingCart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
-
+  const [cuponCode, setCuponCode] = useState("block")
+  const [estimateShipping, setEstimateShipping] = useState("none")
+  const [giftCertificate, setGiftCertificate] = useState("none")
   useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("onlineShopCart")))
+    setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
   }, [])
   return (
     <div id="wrapper" className="wrapper-full ">
@@ -35,6 +37,7 @@ function ShoppingCart() {
                     <td className="text-center">Image</td>
                     <td className="text-left">Product Name</td>
                     <td className="text-left">Model</td>
+                    <td className="text-left">Color</td>
                     <td className="text-left">Quantity</td>
                     <td className="text-right">Unit Price</td>
                     <td className="text-right">Total</td>
@@ -42,9 +45,9 @@ function ShoppingCart() {
                 </thead>
                 <tbody>
                   {
-                    cart.map(({ title, image, model, price }) => {
+                    cart.map((data) => {
                       return (
-                        <ShoppingList title={title} image={image} model={model} price={price} key={Math.random()} />
+                        <ShoppingList data={data} key={Math.random()} />
                       )
                     })
                   }
@@ -71,16 +74,22 @@ function ShoppingCart() {
                       aria-expanded="true"
                     >
                       Use Coupon Code
-                      <i className="fa fa-caret-down"></i>
+                      {
+                        cuponCode === "none" ?
+                          <span className="caret mr-1" onClick={() => setCuponCode("block")}></span>
+                          :
+                          <span className="caret mr-1 bottom" onClick={() => setCuponCode("none")}></span>
+                      }
                     </Link>
                   </h4>
                 </div>
                 <div
+
                   id="collapse-coupon"
                   className="panel-collapse collapse in"
                   aria-expanded="true"
                 >
-                  <div className="panel-body">
+                  <div className="panel-body" style={{ display: `${cuponCode}` }}>
                     <label
                       className="col-sm-2 control-label"
                       htmlFor="input-coupon"
@@ -119,7 +128,14 @@ function ShoppingCart() {
                       aria-expanded="false"
                     >
                       Estimate Shipping &amp; Taxes
-                      <i className="fa fa-caret-down"></i>
+                      {
+                        estimateShipping === "none" ?
+                          <span className="caret mr-1" onClick={() => {
+                            setEstimateShipping("block");
+                          }}></span>
+                          :
+                          <span className="caret mr-1 bottom" onClick={() => setEstimateShipping("none")}></span>
+                      }
                     </Link>
                   </h4>
                 </div>
@@ -127,9 +143,8 @@ function ShoppingCart() {
                   id="collapse-shipping"
                   className="panel-collapse collapse"
                   aria-expanded="false"
-                  style={{ height: "0px" }}
                 >
-                  <div className="panel-body">
+                  <div className="panel-body" style={{ display: `${estimateShipping}` }}>
                     <p>Enter your destination to get Link shipping estimate.</p>
                     <div className="form-horizontal">
                       <div className="form-group required">
@@ -217,7 +232,15 @@ function ShoppingCart() {
                       aria-expanded="false"
                     >
                       Use Gift Certificate
-                      <i className="fa fa-caret-down"></i>
+                      {
+                        giftCertificate === "none" ?
+                          <span className="caret mr-1" onClick={() => {
+                            setGiftCertificate("block");
+
+                          }}></span>
+                          :
+                          <span className="caret mr-1 bottom" onClick={() => setGiftCertificate("none")}></span>
+                      }
                     </Link>
                   </h4>
                 </div>
@@ -225,9 +248,8 @@ function ShoppingCart() {
                   id="collapse-voucher"
                   className="panel-collapse collapse"
                   aria-expanded="false"
-                  style={{ height: "0px" }}
                 >
-                  <div className="panel-body">
+                  <div className="panel-body" style={{ display: `${giftCertificate}` }} >
                     <label
                       className="col-sm-2 control-label"
                       htmlFor="input-voucher"
