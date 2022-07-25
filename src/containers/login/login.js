@@ -30,7 +30,7 @@ function Login() {
         }, 5500)
 
       })
-      .catch(err => notify(err.response?.data.message, err.response?.status))
+      .catch(err => notify(err.data.message, err?.status))
   }
 
   return (

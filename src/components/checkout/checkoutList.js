@@ -10,7 +10,6 @@ function CheckoutList({ data }) {
     }, [userId])
 
     function CheckoutDelete(id) {
-        console.log(id)
         API.delete(`/delete/bag/${userId}/${id}`)
             .then(res => notify(res.data.message, res.status))
             .catch(err => notify(err.message, err.response.status))
