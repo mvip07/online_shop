@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { host } from "../../containers/utils/url";
 function BlogCard({ data }) {
 
   return (
@@ -10,7 +9,7 @@ function BlogCard({ data }) {
           <div className="article-image banners">
             <div>
               <Link className="popup-gallery" to="#">
-                <img src={`${host}/${data.image}`} alt="Kire tuma demonstraverunt lector" />
+                <img src={`${data.image}`} alt="Kire tuma demonstraverunt lector" />
               </Link>
             </div>
           </div>

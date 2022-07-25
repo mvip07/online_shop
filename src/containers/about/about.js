@@ -4,20 +4,21 @@ import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires Link loader
 import { Carousel } from 'react-responsive-carousel';
-import API from "../utils/axios";
+import API from "../../utils/axios";
 import styled from "styled-components";
-import { host } from "../utils/url";
 import { Link } from "react-router-dom";
+import { allAboutCompanys, allAboutTeamMembears } from "../../utils/api";
 function About() {
   const [aboutTeamMembearData, setAboutTeamMembearData] = useState([])
   const [aboutCompany, setAboutCompany] = useState([])
   useEffect(() => {
-    API.get(`/aboutTeamMembars`)
+    API.get(`${allAboutTeamMembears}`)
       .then(res => setAboutTeamMembearData(res.data))
       .catch(err => console.log(err))
 
-    API.get(`/aboutCompanys`)
+    API.get(`${allAboutCompanys}`)
       .then(res => setAboutCompany(res.data))
+      .catch(err => console.log(err))
   }, [])
   return (
     <div>
@@ -45,7 +46,7 @@ function About() {
                       aboutCompany.map((data) => {
                         return (
                           <div className="yt-content-slide yt-clearfix yt-content-wrap" key={Math.random()}>
-                            <img src={`${host}/${data.image}`} alt="About Us" />
+                            <img src={`${data.image}`} alt="About Us" />
                           </div>
                         )
                       })

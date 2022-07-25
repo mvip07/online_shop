@@ -9,7 +9,6 @@ function Advertising() {
 	const [advertisingsCount, setAdvertisingsCount] = useState(0)
 	const [next, setNext] = useState(widthWindows)
 	useEffect(() => {
-
 		setInterval(() => {
 			setWidthWindows(window.innerWidth)
 		}, 1000)

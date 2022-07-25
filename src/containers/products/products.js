@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Product from "../../components/product/product";
-import API from "../utils/axios";
+import { allProducts } from "../../utils/api";
+import API from "../../utils/axios";
 
 function Products() {
   const [products, setproduct] = useState([]);
   useEffect(() => {
-    API.get("/products").then((res) => {
-      setproduct(res.data);
-    });
+    API.get(`${allProducts}`)
+      .then((res) => {
+        setproduct(res.data);
+      }).catch(err => console.log(err))
   }, []);
 
   return (

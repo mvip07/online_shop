@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
-import API from "../containers/utils/axios";
+import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { bottomForm } from "./adminComponents/components";
+import { bottomForm } from "./util/components";
+import { adminLogin } from "../utils/api";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function AdminLogin() {
     if (status === 400 || status === 401) toast.error(`${text}`)
   }
   function Submit() {
-    API.post(`/adminLogin`, {
+    API.post(`${adminLogin}`, {
       username: username,
       password: password,
     })

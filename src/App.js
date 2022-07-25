@@ -1,5 +1,17 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import "./css/App.css";
+import "./css/bootstrap/css/bootstrap.css"
+import "./css/font-awesome/css/font-awesome.css"
+import "./css/themecss/so_megamenu.css"
+import "./css/themecss/so-categories.css"
+import "./css/themecss/so-listing-tabs.css"
+import "./css/themecss/so-newletter-popup.css"
+import "./css/themecss/just_purchased_notification.css"
+import "./css/footer3.css"
+import "./css/header6.css"
+import "./css/home6.css"
+import "./css/theme.css"
+import "./css/responsive.css"
 
 // Containner file da import qilingalar
 import Home from "./containers/home/home";
@@ -10,6 +22,20 @@ import ProductsContainer from "./containers/products/products";
 import ShoppingCart from "./containers/shoppingCartPage/shoppingCart";
 import Compare from "./containers/compare/compare";
 import Wishlist from "./containers/wishlist/wishlist";
+import GiftVoucher from "./containers/giftVoucher/giftVoucher"
+import Login from './containers/login/login'
+import Register from "./containers/register/register"
+import OrderHistory from "./containers/orderHistory/orderHistory";
+import MyAccount from "./containers/myAccount/myAccount";
+import Checkout from "./containers/chekout/chekout"
+import OrderInformation from "./containers/orderInformation/orderInformation"
+import ProductReturn from "./containers/productReturn/productReturn"
+import Contact from "./containers/contact/contact"
+import Faq from "./containers/contact/contact"
+
+import ProductDetail from "./components/product/productDetail"
+import PrivateRouter from "./utils/privateRouter"
+import AdminPrivateRouter from "./utils/adminPrivateRouter";
 
 // Admin file da import qilganlar
 import AdminLogin from "./admin/adminLogin";
@@ -20,20 +46,8 @@ import AddAdvertising from "./admin/advertising/addAdvertising";
 import AddBlog from "./admin/blog/addBlog";
 import AddAboutTeamMembear from "./admin/aboutTeamMembear/addAboutTeamMembear";
 import AddAboutCompany from "./admin/aboutCompany/addAboutCompany";
-import AdminPrivateRouter from "./admin/utils/adminPrivateRouter";
-// Components file da import qilganlar
-import PrivateRouter from "./components/privateRouter/privateRouter";
-import ProductDetail from "./components/product/productDetail";
-import Checkout from "./containers/chekout/chekout";
-import OrderHistory from "./components/orderHistory/orderHistory";
-import OrderInformation from "./components/orderInformation/orderInformation";
-import ProductReturn from "./components/productReturn/productReturn";
-import GiftVoucher from "./components/giftVoucher/giftVoucher";
-import Contact from "./containers/contact/contact";
-import Faq from "./containers/faq/faq";
-import Login from "./components/login/login";
-import Register from "./components/register/register";
-import MyAccount from "./components/myAccount/myAccount";
+import AdvertisingUpdate from "./admin/advertising/advertisingUpdate";
+import ProductUpdate from "./admin/products/productUpdate";
 
 function App() {
 	return (
@@ -95,6 +109,18 @@ function App() {
 					<AdminPrivateRouter >
 						<AddAboutCompany />
 					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="advertising/update/:id"
+				element={
+					<AdvertisingUpdate />
+				}
+			/>
+
+			<Route path="product/update/:id"
+				element={
+					<ProductUpdate />
 				}
 			/>
 

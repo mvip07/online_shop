@@ -1,6 +1,6 @@
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
-import CategoryProduct from "./categoryProduct";
+import CategoryProduct from "../../components/category/categoryProduct";
 import {
   Electronic,
   Product10,
@@ -12,10 +12,8 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Category() {
-  const [inputSearch, setInputSearch] = useState("");
-  const maxvalue = document.querySelector(".max_value");
-  console.log(maxvalue);
+function Category({ search }) {
+  const [inputSearch, setInputSearch] = useState(search);
   return (
     <div id="wrapper" className="wrapper-full ">
       <Navbar />

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import API from "../../containers/utils/axios";
-import { bottomForm } from "../adminComponents/components"
+import API from "../../utils/axios";
+import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { data, send } from "../../utils/firebaseImageSend";
+import { createProduct } from "../../utils/api";
 
 function CreateProduct() {
 	const navigate = useNavigate();
@@ -31,37 +33,45 @@ function CreateProduct() {
 	const [model, setModel] = useState("");
 	const [quantity, setQuantity] = useState("");
 	const [description, setDescripion] = useState("");
-	const [type, setType] = useState("Laptop");
+	const [width, setWidth] = useState(0);
+	const [heigth, setHeigth] = useState(0)
+	const [depth, setDepth] = useState(0)
 
 	const Submit = () => {
+		send(image1)
 		let form = new FormData();
-		form.append("title", title);
-		form.append("brand", brand);
 
-		form.append("color", color1);
-		form.append("color", color2);
-		form.append("color", color3);
-		form.append("color", color4);
-		form.append("color", color5);
+		setTimeout(() => {
+			let img = data.pop()
+			form.append("title", title);
+			form.append("brand", brand);
+			form.append("color", color1);
+			form.append("color", color2);
+			form.append("color", color3);
+			form.append("color", color4);
+			form.append("color", color5);
+			form.append("price", price);
+			form.append("stars", stars);
+			form.append("category", category);
+			form.append("discount", discount);
+			form.append("model", model);
+			form.append("quantity", quantity);
+			form.append("description", description);
+			form.append("width", width);
+			form.append("hegth", heigth);
+			form.append("depth", depth)
+			form.append("image", img);
 
-		form.append("price", price);
-		form.append("stars", stars);
-		form.append("category", category);
-		form.append("discount", discount);
-		form.append("model", model);
-		form.append("quantity", quantity);
-		form.append("description", description);
-		form.append("type", type);
+			API.post(`${createProduct}`, form)
+				.then(res => {
+					notify(`Success`, res.status)
+					setTimeout(() => {
+						navigate("/adminMain")
+					}, 5500)
+				})
+				.catch(err => notify(err.response?.data?.message, err.response?.status))
+		}, 2000)
 
-		form.append("image", image1);
-		API.post("/product", form)
-			.then(res => {
-				notify(`Success`, res.status)
-				setTimeout(() => {
-					navigate("/adminMain")
-				}, 5500)
-			})
-			.catch(err => notify(err.response?.data?.message, err.response?.status))
 	};
 
 	return (
@@ -217,12 +227,18 @@ function CreateProduct() {
 						</div>
 
 						<div className="form-group">
-							<label className="control-label ">Enter your Type</label>
+							<label className="control-label ">Enter your Width (mm)</label>
+							<input type="number" className="form-control" onChange={({ target }) => setWidth(target.value)} />
+						</div>
 
-							<select className="form-control" onChange={({ target }) => setType(target.value)}>
-								<option className="form-control" > Laptop</option>
-								<option className="form-control" > Mobile</option>
-							</select>
+						<div className="form-group">
+							<label className="control-label ">Enter your Heigth (mm)</label>
+							<input type="number" className="form-control" onChange={({ target }) => setHeigth(target.value)} />
+						</div>
+
+						<div className="form-group">
+							<label className="control-label ">Enter your Depth (mm)</label>
+							<input type="number" className="form-control" onChange={({ target }) => setDepth(target.value)} />
 						</div>
 
 						<div className="form-group">

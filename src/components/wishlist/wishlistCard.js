@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { host } from "../../containers/utils/url";
 
 function WishlistCard({ data }) {
   const [bag, setBag] = useState(
@@ -17,12 +16,12 @@ function WishlistCard({ data }) {
   );
 
   return (
-    <tr key={Math.random()}>
+    <tr>
       <td className="text-center">
         <Link to="/product">
           <img
             width="70px"
-            src={`${host}/${data.image}`}
+            src={`${data.image}`}
             alt="Xitefun Causal Wear Fancy Shoes"
             title="Xitefun Causal Wear Fancy Shoes"
           />

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-import { host } from "../../containers/utils/url";
 function AboutTeamMembearCard({ data }) {
   return (
     <div className="yt-content-slide yt-clearfix yt-content-wrap">
@@ -7,7 +6,7 @@ function AboutTeamMembearCard({ data }) {
         <div className="member">
           <div className="member-image">
             <img
-              src={`${host}/${data.image}`}
+              src={`${data.image}`}
               alt=""
             />
           </div>

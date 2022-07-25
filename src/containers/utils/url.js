@@ -1,1 +1,0 @@
-export const host = `https://mirafzal-online-shop.herokuapp.com`

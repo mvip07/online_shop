@@ -1,22 +1,35 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import API from "../../containers/utils/axios";
-import { host } from "../../containers/utils/url";
-import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components"
+import API from "../../utils/axios";
+import { ComponentsStyle, ComponentsStyleBtn } from "../util/components"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteAboutCompany } from "../../utils/api";
 
 function AboutCompany({ data }) {
+
+    const notify = (text, status) => {
+        if (status === 200 || status === 201) toast.success(`${text}`)
+        if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+    }
+
     function DeleteAboutCompany(id) {
-        API.delete(`/aboutCompany/${id}`).then((res) => console.log(res));
+        API.delete(`${deleteAboutCompany}/${id}`)
+            .then((res) => {
+                notify(`Success`, res.status)
+            })
+            .catch(err => notify(err.response?.data?.message, err.response?.status))
     }
 
     return (
         <Wrapper style={ComponentsStyle}>
-            <div className="yt-content-slide" key={Math.random()}>
+            <ToastContainer />
+            <div>
                 <Link to="#">
 
                     {
                         data.type === "video/mp4" ?
-                            <video src={`${host}/${data.image}`}
+                            <video src={`${data.image}`}
                                 className="img-responsive"
                                 width="500px"
                                 height="300px"
@@ -24,7 +37,7 @@ function AboutCompany({ data }) {
                             />
                             :
                             <img
-                                src={`${host}/${data.image}`}
+                                src={`${data.image}`}
                                 alt="slider1"
                                 className="img-responsive"
                                 width="500px"

@@ -2,9 +2,10 @@
 
 # dependencies
 /node_modules
-/frontend
 /.pnp
+/.idea
 .pnp.js
+/css
 
 # testing
 /coverage

@@ -1,32 +1,38 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import API from "../../containers/utils/axios";
-import { bottomForm } from "../adminComponents/components"
+import API from "../../utils/axios";
+import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { send, data } from "../../utils/firebaseImageSend";
+import { createAboutCompany } from "../../utils/api";
 
 function AddAboutCompany() {
     const navigate = useNavigate()
     const [companyName, setCompanyName] = useState("")
     const [image, setImage] = useState("")
-    const notify = (text, status) => {
 
+    const notify = (text, status) => {
         if (status === 200 || status === 201) toast.success(`${text}`)
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
     }
-    const Submit = () => {
-        let form = new FormData();
-        form.append("title", companyName);
-        form.append("image", image);
 
-        API.post("/aboutCompany", form)
-            .then((res) => {
-                notify(`Success`, res.status)
-                setTimeout(() => {
-                    navigate("/adminMain")
-                }, 5500)
-            })
-            .catch(err => notify(err.response?.data?.message, err.response?.status))
+    const Submit = () => {
+        send(image)
+        let form = new FormData();
+
+        setTimeout(() => {
+            let img = data.pop()
+            form.append("title", companyName);
+            form.append("image", img);
+
+            API.post(`${createAboutCompany}`, form)
+                .then((res) => {
+                    notify(`Success`, res.status)
+                })
+                .catch(err => notify(err.response?.data?.message, err.response?.status))
+        }, 2000)
+
     };
 
     return (
@@ -35,7 +41,7 @@ function AddAboutCompany() {
             <div className="col-lg-12 customer-login">
                 <div className="well">
                     <p>
-                        <strong>About Company</strong>
+                        <strong>Create About Company</strong>
                     </p>
                     <div className="form-group">
                         <label className="control-label ">Enter your Company Name</label>

@@ -1,21 +1,35 @@
 import styled from "styled-components"
-import API from "../../containers/utils/axios";
-import { host } from "../../containers/utils/url";
-import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components";
+import API from "../../utils/axios";
+import { ComponentsStyle, ComponentsStyleBtn } from "../util/components";
 import { Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteBlog } from "../../utils/api";
 
 function Blog({ data }) {
-    function DeleteAdvertising(id) {
-        API.delete(`/blog/${id}`).then((res) => console.log(res));
+
+    const notify = (text, status) => {
+        if (status === 200 || status === 201) toast.success(`${text}`)
+        if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
     }
+
+    function DeleteBlog(id) {
+        API.delete(`${deleteBlog}/${id}`)
+            .then(res => {
+                notify(`Success`, res.status)
+            })
+            .catch(err => notify(err.response?.data?.message, err.response?.status))
+    }
+
     return (
         <Wrapper style={ComponentsStyle}>
+            <ToastContainer />
             <div className="blog-item ">
                 <div className="itemBlogImg ">
                     <div className="article-image banners">
                         <div>
                             <Link className="popup-gallery" to="#">
-                                <img src={`${host}/${data.image}`} alt="Kire tuma demonstraverunt lector" />
+                                <img src={`${data.image}`} alt="Kire tuma demonstraverunt lector" />
                             </Link>
                         </div>
                     </div>
@@ -55,7 +69,7 @@ function Blog({ data }) {
                             type="button"
                             data-toggle="tooltip"
                             title="Delete"
-                            onClick={() => DeleteAdvertising(data.id)}
+                            onClick={() => DeleteBlog(data.id)}
                         >
                             <i className="fa-solid fa-trash-can mr-1"></i>
                             <span>Delete</span>

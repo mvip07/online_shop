@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import BlogCard from "../../components/blogCard/blogCard";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
-import API from "../utils/axios";
+import { allBlogs } from "../../utils/api";
+import API from "../../utils/axios";
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    API.get(`/blogs`).then(res => setBlogs(res.data))
+    API.get(`${allBlogs}`).then(res => setBlogs(res.data))
   }, [])
   return (
     <div id="wrapper" className="wrapper-full ">

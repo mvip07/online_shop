@@ -1,20 +1,33 @@
 import styled from "styled-components";
-import API from "../../containers/utils/axios";
-import { host } from "../../containers/utils/url";
-import { ComponentsStyle, ComponentsStyleBtn } from "../adminComponents/components"
+import API from "../../utils/axios";
+import { ComponentsStyle, ComponentsStyleBtn } from "../util/components"
 import { Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { deleteAboutTeamMembear } from "../../utils/api";
 
 function AboutTeamMembear({ data }) {
-    function DeleteAdvertising(id) {
-        API.delete(`/aboutTeamMembear/${id}`).then((res) => console.log(res));
+
+    const notify = (text, status) => {
+        if (status === 200 || status === 201) toast.success(`${text}`)
+        if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
+    }
+
+    function DeleteAboutTeamMembear(id) {
+        API.delete(`${deleteAboutTeamMembear}/${id}`)
+            .then((res) => {
+                notify(`Success`, res.status)
+            })
+            .catch(err => { console.log(err); notify("Something is wrong!", err.response?.status) })
     }
     return (
         <Wrapper style={ComponentsStyle}>
+            <ToastContainer />
             <div className="yt-content-slide yt-clearfix yt-content-wrap">
                 <div className="item">
                     <div className="member">
                         <div className="member-image">
-                            <img src={`${host}/${data.image}`} alt="" />
+                            <img src={`${data.image}`} alt="" />
                         </div>
                         <div className="member-info">
                             <h3 className="name-member">{data.title}</h3>
@@ -62,7 +75,7 @@ function AboutTeamMembear({ data }) {
                             type="button"
                             data-toggle="tooltip"
                             title="Delete"
-                            onClick={() => DeleteAdvertising(data.id)}
+                            onClick={() => DeleteAboutTeamMembear(data.id)}
                         >
                             <i className="fa-solid fa-trash-can mr-1"></i>
                             <span>Delete</span>

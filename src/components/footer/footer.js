@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { Payment } from "../../export/exportImg/exportImg";
 
 function Footer() {
+  function Top() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
   return (
     <footer className="footer-container type_footer3">
       <section className="footer-top">
@@ -130,7 +135,7 @@ function Footer() {
             <div className="col-sm-7">
               <div className="block-payment text-right"><img src={Payment} alt="payment" title="payment" /></div>
             </div>
-            <div className="back-to-top"><i className="fa fa-angle-up"></i><span> Top </span></div>
+            <div onClick={Top} className="back-to-top"><i className="fa fa-angle-up"></i><span> Top </span></div>
 
           </div>
         </div>
@@ -140,3 +145,7 @@ function Footer() {
 }
 
 export default Footer;
+
+const Wraos = styled.div`
+  transition: all 5s;
+`

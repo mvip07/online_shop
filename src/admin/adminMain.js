@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import API from "../containers/utils/axios";
+import API from "../utils/axios";
 import AdminProduct from "./products/product";
 import AdvertisingCard from "./advertising/advertising";
 import BlogCard from "./blog/blog"
@@ -10,6 +10,7 @@ import AboutCompany from "./aboutCompany/aboutCompany";
 import AdminLogin from "./adminLogin";
 import AdminSignup from "./adminSignUp";
 import AdminLogOut from "./adminLogOut";
+import { allAboutCompanys, allAboutTeamMembears, allAdvertisings, allBlogs, allProducts } from "../utils/api";
 
 function AdminMain() {
   const [products, setProducts] = useState([]);
@@ -21,15 +22,15 @@ function AdminMain() {
   const [dropdown, setDropdown] = useState("none")
 
   useEffect(() => {
-    API.get(`/products`).then((res) => setProducts(res.data));
+    API.get(`${allProducts}`).then((res) => setProducts(res.data));
 
-    API.get(`/advertisings`).then((res) => setAdvertisings(res.data));
+    API.get(`${allAdvertisings}`).then((res) => setAdvertisings(res.data));
 
-    API.get(`/blogs`).then(res => setBlogs(res.data))
+    API.get(`${allBlogs}`).then(res => setBlogs(res.data))
 
-    API.get(`/aboutTeamMembars`).then(res => setAboutTeamMembear(res.data))
+    API.get(`${allAboutTeamMembears}`).then(res => setAboutTeamMembear(res.data))
 
-    API.get(`/aboutCompanys`).then(res => setAboutCompany(res.data))
+    API.get(`${allAboutCompanys}`).then(res => setAboutCompany(res.data))
 
   }, []);
   return (
@@ -170,6 +171,8 @@ const Wrapper = styled.div`
     background-color: red;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: 420px;
+    overflow-y: scroll;
   }
   span {
     font-weight: bold;

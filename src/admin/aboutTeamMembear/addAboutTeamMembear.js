@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import API from "../../containers/utils/axios"
-import { bottomForm } from "../adminComponents/components"
+import API from "../../utils/axios"
+import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { data, send } from "../../utils/firebaseImageSend"
+import { createAboutTeamMembear } from "../../utils/api"
 
 function AddAboutTeamMembear() {
     const navigate = useNavigate()
@@ -21,24 +23,29 @@ function AddAboutTeamMembear() {
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
     }
     const Submit = () => {
+        send(image)
         let form = new FormData();
-        form.append("title", title);
-        form.append("job", job);
-        form.append("description", description);
-        form.append("githubUrl", githubUrl);
-        form.append("facebookUrl", facebookUrl);
-        form.append("twitterUrl", twitterUrl);
-        form.append("linkedinUrl", linkedinUrl);
-        form.append("image", image);
+        setTimeout(() => {
+            let img = data.pop()
+            form.append("title", title);
+            form.append("job", job);
+            form.append("description", description);
+            form.append("githubUrl", githubUrl);
+            form.append("facebookUrl", facebookUrl);
+            form.append("twitterUrl", twitterUrl);
+            form.append("linkedinUrl", linkedinUrl);
+            form.append("image", img);
 
-        API.post("/aboutTeamMembar", form)
-            .then((res) => {
-                notify(`Success`, res.status)
-                setTimeout(() => {
-                    navigate("/adminMain")
-                }, 5500)
-            })
-            .catch(err => notify("Something is wrong!", err.response?.status))
+            API.post(`${createAboutTeamMembear}`, form)
+                .then((res) => {
+                    notify(`Success`, res.status)
+                    setTimeout(() => {
+                        navigate("/adminMain")
+                    }, 5500)
+                })
+                .catch(err => notify("Something is wrong!", err.response?.status))
+        }, 2000)
+
     };
 
     return (
