@@ -6,7 +6,7 @@ import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { data, send } from "../../utils/firebaseImageSend"
-import { updateAboutTeamMembear } from "../../utils/api"
+import { selectedAboutTeamMembear, updateAboutTeamMembear } from "../../utils/api"
 
 function AddAboutTeamMembearUpdate() {
     const navigate = useNavigate()
@@ -27,27 +27,25 @@ function AddAboutTeamMembearUpdate() {
     }
 
     useEffect(() => {
-        API.get(`/aboutTeamMembear/${id}`).then(res => setAboutTeamMembear(res.data))
+        API.get(`${selectedAboutTeamMembear}/${id}`).then(res => setAboutTeamMembear(res.data))
     }, [id])
 
     const Submit = () => {
         send(image)
-        let form = new FormData();
-
         setTimeout(() => {
             let img = data.pop()
             setUpdateImg(img)
-            form.append("title", title === "" ? aboutTeamMembear.title : title);
-            form.append("job", job === "" ? aboutTeamMembear.job : job);
-            form.append("description", description === "" ? aboutTeamMembear.description : description);
-            form.append("githubUrl", githubUrl === "" ? aboutTeamMembear.githubUrl : githubUrl);
-            form.append("facebookUrl", facebookUrl === "" ? aboutTeamMembear.facebookUrl : facebookUrl);
-            form.append("twitterUrl", twitterUrl === "" ? aboutTeamMembear.twitterUrl : twitterUrl);
-            form.append("linkedinUrl", linkedinUrl === "" ? aboutTeamMembear.linkedinUrl : linkedinUrl);
-            form.append("image", image === "" ? aboutTeamMembear.image : img);
-            form.append("id", id)
-
-            API.post(`${updateAboutTeamMembear}`, form)
+            API.post(`${updateAboutTeamMembear}`, {
+                "title": title == "" ? aboutTeamMembear.title : title,
+                "job": job == "" ? aboutTeamMembear.job : job,
+                "description": description == "" ? aboutTeamMembear.description : description,
+                "githubUrl": githubUrl == "" ? aboutTeamMembear.githubUrl : githubUrl,
+                "facebookUrl": facebookUrl == "" ? aboutTeamMembear.facebookUrl : facebookUrl,
+                "twitterUrl": twitterUrl == "" ? aboutTeamMembear.twitterUrl : twitterUrl,
+                "linkedinUrl": linkedinUrl == "" ? aboutTeamMembear.linkedinUrl : linkedinUrl,
+                "image": image == "" ? aboutTeamMembear.image : updateImg,
+                "id": id,
+            })
                 .then((res) => {
                     notify(`Success`, res.status)
                     setTimeout(() => {

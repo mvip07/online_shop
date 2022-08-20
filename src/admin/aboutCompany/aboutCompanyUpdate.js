@@ -5,7 +5,7 @@ import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { send, data } from "../../utils/firebaseImageSend";
-import { updateAboutCompany } from "../../utils/api";
+import { selectedAboutCompany, updateAboutCompany } from "../../utils/api";
 
 function AboutCompanyUpdate() {
     const navigate = useNavigate()
@@ -20,22 +20,20 @@ function AboutCompanyUpdate() {
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
     }
 
-    useEffect(() => {
-        API.get(`/aboutCompany/${id}`).then(res => setAboutCompany(res.data))
+    useEffect(() => {   
+        API.get(`${selectedAboutCompany}/${id}`).then(res => setAboutCompany(res.data))
     }, [id])
 
     const Submit = () => {
         send(image)
-        let form = new FormData();
-
         setTimeout(() => {
             let img = data.pop()
             setUpdateImg(img)
-            form.append("title", companyName === "" ? aboutCompany.title : companyName);
-            form.append("image", image === "" ? aboutCompany : img);
-            form.append("id", id)
-
-            API.post(`${updateAboutCompany}`, form)
+            API.post(`${updateAboutCompany}`, {
+                "title": companyName === "" ? aboutCompany.title : companyName,
+                "image": image === "" ? aboutCompany : img,
+                "id": id,
+            })
                 .then((res) => {
                     notify(`Success`, res.status)
                     setTimeout(() => {
@@ -43,8 +41,6 @@ function AboutCompanyUpdate() {
                     }, 5500)
                 })
                 .catch(err => notify(err.response?.data?.message, err.response?.status))
-
-
         }, 2000)
     }
 

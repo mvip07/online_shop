@@ -6,7 +6,7 @@ import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { data, send } from "../../utils/firebaseImageSend";
-import { updateBlog } from "../../utils/api";
+import { selectedBlog, updateBlog } from "../../utils/api";
 
 function BlogUpdate() {
     const navigate = useNavigate()
@@ -24,23 +24,21 @@ function BlogUpdate() {
     }
 
     useEffect(() => {
-        API.get(`/blog/${id}`).then(res => setBlog(res.data))
+        API.get(`${selectedBlog}/${id}`).then(res => setBlog(res.data))
     }, [id])
 
     const Submit = () => {
         send(image)
-        let form = new FormData();
-
         setTimeout(() => {
             let img = data.pop()
             setUpdateImg(img)
-            form.append("title", title === "" ? blog.title : blog);
-            form.append("description", description === "" ? blog.description : description);
-            form.append("postIntruder", postIntruder === "" ? blog.postIntruder : postIntruder)
-            form.append("image", image === "" ? blog.image : img);
-            form.append("id", id)
-
-            API.post(`${updateBlog}`, form)
+            API.post(`${updateBlog}`, {
+                "title": title === "" ? blog.title : blog,
+                "description": description === "" ? blog.description : description,
+                "postIntruder": postIntruder === "" ? blog.postIntruder : postIntruder,
+                "image": image === "" ? blog.image : updateImg,
+                "id": id,
+            })
                 .then(res => {
                     notify(`Success`, res.status)
                     setTimeout(() => {

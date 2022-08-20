@@ -6,7 +6,7 @@ import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { send, data } from "../../utils/firebaseImageSend";
-import { updateAdvertising } from "../../utils/api";
+import { selectedAdvertising, updateAdvertising } from "../../utils/api";
 
 function AdvertisingUpdate() {
     const navigate = useNavigate()
@@ -23,21 +23,20 @@ function AdvertisingUpdate() {
     }
 
     useEffect(() => {
-        API.get(`/advertising/${id}`).then(res => setAdvertising(res.data))
+        API.get(`${selectedAdvertising}/${id}`).then(res => setAdvertising(res.data))
     }, [id])
 
     function Submit() {
         send(image)
-        let form = new FormData()
         setTimeout(() => {
             let img = data.pop()
-            setUpdateImg(img)
-            form.append("firma", firma === "" ? advertising.firma : firma)
-            form.append("image", image === "" ? advertising.image : img)
-            form.append("type", type === "" ? advertising.type : type)
-            form.append("id", id)
-
-            API.post(`${updateAdvertising}`, form)
+            setUpdateImg(img)         
+            API.post(`${updateAdvertising}`, {
+                "firma": firma === "" ? advertising.firma : firma,
+                "image": image === "" ? advertising.image : updateImg,
+                "type": type === "" ? advertising.type : type,
+                "id": id,
+            })
                 .then((res) => {
                     notify(`Success`, res.status)
                     setTimeout(() => {
@@ -48,11 +47,13 @@ function AdvertisingUpdate() {
         }, 2000)
 
     }
+
+    console.log(advertising)
     return (
         <Wrapper>
             <ToastContainer />
             <div>
-                <div className="col-lg-12 customer-login">
+                <div className="col-lg-12">
                     <div className="well">
                         <p>
                             <strong>Update Advertising</strong>
@@ -107,7 +108,4 @@ function AdvertisingUpdate() {
 
 export default AdvertisingUpdate;
 
-const Wrapper = styled.div`
-  display: block;
-  margin: 150px;
-`;
+const Wrapper = styled.div``;

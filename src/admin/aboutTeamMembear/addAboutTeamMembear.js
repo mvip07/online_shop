@@ -24,26 +24,38 @@ function AddAboutTeamMembear() {
     }
     const Submit = () => {
         send(image)
-        let form = new FormData();
         setTimeout(() => {
-            let img = data.pop()
-            form.append("title", title);
-            form.append("job", job);
-            form.append("description", description);
-            form.append("githubUrl", githubUrl);
-            form.append("facebookUrl", facebookUrl);
-            form.append("twitterUrl", twitterUrl);
-            form.append("linkedinUrl", linkedinUrl);
-            form.append("image", img);
-
-            API.post(`${createAboutTeamMembear}`, form)
-                .then((res) => {
-                    notify(`Success`, res.status)
-                    setTimeout(() => {
-                        navigate("/adminMain")
-                    }, 5500)
+            let img = data.pop()            
+            if (
+                title.trim() !== "" &&
+                job.trim() !== "" &&
+                description.trim() !== "" &&
+                githubUrl.trim() !== "" &&
+                facebookUrl.trim() !== "" &&
+                twitterUrl.trim() !== "" &&
+                linkedinUrl.trim() !== "" && 
+                img.trim() !== "" 
+            ) {
+                API.post(`${createAboutTeamMembear}`, {
+                    "title": title,
+                    "job": job,
+                    "description": description,
+                    "githubUrl": githubUrl,
+                    "facebookUrl": facebookUrl,
+                    "twitterUrl": twitterUrl,
+                    "linkedinUrl": linkedinUrl,
+                    "image": img,
+    
                 })
-                .catch(err => notify("Something is wrong!", err.response?.status))
+                    .then((res) => {
+                        notify(`Success`, res.status)
+                        setTimeout(() => {
+                            navigate("/adminMain")
+                        }, 5500)
+                    })
+                    .catch(err => notify("Something is wrong!", err.response?.status))
+            }
+            
         }, 2000)
 
     };

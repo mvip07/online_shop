@@ -41,13 +41,21 @@ import AdminPrivateRouter from "./utils/adminPrivateRouter";
 import AdminLogin from "./admin/adminLogin";
 import AdminSignup from "./admin/adminSignUp";
 import AdminMain from "./admin/adminMain";
+
 import AddProduct from "./admin/products/addProduct";
-import AddAdvertising from "./admin/advertising/addAdvertising";
-import AddBlog from "./admin/blog/addBlog";
-import AddAboutTeamMembear from "./admin/aboutTeamMembear/addAboutTeamMembear";
-import AddAboutCompany from "./admin/aboutCompany/addAboutCompany";
-import AdvertisingUpdate from "./admin/advertising/advertisingUpdate";
 import ProductUpdate from "./admin/products/productUpdate";
+
+import AddAdvertising from "./admin/advertising/addAdvertising";
+import AdvertisingUpdate from "./admin/advertising/advertisingUpdate";
+
+import AddBlog from "./admin/blog/addBlog";
+import UpdateBlog from "./admin/blog/blogUpdate";
+
+import AddAboutTeamMembear from "./admin/aboutTeamMembear/addAboutTeamMembear";
+import UpdateAboutTeamMembear  from "./admin/aboutTeamMembear/aboutTeamMemberUpdate";
+
+import AddAboutCompany from "./admin/aboutCompany/addAboutCompany";
+import UpdateAboutCompany from "./admin/aboutCompany/aboutCompanyUpdate";
 
 function App() {
 	return (
@@ -80,10 +88,24 @@ function App() {
 				}
 			/>
 
+			<Route path="product/update/:id"
+				element={
+					<ProductUpdate />
+				}
+			/>
+
 			<Route path="/createAdvertising"
 				element={
 					<AdminPrivateRouter >
 						<AddAdvertising />
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/advertising/update/:id"
+				element={
+					<AdminPrivateRouter >
+						<AdvertisingUpdate />
 					</AdminPrivateRouter>
 				}
 			/>
@@ -96,10 +118,26 @@ function App() {
 				}
 			/>
 
+			<Route path="/blog/update/:id"
+				element={
+					<AdminPrivateRouter >
+						<UpdateBlog />
+					</AdminPrivateRouter>
+				}
+			/>
+
 			<Route path="/createAboutTeamMember"
 				element={
 					<AdminPrivateRouter >
 						<AddAboutTeamMembear />
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/about/team/member/update/:id"
+				element={
+					<AdminPrivateRouter >
+						<UpdateAboutTeamMembear />
 					</AdminPrivateRouter>
 				}
 			/>
@@ -112,15 +150,11 @@ function App() {
 				}
 			/>
 
-			<Route path="advertising/update/:id"
+			<Route path="/about/company/update/:id"
 				element={
-					<AdvertisingUpdate />
-				}
-			/>
-
-			<Route path="product/update/:id"
-				element={
-					<ProductUpdate />
+					<AdminPrivateRouter >
+						<UpdateAboutCompany />
+					</AdminPrivateRouter>
 				}
 			/>
 

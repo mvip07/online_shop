@@ -3845,8 +3845,8 @@ ul.yt-accordion li.accordion-group h3.accordion-heading:hover .fa {
   background-color: #F4A137 !important;
 }
 
-.about-us .social-member .social-icon.rss a {
-  background-color: #f8bc2e;
+.about-us .social-member .social-icon.github a {
+  background-color: #010101;
 }
 
 .about-us .social-member .social-icon.facebook a {
@@ -3857,7 +3857,7 @@ ul.yt-accordion li.accordion-group h3.accordion-heading:hover .fa {
   background-color: #45b0e3;
 }
 
-.about-us .social-member .social-icon.google a {
+.about-us .social-member .social-icon.linkedin a {
   background-color: #1872bf;
 }
 
