@@ -5,23 +5,53 @@ import Calculation from "../../components/calculation/calculation";
 import API from "../../utils/axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 export const notify = (text, status) => {
-	if (status === 200 || status === 201) toast.success(`${text}`)
-	if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
-}
+	if (status === 200 || status === 201) toast.success(`${text}`);
+	if (
+		status === 400 ||
+		status === 401 ||
+		status === 403 ||
+		status === 404 ||
+		status === 500 ||
+		status === 503
+	)
+		toast.error(`${text}`);
+};
 
 function Checkout() {
 	const [cart, setCart] = useState([]);
-	const [userDetail, setUserDetail] = useState({})
-	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("onlineShopUser"))?.user?.id)
-	
+	const [userDetail, setUserDetail] = useState({});
+	const [validOinvalidCardNumber, setvalidOinvalidCardNumber] = useState(false);
+	const [validOinvalidCardDate, setvalidOinvalidCardDate] = useState(false);
+	const [userId, setUserId] = useState(
+		JSON.parse(localStorage.getItem("onlineShopUser"))?.user?.id
+	);
+
+	const [newDate, setnewDate] = useState(
+		`${new Date().getFullYear()}-${new Date().getMonth() + 1 <= 9
+			? `0${new Date().getMonth() + 1}`
+			: new Date().getMonth() + 1
+		}-${new Date().getUTCDate() <= 9
+			? `0${new Date().getUTCDate()}`
+			: new Date().getUTCDate()
+		}`
+	);
 	useEffect(() => {
-		setUserId(JSON.parse(localStorage.getItem("onlineShopUser"))?.user?.id)
-		API.get(`/user/${userId}`).then(res => setUserDetail(res.data))
-		API.get(`/all/bag/${userId}`).then(res => setCart(res.data))
-	}, [userId])
+		setnewDate(
+			`${new Date().getFullYear()}-${new Date().getMonth() + 1 <= 9
+				? `0${new Date().getMonth() + 1}`
+				: new Date().getMonth() + 1
+			}-${new Date().getUTCDate() <= 9
+				? `0${new Date().getUTCDate()}`
+				: new Date().getUTCDate()
+			}`
+		);
+		setUserId(JSON.parse(localStorage.getItem("onlineShopUser"))?.user?.id);
+		API.get(`/user/${userId}`).then((res) => setUserDetail(res.data));
+		API.get(`/all/bag/${userId}`).then((res) => setCart(res.data));
+	}, [userId, cart]);
 
 	return (
 		<div id="wrapper" className="wrapper-full ">
@@ -260,11 +290,11 @@ function Checkout() {
 								<div className="row">
 									<div className="col-sm-12">
 										<div className="panel panel-default no-padding">
-
 											<div className="col-sm-12  checkout-payment-methods">
 												<div className="panel-heading">
 													<h4 className="panel-title">
-														<i className="fa fa-credit-card"> </i> Payment Method
+														<i className="fa fa-credit-card"> </i> Payment
+														Method
 													</h4>
 												</div>
 												<div className="panel-body col-sm-12">
@@ -274,7 +304,7 @@ function Checkout() {
 													</p>
 
 													<div>
-														<div className="radio" >
+														<div className="radio">
 															<label>
 																<input
 																	type="radio"
@@ -285,7 +315,7 @@ function Checkout() {
 															</label>
 														</div>
 
-														<div className="radio" >
+														<div className="radio">
 															<label>
 																<input
 																	type="radio"
@@ -297,16 +327,54 @@ function Checkout() {
 														</div>
 
 														<div className="card">
-															<input
-																type="text"
-																className="form-control"
-																id="input-payment-card"
-																placeholder="1234-5678-1234-5678"
-																name="card"
-															/>
+															<div className="col-sm-8">
+																<label
+																	htmlFor="Card-Number"
+																	className="control-label"
+																>
+																	<h4 className="panel-title"> Card Number </h4>
+																</label>
+																<input
+																	type="number"
+																	className={`form-control ${validOinvalidCardNumber === false
+																			? "invalid"
+																			: "valid"
+																		}`}
+																	id="input-payment-card"
+																	placeholder="1234-5678-1234-5678"
+																	name="card"
+																	onChange={({ target }) =>
+																		target.value.length === 16
+																			? setvalidOinvalidCardNumber(true)
+																			: setvalidOinvalidCardNumber(false)
+																	}
+																/>
+															</div>
+															<div className="col-sm-3">
+																<label
+																	htmlFor="Card-Number"
+																	className="control-label"
+																>
+																	<h4 className="panel-title"> Card Date </h4>
+																</label>
+																<input
+																	type="date"
+																	className={`form-control ${validOinvalidCardDate === false
+																			? "invalid"
+																			: "valid"
+																		}`}
+																	id="input-payment-card"
+																	placeholder="date"
+																	name="card"
+																	onChange={({ target }) =>
+																		target.value >= newDate
+																			? setvalidOinvalidCardDate(true)
+																			: setvalidOinvalidCardDate(false)
+																	}
+																/>
+															</div>
 														</div>
 													</div>
-
 												</div>
 											</div>
 										</div>
@@ -334,23 +402,14 @@ function Checkout() {
 															</tr>
 														</thead>
 														<tbody>
-															{
-																cart.map((data) => (
-																		<CheckoutList data={data} key={Math.random()} />
-																	
-																))
-															}
+															{cart.map((data) => (
+																<CheckoutList data={data} key={Math.random()} />
+															))}
 														</tbody>
-
 													</table>
 													<table className="table table-bordered">
-														{
-															cart.length > 0 ? <Calculation data={cart} />
-																
-															: ""
-														}
+														{cart.length > 0 ? <Calculation data={cart} /> : ""}
 													</table>
-
 												</div>
 											</div>
 										</div>

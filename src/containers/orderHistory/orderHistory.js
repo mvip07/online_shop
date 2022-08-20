@@ -2,8 +2,17 @@ import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 import { Product4, Product5 } from "../../export/exportImg/exportImg";
 import { Link } from "react-router-dom";
-
+import API from "../../utils/axios"
+import { allBag } from "../../utils/api";
+import { useEffect, useState } from "react";
 function OrderHistory() {
+
+  const [userId, setUserId] =useState(JSON.parse(localStorage.getItem("onlineShopUser")).user?.id)
+   useEffect(() => {
+      if(userId) setUserId(JSON.parse(localStorage.getItem("onlineShopUser")).user?.id) 
+   }, []) 
+  API.get(`${allBag}/${userId}`).then(res => console.log(res))
+
   return (
     <div id="wrapper" className="wrapper-full ">
       <Navbar />

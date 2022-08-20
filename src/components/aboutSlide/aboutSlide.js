@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 function AboutTeamMembearCard({ data }) {
+  console.log(data)
+  const navigate = useNavigate()
   return (
     <div className="yt-content-slide yt-clearfix yt-content-wrap">
       <div className="item">

@@ -31,7 +31,7 @@ import Checkout from "./containers/chekout/chekout"
 import OrderInformation from "./containers/orderInformation/orderInformation"
 import ProductReturn from "./containers/productReturn/productReturn"
 import Contact from "./containers/contact/contact"
-import Faq from "./containers/contact/contact"
+import Faq from "./containers/faq/faq"
 
 import ProductDetail from "./components/product/productDetail"
 import PrivateRouter from "./utils/privateRouter"

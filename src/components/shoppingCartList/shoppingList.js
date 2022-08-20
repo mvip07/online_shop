@@ -10,11 +10,11 @@ function ShoppingList({ data }) {
 		setUserId(JSON.parse(localStorage.getItem("onlineShopUser"))?.user.id)
 	}, [userId])
 
-	function SaveDatabase (data, choose) {
+	function SaveDatabase (data, choose, id) {
 		if (choose.quantity !== 0 && choose.totalPrice !== 0 && choose.colorCheck !== "") {
 			API.post(`/create/bag/${userId}`,{
 				userId: userId,
-				id: data.id,
+				productId: data.id,
 				date: data.date,
 				title: data.title,
 				brand: data.brand,
@@ -23,18 +23,15 @@ function ShoppingList({ data }) {
 				stars: data.stars,
 				category: data.category,
 				discount: data.discount,
-				model: data.model,
-				quantity: choose.quantity,
-				description: data.description,
+				moantity: choose.quantity,
+				dedel: data.model,
+				quscription: data.description,
 				width: data.width,
 				hegth: data.hegth,
 				depth: data.depth,
 				totalPrice: choose.totalPrice,
 				image: data.image,
 			}).then(res => notify(res.data?.message, res.status))
-			API.get(`/all/bag/${userId}`)
-			.then(res => notify(res.data.message, 200))
-			.catch(err => notify(err.data.message, 400))
 		} else {
 			notify("You have not yet chosen the number and color of the product", 400)
 		}
@@ -106,8 +103,7 @@ function ShoppingList({ data }) {
 				title="Save"
 				className="btn btn-primary mr-1"
 				onClick={() => {	
-				SaveDatabase(data, choose);
-				notify();
+				SaveDatabase(data, choose, data.id);
 				}}
 			>Save</button>
 			</td>
