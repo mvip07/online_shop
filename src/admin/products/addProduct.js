@@ -39,30 +39,28 @@ function CreateProduct() {
 
 	const Submit = () => {
 		send(image1)
-		let form = new FormData();
-
 		setTimeout(() => {
 			let img = data.pop()
-			form.append("title", title);
-			form.append("brand", brand);
-			form.append("color", color1);
-			form.append("color", color2);
-			form.append("color", color3);
-			form.append("color", color4);
-			form.append("color", color5);
-			form.append("price", price);
-			form.append("stars", stars);
-			form.append("category", category);
-			form.append("discount", discount);
-			form.append("model", model);
-			form.append("quantity", quantity);
-			form.append("description", description);
-			form.append("width", width);
-			form.append("hegth", heigth);
-			form.append("depth", depth)
-			form.append("image", img);
-
-			API.post(`${createProduct}`, form)
+			API.post(`${createProduct}`, {
+				"title": title,
+				"brand": brand,
+				"color": color1,
+				"color": color2,
+				"color": color3,
+				"color": color4,
+				"color": color5,
+				"price": price,
+				"stars": stars,
+				"category": category,
+				"discount": discount,
+				"model": model,
+				"quantity": quantity,
+				"description": description,
+				"width": width,
+				"hegth": heigth,
+				"depth": depth,
+				"image": img,
+			})
 				.then(res => {
 					notify(`Success`, res.status)
 					setTimeout(() => {

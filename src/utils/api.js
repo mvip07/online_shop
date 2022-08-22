@@ -37,3 +37,8 @@ export const userUpdateAccount = "/user/update/account"
 export const adminLogin = "/admin/login"
 export const adminRegister = "/admin/register"
 export const adminUpdateAccount = "/admin/update/account" 
+
+
+export const allBag = "/all/bag"
+export const createBag = "/create/bag"
+export const deleteBag = "/delete/bag"

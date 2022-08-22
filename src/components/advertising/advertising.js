@@ -31,9 +31,9 @@ function Advertising() {
 							</div>
 							<div className="owl2-stage-outer">
 								<div className="owl2-stage" style={{
-									transform: `translate3d(-${next}px, 0px, 0px)`, transition: "all 0.6s ease 0s", minwidth: "100%", display: "flex"
+									transform: `translate3d(-${next}px, 0px, 0px)`, transition: "all 0.6s ease 0s", minwidth: "80%", display: "flex"
 								}}>
-									<div className="owl1-item" style={{ minWidth: "100%", marginRight: "0px" }}>
+									<div className="owl2-item" style={{ minWidth: "100%", marginRight: "0px" }}>
 										<div className="yt-content-slide">
 											<Link to="#">
 												<img src={Slider1} alt="slider1" className="img-responsive" />

@@ -20,23 +20,24 @@ function AddBlog() {
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
     }
     const Submit = () => {
-        send(image)
-        let form = new FormData();
+        send(image)        
         setTimeout(() => {
-            let img = data.pop()
-            form.append("title", title);
-            form.append("description", description);
-            form.append("postIntruder", postIntruder)
-            form.append("image", img);
-
-            API.post(`${createBlog}`, form)
-                .then(res => {
-                    notify(`Success`, res.status)
-                    setTimeout(() => {
-                        navigate("/adminMain")
-                    }, 5500)
+            let img = data.pop() 
+            if (title.trim() !== "" && description.trim() !== "" && postIntruder.trim() !== "" && img.trim() !== "") {
+                API.post(`${createBlog}`, {
+                    "title": title,
+                    "description": description,
+                    "postIntruder": postIntruder,
+                    "image": img,
                 })
-                .catch(err => notify(err.response?.data?.message, err.response?.status))
+                    .then(res => {
+                        notify(`Success`, res.status)
+                        setTimeout(() => {
+                            navigate("/adminMain")
+                        }, 5500)
+                    })
+                   .catch(err => notify(err.response?.data?.message, err.response?.status))
+            }         
         }, 2000)
 
     }

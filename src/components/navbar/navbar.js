@@ -9,14 +9,15 @@ import {
 import Calculation from "../calculation/calculation";
 
 function Navbar() {
-
-	const [cart, setCart] = useState(
-		[]
-	);
+	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
 
 	useEffect(() => {
-		setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
-	}, [])
+		if (!localStorage.getItem("onlineShopCart")) {
+			setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
+			
+			
+		}
+	}, [cart])
 
 	const [languageMenu, setLanguageMenu] = useState("none")
 	const [currency, setCurrency] = useState("none")
@@ -141,7 +142,7 @@ function Navbar() {
 						<div className="phone-contact col-md-2  hidden-md hidden-sm hidden-xs">
 							<div className="inner-info">
 								<strong>Call us Now:</strong><br />
-								<span>Toll free:  0123-456-789</span>
+								<span>Toll free:  +998 (91) 166-21-25</span>
 							</div>
 						</div>
 
@@ -172,11 +173,6 @@ function Navbar() {
 									</li>
 									<li>
 										<div>
-											<table className="table table-bordered">
-												{cart.length > 0 ? <Calculation /> : ""}
-
-											</table>
-
 											<p className="text-right">
 												<Link className="btn mr-1" to="#" onClick={() => setCartMenu("none")}>
 													<i id="remove-vertical" className="fa fa-times"></i>

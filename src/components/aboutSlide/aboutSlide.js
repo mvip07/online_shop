@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 function AboutTeamMembearCard({ data }) {
   return (
-    <div className="yt-content-slide yt-clearfix yt-content-wrap">
       <div className="item">
         <div className="member">
           <div className="member-image">
@@ -17,9 +16,9 @@ function AboutTeamMembearCard({ data }) {
               {data.description}
             </p>
             <ul className="social-member">
-              <li className="social-icon rss">
-                <Link className="fa fa-rss" to="#">
-                  <span>RSS</span>
+              <li className="social-icon github">
+                <Link className="fab fa-github" to="#" title="Git Hub">
+                  <span>Git Hub</span>
                 </Link>
               </li>
               <li className="social-icon facebook">
@@ -33,16 +32,15 @@ function AboutTeamMembearCard({ data }) {
                   <span>Twitter</span>
                 </Link>
               </li>
-              <li className="social-icon google">
-                <Link className="fa fa-google" to="#" title="Google">
-                  <span>Google</span>
+              <li className="social-icon linkedin">
+                <Link className="fab fa-linkedin-in" to="#" title="Linkedin">
+                  <span>Linkedin</span>
                 </Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

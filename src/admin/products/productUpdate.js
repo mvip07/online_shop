@@ -6,13 +6,14 @@ import { bottomForm } from "../util/components"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { data, send } from "../../utils/firebaseImageSend";
-import { updateProduct } from "../../utils/api";
+import { selectedProduct, updateProduct } from "../../utils/api";
 
 const numberDiscount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
 
 function ProductUpdate() {
     const navigate = useNavigate();
     const { id } = useParams();
+    const color = []
     const [product, setProduct] = useState([])
     const [color1, setColor1] = useState("");
     const [color2, setColor2] = useState("");
@@ -29,9 +30,9 @@ function ProductUpdate() {
     const [model, setModel] = useState("");
     const [quantity, setQuantity] = useState("");
     const [description, setDescripion] = useState("");
-    const [width, setWidth] = useState(0);
-    const [heigth, setHeigth] = useState(0)
-    const [depth, setDepth] = useState(0)
+    const [width, setWidth] = useState("");
+    const [heigth, setHeigth] = useState("")
+    const [depth, setDepth] = useState("")
     const [updateImg, setUpdateImg] = useState("")
 
     const notify = (text, status) => {
@@ -40,47 +41,45 @@ function ProductUpdate() {
     }
 
     useEffect(() => {
-        API.get(`product/${id}`).then(res => setProduct(res.data))
+        API.get(`${selectedProduct}/${id}`).then(res => setProduct(res.data))
     }, [id])
 
     const Submit = () => {
         send(image)
-        let form = new FormData();
+        color1 == "" ? color.push(product.color[0]) : color.push(color1)
+        color2 == "" ? color.push(product.color[1]) : color.push(color2)
+        color3 == "" ? color.push(product.color[2]) : color.push(color3)
+        color4 == "" ? color.push(product.color[3]) : color.push(color4)
+        color5 == "" ? color.push(product.color[4]) : color.push(color5)
+
         setTimeout(() => {
             let img = data.pop()
             setUpdateImg(img)
-            form.append("title", title === "" ? product.title : title);
-            form.append("brand", brand === "" ? product.brand : brand);
-            form.append("color", color1 === "" ? product.color[0] : color1);
-            form.append("color", color2 === "" ? product.color[1] : color2);
-            form.append("color", color3 === "" ? product.color[2] : color3);
-            form.append("color", color4 === "" ? product.color[3] : color4);
-            form.append("color", color5 === "" ? product.color[4] : color5);
-            form.append("price", price === "" ? product.price : price);
-            form.append("stars", stars === "" ? product.stars : stars);
-            form.append("category", category === "" ? product.category : category);
-            form.append("discount", discount === "" ? product.discount : discount);
-            form.append("model", model === "" ? product.model : model);
-            form.append("quantity", quantity === "" ? product.quantity : quantity);
-            form.append("description", description === "" ? product.description : description);
-            form.append("width", width === "" ? product.width : width);
-            form.append("hegth", heigth === "" ? product.heigth : heigth);
-            form.append("depth", depth === "" ? product.depth : depth);
-            form.append("image", image === "" ? product.image : img);
-            form.append("id", id);
-
-            API.post(`${updateProduct}`, form)
-                .then(res => {
+            API.post(`${updateProduct}`, {
+                "title": title == "" ? product.title : title,
+                "brand": brand == "" ? product.brand : brand,
+                "color": color,
+                "price": price == "" ? product.price : price,
+                "stars": stars == "" ? product.stars : stars,
+                "category": category == "" ? product.category : category,
+                "discount": discount == "" ? product.discount : discount,
+                "model": model == "" ? product.model : model,
+                "quantity": quantity == "" ? product.quantity : quantity,
+                "description": description == "" ? product.description : description,
+                "width": width == "" ? product.width : width,
+                "hegth": heigth == "" ? product.hegth : heigth,
+                "depth": depth == "" ? product.depth : depth,
+                "image": image == "" ? product.image : updateImg,
+                "id": id,
+            }).then(res => {
                     notify(`Success`, res.status)
                     setTimeout(() => {
                         navigate("/adminMain")
                     }, 5500)
                 })
-                .catch(err => notify(err.response?.data?.message, err.response?.status))
+                .catch(err => notify(err.message, err.response?.status))
         }, 2000)
     };
-
-    console.log(product)
     return (
         <Wrapper >
             <ToastContainer />
