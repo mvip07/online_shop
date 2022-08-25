@@ -257,7 +257,7 @@ function ProductDetail() {
 													className="cart"
 													onClick={() => AddtoBag(productDetail)}
 													style={{
-														display: bagElements.includes(productDetail._id) ? "none" : ""
+														display: bagElements?.includes(productDetail._id) ? "none" : ""
 
 													}}
 												>
