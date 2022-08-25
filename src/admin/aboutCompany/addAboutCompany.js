@@ -19,18 +19,19 @@ function AddAboutCompany() {
 
     const Submit = () => {
         send(image)
-        let form = new FormData();
-
         setTimeout(() => {
             let img = data.pop()
-            form.append("title", companyName);
-            form.append("image", img);
-
-            API.post(`${createAboutCompany}`, form)
-                .then((res) => {
-                    notify(`Success`, res.status)
+            if (companyName.trim() !== "" && img.trim() !== "") {
+                API.post(`${createAboutCompany}`, {
+                    "title": companyName,
+                    "image": img,
                 })
-                .catch(err => notify(err.response?.data?.message, err.response?.status))
+                    .then((res) => {
+                        notify(`Success`, res.status)
+                    })
+                    .catch(err => notify(err.response?.data?.message, err.response?.status))
+            }
+            
         }, 2000)
 
     };

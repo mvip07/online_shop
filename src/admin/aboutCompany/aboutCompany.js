@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import API from "../../utils/axios";
 import { ComponentsStyle, ComponentsStyleBtn } from "../util/components"
@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { deleteAboutCompany } from "../../utils/api";
 
 function AboutCompany({ data }) {
-
+    const navigate = useNavigate()
     const notify = (text, status) => {
         if (status === 200 || status === 201) toast.success(`${text}`)
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
@@ -52,6 +52,7 @@ function AboutCompany({ data }) {
                         type="button"
                         data-toggle="tooltip"
                         title="Edit"
+                        onClick={() => navigate(`/about/company/update/${data.id}`)}
                     >
                         <i className="fa-solid fa-pen-to-square mr-1"></i>
                         <span>Edit</span>

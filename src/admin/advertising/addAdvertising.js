@@ -21,33 +21,31 @@ function AddAdvertising() {
 
 	function Submit() {
 		send(image)
-		let form = new FormData();
-
 		setTimeout(() => {
 			let img = data.pop()
-			form.append("firma", firma);
-			form.append("type", type)
-			form.append("image", img);
 
-			API.post(`${createAdvertising}`, form)
-				.then((res) => {
-					notify(`Success`, res.status)
-					setTimeout(() => {
-						navigate("/adminMain")
-					}, 5500)
+			if (firma.trim() !== "" && type.trim() !== "" && img === "") {
+				API.post(`${createAdvertising}`, {
+					"firma": firma,
+					"type": type,
+					"image": img,
 				})
-				.catch(err => notify(err.response?.data?.message, err.response?.status))
+					.then((res) => {
+						notify(`Success`, res.status)
+						setTimeout(() => {
+							navigate("/adminMain")
+						}, 5500)
+					})
+					.catch(err => notify(err.response?.data?.message, err.response?.status))
+			}
 		}, 2000)
 
 	};
-
-
-
 	return (
 		<Wrapper>
 			<ToastContainer />
 			<div>
-				<div className="col-lg-12 customer-login">
+				<div className="col-lg-12">
 					<div className="well">
 						<p>
 							<strong>Create Advertising</strong>
@@ -95,7 +93,4 @@ function AddAdvertising() {
 
 export default AddAdvertising;
 
-const Wrapper = styled.div`
-  display: block;
-  margin: 150px;
-`;
+const Wrapper = styled.div``;

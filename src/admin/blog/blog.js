@@ -1,13 +1,13 @@
 import styled from "styled-components"
 import API from "../../utils/axios";
 import { ComponentsStyle, ComponentsStyleBtn } from "../util/components";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteBlog } from "../../utils/api";
 
 function Blog({ data }) {
-
+    const navigate = useNavigate()
     const notify = (text, status) => {
         if (status === 200 || status === 201) toast.success(`${text}`)
         if (status === 400 || status === 401 || status === 403 || status === 404 || status === 500 || status === 503) toast.error(`${text}`)
@@ -59,6 +59,7 @@ function Blog({ data }) {
                             type="button"
                             data-toggle="tooltip"
                             title="Edit"
+                            onClick={() => navigate(`/blog/update/${data.id}`)}
                         >
                             <i className="fa-solid fa-pen-to-square mr-1"></i>
                             <span>Edit</span>

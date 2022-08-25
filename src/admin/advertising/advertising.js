@@ -23,7 +23,7 @@ function Advertising({ data }) {
 			.catch(err => notify(err.response?.data?.message, err.response?.status))
 	}
 	return (
-		<Wrapper style={ComponentsStyle}>
+		<Wrapper>
 			<ToastContainer />
 			<div>
 				<Link to="#">
@@ -51,8 +51,7 @@ function Advertising({ data }) {
 						type="button"
 						data-toggle="tooltip"
 						title="Edit"
-						onClick={() => navigate(`advertising/update/${data.id}`)}
-					>
+						onClick={() => navigate(`/advertising/update/${data.id}`)}					>
 						<i className="fa-solid fa-pen-to-square mr-1"></i>
 						<span>Edit</span>
 					</button>

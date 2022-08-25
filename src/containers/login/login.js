@@ -34,7 +34,7 @@ function Login() {
   }
 
   return (
-    <div id="wrapper" className="wrapper-full ">
+    <div id="wrapper" className="wrapper-full">
       <ToastContainer />
       <Navbar />
       <div className="main-container container">
@@ -50,7 +50,7 @@ function Login() {
         </ul>
 
         <div className="row">
-          <div id="content" className="col-lg-6 ">
+          <div id="content" className="col-lg-6 center">
             <div>
               <div className="col-lg-12 customer-login">
                 <div className="well">
@@ -77,7 +77,7 @@ function Login() {
                 </div>
                 <div className="bottom-form">
                   <Link to="/register" className="forgot">
-                    Forgotten Password
+                    Register
                   </Link>
                   <button
                     className="btn btn-default pull-right"
