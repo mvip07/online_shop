@@ -39,36 +39,56 @@ function CreateProduct() {
 
 	const Submit = () => {
 		send(image1)
-		setTimeout(() => {
-			let img = data.pop()
-			API.post(`${createProduct}`, {
-				"title": title,
-				"brand": brand,
-				"color": color1,
-				"color": color2,
-				"color": color3,
-				"color": color4,
-				"color": color5,
-				"price": price,
-				"stars": stars,
-				"category": category,
-				"discount": discount,
-				"model": model,
-				"quantity": quantity,
-				"description": description,
-				"width": width,
-				"hegth": heigth,
-				"depth": depth,
-				"image": img,
-			})
-				.then(res => {
-					notify(`Success`, res.status)
-					setTimeout(() => {
-						navigate("/adminMain")
-					}, 5500)
+
+		if (color1.trim() !== "" &&
+			color2.trim() !== "" &&
+			color3.trim() !== "" &&
+			color4.trim() !== "" &&
+			color5.trim() !== "" &&
+			image1.trim() !== "" &&
+			title.trim() !== "" &&
+			brand.trim() !== "" &&
+			price.trim() !== "" &&
+			stars.trim() !== "" &&
+			category.trim() !== "" &&
+			discount.trim() !== "" &&
+			model.trim() !== "" &&
+			quantity.trim() !== "" &&
+			description.trim() !== "" &&
+			width.trim() !== "" &&
+			heigth.trim() !== "" &&
+			depth.trim() !== "" 
+		) {
+			setTimeout(() => {
+				let img = data.pop()
+				API.post(`${createProduct}`, {
+					"title": title,
+					"brand": brand,
+					"color": [color1, color2, color3, color4, color5],
+					"price": price,
+					"stars": stars,
+					"category": category,
+					"discount": discount,
+					"model": model,
+					"quantity": quantity,
+					"description": description,
+					"width": width,
+					"hegth": heigth,
+					"depth": depth,
+					"image": img,
 				})
-				.catch(err => notify(err.response?.data?.message, err.response?.status))
-		}, 2000)
+					.then(res => {
+						notify(`Success`, res.status)
+						setTimeout(() => {
+							navigate("/adminMain")
+						}, 5500)
+					})
+					.catch(err => notify(err.response?.data?.message, err.response?.status))
+			}, 2000)
+		} else {
+			notify(400, "You have not entered all the information")
+		}
+		
 
 	};
 
