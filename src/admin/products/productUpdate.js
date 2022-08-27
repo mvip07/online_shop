@@ -51,10 +51,10 @@ function ProductUpdate() {
         color3 == "" ? color.push(product.color[2]) : color.push(color3)
         color4 == "" ? color.push(product.color[3]) : color.push(color4)
         color5 == "" ? color.push(product.color[4]) : color.push(color5)
-
+        let img = data.pop()
+        setUpdateImg(img)
         setTimeout(() => {
-            let img = data.pop()
-            setUpdateImg(img)
+            
             API.post(`${updateProduct}`, {
                 "title": title == "" ? product.title : title,
                 "brand": brand == "" ? product.brand : brand,
@@ -78,7 +78,7 @@ function ProductUpdate() {
                     }, 5500)
                 })
                 .catch(err => notify(err.message, err.response?.status))
-        }, 2000)
+        }, 3000)
     };
     return (
         <Wrapper >
