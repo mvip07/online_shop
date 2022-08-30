@@ -45,7 +45,6 @@ function CreateProduct() {
 			color3.trim() !== "" &&
 			color4.trim() !== "" &&
 			color5.trim() !== "" &&
-			image1.trim() !== "" &&
 			title.trim() !== "" &&
 			brand.trim() !== "" &&
 			price.trim() !== "" &&
