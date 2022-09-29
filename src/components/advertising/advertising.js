@@ -47,13 +47,27 @@ function Advertising() {
 											<div className="owl2-item" style={{ minWidth: "100%", marginRight: "0px" }} key={Math.random()}>
 												<div className="yt-content-slide">
 													<Link to="#">
-														<img src={data.image} alt="slider1" className="img-responsive" />
+														{
+															data.type == "video/mp4" ?
+																<video
+																	src={data.image}
+																	alt="slider1"
+																	className="img-responsive"
+																	controls="true"
+																/>
+																:
+																<img
+																	src={data.image}
+																	alt="slider1"
+																	className="img-responsive"
+																/>
+														}
 													</Link>
 												</div>
 											</div>
 										))
 										:
-									<Loader />
+										<Loader />
 								}
 							</div>
 						</div>
