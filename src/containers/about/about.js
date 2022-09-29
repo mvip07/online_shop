@@ -8,20 +8,30 @@ import API from "../../utils/axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { allAboutCompanys, allAboutTeamMembears } from "../../utils/api";
+import Loader from "../../components/loader/loader";
 function About() {
 	const [aboutTeamMembearData, setAboutTeamMembearData] = useState([]);
 	const [aboutCompany, setAboutCompany] = useState([]);
+	const [loaderAC, setLoaderAC] = useState(false)
+	const [loaderATM, setLoaderATM] = useState(false)
+
 	useEffect(() => {
-		API.get(`${allAboutTeamMembears}`)
-			.then((res) => setAboutTeamMembearData(res.data))
+		API.get(allAboutTeamMembears)
+			.then((res) => {
+				setAboutTeamMembearData(res.data)
+				setLoaderATM(true)
+			})
 			.catch((err) => console.log(err));
 
-		API.get(`${allAboutCompanys}`)
-			.then((res) => setAboutCompany(res.data))
+		API.get(allAboutCompanys)
+			.then((res) => {
+				setAboutCompany(res.data)
+				setLoaderAC(true)
+			})
 			.catch((err) => console.log(err));
 	}, []);
 	return (
-		<div>
+		<div style={{ margin: "0px" }}>
 			<Navbar />
 			<div className="main-container container">
 
@@ -42,15 +52,17 @@ function About() {
 							<div className="row">
 								<div className="col-lg-12 col-md-12 about-us-center">
 									<Carousel >
-
 										{
-											aboutCompany.map((data) => {
-												return (
-													<div className="yt-content-slide yt-clearfix yt-content-wrap" key={Math.random()}>
-														<img src={`${data.image}`} alt="About Us" />
-													</div>
-												)
-											})
+											loaderAC == true ?
+												aboutCompany.map((data) => {
+													return (
+														<div className="yt-content-slide yt-clearfix yt-content-wrap" key={Math.random()}>
+															<img src={`${data.image}`} alt="About Us" />
+														</div>
+													)
+												})
+												:
+												<Loader />
 										}
 									</Carousel>
 
@@ -88,15 +100,18 @@ function About() {
 									<div className="our-team-content">
 										<div className="our-team-slider">
 
-												<Wrapper>
-													{
+											<Wrapper>
+												{
+													loaderATM == true ?
 														aboutTeamMembearData.map((data) => {
 															return (
 																<AboutTeamMembearCard data={data} key={Math.random()} />
 															)
 														})
-													}
-												</Wrapper>
+														:
+														<Loader />
+												}
+											</Wrapper>
 										</div>
 									</div>
 								</div>

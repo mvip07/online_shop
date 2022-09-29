@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./css/App.css";
 import "./css/bootstrap/css/bootstrap.css"
 import "./css/font-awesome/css/font-awesome.css"
@@ -31,129 +32,295 @@ import Checkout from "./containers/chekout/chekout"
 import OrderInformation from "./containers/orderInformation/orderInformation"
 import ProductReturn from "./containers/productReturn/productReturn"
 import Contact from "./containers/contact/contact"
-import Faq from "./containers/faq/faq"
+import Faqs from "./containers/faqs/faqs";
+import BlogDetail from "./containers/blog/blogDetail";
 
 import ProductDetail from "./components/product/productDetail"
+
 import PrivateRouter from "./utils/privateRouter"
 import AdminPrivateRouter from "./utils/adminPrivateRouter";
 
 // Admin file da import qilganlar
-import AdminLogin from "./admin/adminLogin";
-import AdminSignup from "./admin/adminSignUp";
-import AdminMain from "./admin/adminMain";
+import AdminLogin from "./admin/containers/adminLogin";
+import AdminSignup from "./admin/containers/adminSignUp";
+import Admin from "./admin/containers/admin";
+import AdminNrandFr from "./utils/adminNrandFr";
 
-import AddProduct from "./admin/products/addProduct";
-import ProductUpdate from "./admin/products/productUpdate";
+import AllProduct from "./admin/containers/products/product"
+import AddProduct from "./admin/containers/products/addProduct"
+import UpdateProduct from "./admin/containers/products/productUpdate"
 
-import AddAdvertising from "./admin/advertising/addAdvertising";
-import AdvertisingUpdate from "./admin/advertising/advertisingUpdate";
+import AllAdvertising from "./admin/containers/advertising/advertising"
+import AddAdvertising from "./admin/containers/advertising/addAdvertising"
+import UpdateAdvertising from "./admin/containers/advertising/advertisingUpdate"
 
-import AddBlog from "./admin/blog/addBlog";
-import UpdateBlog from "./admin/blog/blogUpdate";
+import AllAboutCompany from "./admin/containers/aboutCompany/aboutCompany"
+import AddAboutCompany from "./admin/containers/aboutCompany/addAboutCompany"
+import UpdateAboutCompany from "./admin/containers/aboutCompany/aboutCompanyUpdate"
 
-import AddAboutTeamMembear from "./admin/aboutTeamMembear/addAboutTeamMembear";
-import UpdateAboutTeamMembear  from "./admin/aboutTeamMembear/aboutTeamMemberUpdate";
+import AllAboutTeamMembear from "./admin/containers/aboutTeamMembear/aboutTeamMembear";
+import AddAboutTeamMembear from "./admin/containers/aboutTeamMembear/addAboutTeamMembear";
+import UpdateAboutTeamMembear from "./admin/containers/aboutTeamMembear/aboutTeamMemberUpdate";
 
-import AddAboutCompany from "./admin/aboutCompany/addAboutCompany";
-import UpdateAboutCompany from "./admin/aboutCompany/aboutCompanyUpdate";
+import AllBlog from "./admin/containers/blog/blog"
+import AddBlog from "./admin/containers/blog/addBlog"
+import UpdateBlog from "./admin/containers/blog/blogUpdate"
+
+import AllSearchCategory from "./admin/containers/searchCategory/searchCategory"
+import AddSearchCategory from "./admin/containers/searchCategory/addSearchCategory"
+import UpdateSearchCategory from "./admin/containers/searchCategory/searchCategoryUpdate"
+
+import AllFaq from "./admin/containers/faq/faq"
+import AddFaq from "./admin/containers/faq/addFaq"
+import UpdateFaq from "./admin/containers/faq/faqUpdate"
 
 function App() {
+	const { pathname } = useLocation();
+	let Usertoken = JSON.parse(localStorage.getItem("onlineShopUser"))?.token
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (Usertoken && pathname == "/login") navigate("/");
+	}, [Usertoken, navigate, pathname])
 	return (
 		<Routes>
 			<Route path="/adminLogin"
 				element={
-					<AdminLogin />
+					<AdminNrandFr >
+						<AdminLogin />
+					</AdminNrandFr>
 				}
 			/>
 
 			<Route path="/adminSignUp"
 				element={
-					<AdminSignup />
+					<AdminNrandFr >
+						<AdminSignup />
+					</AdminNrandFr>
 				}
 			/>
 
-			<Route path="/adminMain"
+			<Route path="/admin"
 				element={
 					<AdminPrivateRouter>
-						<AdminMain />
+						<AdminNrandFr >
+							<Admin />
+						</AdminNrandFr >
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/createProduct"
+			<Route path="/all/product"
 				element={
 					<AdminPrivateRouter >
-						<AddProduct />
+						<AdminNrandFr >
+							<AllProduct />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="product/update/:id"
-				element={
-					<ProductUpdate />
-				}
-			/>
-
-			<Route path="/createAdvertising"
+			<Route path="/create/product"
 				element={
 					<AdminPrivateRouter >
-						<AddAdvertising />
+						<AdminNrandFr >
+							<AddProduct />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/advertising/update/:id"
+			<Route path="/product/edit/:id"
 				element={
 					<AdminPrivateRouter >
-						<AdvertisingUpdate />
+						<AdminNrandFr >
+							<UpdateProduct />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/createBlog"
+
+			<Route path="/all/advertising"
 				element={
 					<AdminPrivateRouter >
-						<AddBlog />
+						<AdminNrandFr >
+							<AllAdvertising />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/blog/update/:id"
+			<Route path="/create/advertising"
 				element={
 					<AdminPrivateRouter >
-						<UpdateBlog />
+						<AdminNrandFr >
+							<AddAdvertising />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/createAboutTeamMember"
+			<Route path="/advetising/edit/:id"
 				element={
 					<AdminPrivateRouter >
-						<AddAboutTeamMembear />
+						<AdminNrandFr >
+							<UpdateAdvertising />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/about/team/member/update/:id"
+
+			<Route path="/all/blog"
 				element={
 					<AdminPrivateRouter >
-						<UpdateAboutTeamMembear />
+						<AdminNrandFr >
+							<AllBlog />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/createAboutCompany"
+			<Route path="/create/blog"
 				element={
 					<AdminPrivateRouter >
-						<AddAboutCompany />
+						<AdminNrandFr >
+							<AddBlog />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
 
-			<Route path="/about/company/update/:id"
+			<Route path="/blog/edit/:id"
 				element={
 					<AdminPrivateRouter >
-						<UpdateAboutCompany />
+						<AdminNrandFr >
+							<UpdateBlog />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+
+			<Route path="/all/about/team/member"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AllAboutTeamMembear />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/create/about/team/member"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AddAboutTeamMembear />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/about/team/member/edit/:id"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<UpdateAboutTeamMembear />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+
+			<Route path="/all/about/company"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AllAboutCompany />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/create/about/company"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AddAboutCompany />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/about/company/edit/:id"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<UpdateAboutCompany />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+
+			<Route path="/all/search/category"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AllSearchCategory />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/create/search/category"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AddSearchCategory />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/search/category/edit/:id"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<UpdateSearchCategory />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+
+			<Route path="/all/faq"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AllFaq />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/create/faq"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<AddFaq />
+						</AdminNrandFr>
+					</AdminPrivateRouter>
+				}
+			/>
+
+			<Route path="/faq/edit/:id"
+				element={
+					<AdminPrivateRouter >
+						<AdminNrandFr >
+							<UpdateFaq />
+						</AdminNrandFr>
 					</AdminPrivateRouter>
 				}
 			/>
@@ -262,6 +429,15 @@ function App() {
 				}
 			/>
 
+			<Route path="/blog-detail/:id"
+				element={
+					<PrivateRouter>
+						<BlogDetail />
+					</PrivateRouter>
+				}
+			/>
+
+
 			<Route path="/about"
 				element={
 					<PrivateRouter>
@@ -281,7 +457,7 @@ function App() {
 			<Route path="/faq"
 				element={
 					<PrivateRouter>
-						<Faq />
+						<Faqs />
 					</PrivateRouter>
 				}
 			/>

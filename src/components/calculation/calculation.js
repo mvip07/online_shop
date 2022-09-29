@@ -21,32 +21,32 @@ function Calculation({ data }) {
                 <td className="text-right" colSpan="5">
                     <strong>Products-total:</strong>
                 </td>
-                <td className="text-right">$ {price} </td>
+                <td className="text-right">$ {(price).toFixed(2)} </td>
             </tr>
             <tr>
                 <td className="text-right" colSpan="5">
                     <strong>Flat Shipping Rate:</strong>
                 </td>
-                <td className="text-right">$ {flatShipping}</td>
+                <td className="text-right">$ {(flatShipping).toFixed(2)}</td>
             </tr>
             <tr>
                 <td className="text-right" colSpan="5">
                     <strong>Tax (1%):</strong>
                 </td>
-                <td className="text-right">$ {tax}</td>
+                <td className="text-right">$ {(tax).toFixed(2)}</td>
             </tr>
             <tr>
                 <td className="text-right" colSpan="5">
                     <strong>VAT (20%):</strong>
                 </td>
-                <td className="text-right">$ {vat}</td>
+                <td className="text-right">$ {(vat).toFixed(2)}</td>
             </tr>
             <tr>
                 <td className="text-right" colSpan="5">
                     <strong>Total:</strong>
                 </td>
 
-                <td className="text-right">$ {total}
+                <td className="text-right">$ {(total).toFixed(2)}
                 </td>
             </tr>
         </tbody>

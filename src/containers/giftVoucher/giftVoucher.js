@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AccountAside from "../../components/accountAside/accountAside";
 import Footer from "../../components/footer/footer";
 import Navbar from "../../components/navbar/navbar";
 
@@ -192,52 +193,7 @@ function GiftVoucher() {
               </div>
             </form>
           </div>
-          <aside className="col-sm-3 hidden-xs" id="column-right">
-            <h2 className="subtitle">Account</h2>
-            <div className="list-group">
-              <ul className="list-item">
-                <li>
-                  <Link to="login.html">Login</Link>
-                </li>
-                <li>
-                  <Link to="register.html">Register</Link>
-                </li>
-                <li>
-                  <Link to="#">Forgotten Password</Link>
-                </li>
-                <li>
-                  <Link to="#">My Account</Link>
-                </li>
-                <li>
-                  <Link to="#">Address Books</Link>
-                </li>
-                <li>
-                  <Link to="wishlist.html">Wish List</Link>
-                </li>
-                <li>
-                  <Link to="#">Order History</Link>
-                </li>
-                <li>
-                  <Link to="#">Downloads</Link>
-                </li>
-                <li>
-                  <Link to="#">Reward Points</Link>
-                </li>
-                <li>
-                  <Link to="#">Returns</Link>
-                </li>
-                <li>
-                  <Link to="#">Transactions</Link>
-                </li>
-                <li>
-                  <Link to="#">Newsletter</Link>
-                </li>
-                <li>
-                  <Link to="#">Recurring payments</Link>
-                </li>
-              </ul>
-            </div>
-          </aside>
+          <AccountAside />
         </div>
       </div>
       <Footer />

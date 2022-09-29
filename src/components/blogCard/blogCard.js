@@ -17,7 +17,7 @@ function BlogCard({ data }) {
         <div className="itemBlogContent col-md-8 col-sm-12">
           <div className="article-title">
             <h4>
-              <Link to="/blog-detail">{data.title}</Link>
+              <Link to={`/blog-detail/${data._id}`}>{data.title}</Link>
             </h4>
           </div>
           <div className="article-sub-title">

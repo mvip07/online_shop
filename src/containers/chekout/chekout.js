@@ -6,6 +6,7 @@ import API from "../../utils/axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "../../components/loader/loader";
 
 export const notify = (text, status) => {
 	if (status === 200 || status === 201) toast.success(`${text}`);
@@ -23,6 +24,7 @@ export const notify = (text, status) => {
 function Checkout() {
 	const [cart, setCart] = useState([]);
 	const [userDetail, setUserDetail] = useState({});
+	const [loader, setLoader] = useState(false)
 	const [validOinvalidCardNumber, setvalidOinvalidCardNumber] = useState(false);
 	const [validOinvalidCardDate, setvalidOinvalidCardDate] = useState(false);
 	const [userId, setUserId] = useState(
@@ -49,8 +51,14 @@ function Checkout() {
 			}`
 		);
 		setUserId(JSON.parse(localStorage.getItem("onlineShopUser"))?.user?.id);
-		API.get(`/user/${userId}`).then((res) => setUserDetail(res.data));
-		API.get(`/all/bag/${userId}`).then((res) => setCart(res.data));
+		API.get(`/user/${userId}`)
+			.then((res) => setUserDetail(res.data))
+			.catch(err => console.log(err))
+		API.get(`/all/bag/${userId}`)
+			.then((res) => {
+				setCart(res.data)
+				setLoader(true)
+			});
 	}, [userId, cart]);
 
 	return (
@@ -70,7 +78,6 @@ function Checkout() {
 				</ul>
 
 				<div className="row">
-					{" "}
 					<div id="content" className="col-sm-12">
 						<h2 className="title">Checkout</h2>
 						<div className="so-onepagecheckout ">
@@ -337,8 +344,8 @@ function Checkout() {
 																<input
 																	type="number"
 																	className={`form-control ${validOinvalidCardNumber === false
-																			? "invalid"
-																			: "valid"
+																		? "invalid"
+																		: "valid"
 																		}`}
 																	id="input-payment-card"
 																	placeholder="1234-5678-1234-5678"
@@ -360,8 +367,8 @@ function Checkout() {
 																<input
 																	type="date"
 																	className={`form-control ${validOinvalidCardDate === false
-																			? "invalid"
-																			: "valid"
+																		? "invalid"
+																		: "valid"
 																		}`}
 																	id="input-payment-card"
 																	placeholder="date"
@@ -391,20 +398,25 @@ function Checkout() {
 													<table className="table table-bordered">
 														<thead>
 															<tr>
-																<td className="text-center">Image</td>
-																<td className="text-left">Product Name</td>
-																<td className="text-left">Model</td>
-																<td className="text-left">Color</td>
-																<td className="text-left">Quantity</td>
-																<td className="text-right">Unit Price</td>
-																<td className="text-right">Total</td>
-																<td className="text-center">Button</td>
+																<th className="text-center">Image</th>
+																<th className="text-left">Name</th>
+																<th className="text-left">Model</th>
+																<th className="text-left">Color</th>
+																<th className="text-left">Quantity</th>
+																<th className="text-right">Price</th>
+																<th className="text-right">Total</th>
+																<th className="text-center">Button</th>
 															</tr>
 														</thead>
 														<tbody>
-															{cart.map((data) => (
-																<CheckoutList data={data} key={Math.random()} />
-															))}
+															{
+																loader == true ?
+																	cart.map((data, index) => (
+																		<CheckoutList data={data} key={index} />
+																	))
+																	:
+																	<Loader />
+															}				
 														</tbody>
 													</table>
 													<table className="table table-bordered">

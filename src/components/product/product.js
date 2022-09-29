@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
 	Five,
@@ -12,49 +11,20 @@ import {
 	TwoAndHalf,
 } from "../stars/stars";
 
-function Product({ product }) {
+function Product({ product, AddtoBag, AddtoLike, AddtoComparison }) {
 	const navigate = useNavigate();
-	const [bag, setBag] = useState(
-		JSON.parse(localStorage.getItem("onlineShopCart")) || []
-	  );
-	
-	  const AddtoBag = (product) => {
-		setBag([...bag, product]);
-		localStorage.setItem("onlineShopCart", JSON.stringify([...bag, product]));
-	  };
 	
 	  const bagElements = JSON.parse(localStorage.getItem("onlineShopCart"))?.map(
-		({ id }) => id
+		({ _id }) => _id
 	  );
-	
-	  const [like, setLike] = useState(
-		JSON.parse(localStorage.getItem("onlineShopLike")) || []
-	  );
-	
-	  const AddtoLike = (product) => {
-		setLike([...like, product]);
-		localStorage.setItem("onlineShopLike", JSON.stringify([...like, product]));
-	  };
 	
 	  const LikeElements = JSON.parse(localStorage.getItem("onlineShopLike"))?.map(
-		({ id }) => id
+		({ _id }) => _id
 	  );
-	
-	  const [comparison, setComparison] = useState(
-		JSON.parse(localStorage.getItem("onlineShopComparison")) || []
-	  );
-	
-	  const AddtoComparison = (product) => {
-		setComparison([...comparison, product]);
-		localStorage.setItem(
-		  "onlineShopComparison",
-		  JSON.stringify([...comparison, product])
-		);
-	  };
 	
 	  const ComparisonElements = JSON.parse(
 		localStorage.getItem("onlineShopComparison")
-	  )?.map(({ id }) => id);
+	  )?.map(({ _id }) => _id);
 	
 
 	return (
@@ -77,7 +47,7 @@ function Product({ product }) {
 					<div
 						className="quickview iframe"
 						data-fancybox-type="iframe"
-						onClick={() => navigate(`/productDetail/${product.id}`)}
+						onClick={() => navigate(`/productDetail/${product._id}`)}
 					>
 						Quickview
 					</div>
@@ -99,29 +69,19 @@ function Product({ product }) {
 							{product.stars === "5" ? <Five /> : ""}
 						</div>
 						<div className="price">
-							<span className="price-new">${product.price}</span>
-
-							{
-
-								product.discount === "No" || product.discount === ""
-									?
-									""
-									:
-									<span className="price-old mr-1">$ {Number(((product.price * product.discount) / 100).toFixed(2)) + Number(product.price)}</span>
-							}
-
+							<span className="price-new">$ {product.price}</span>
 						</div>
 					</div>
 					<div className="button-group">
 						<button
-							style={{
-								display: bagElements?.includes(product.id) ? "none" : "",
-							}}
 							className="addToCart"
 							type="button"
 							data-toggle="tooltip"
 							title="Add to Cart"
 							onClick={() => AddtoBag(product)}
+							style={{
+								display: bagElements?.includes(product._id) ? "none" : "",
+							}}
 						>
 							<i className="fa fa-shopping-cart"> </i>
 							<span>Add to Cart</span>
@@ -133,7 +93,7 @@ function Product({ product }) {
 							title="Add to Wish List"
 							onClick={() => AddtoLike(product)}
 							style={{
-								display: LikeElements?.includes(product.id) ? "none" : "",
+								display: LikeElements?.includes(product._id) ? "none" : "",
 							}}
 						>
 							<i className="fa fa-heart"> </i>
@@ -145,7 +105,7 @@ function Product({ product }) {
 							title="Compare this Product"
 							onClick={() => AddtoComparison(product)}
 							style={{
-								display: ComparisonElements?.includes(product.id) ? "none" : "",
+								display: ComparisonElements?.includes(product._id) ? "none" : "",
 							}}
 						>
 							<i className="fa fa-exchange"> </i>

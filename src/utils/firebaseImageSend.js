@@ -1,6 +1,5 @@
-import { storage } from "../admin/firebase"
+import { storage } from "./firebase"
 export let data = []
-
 
 export const send = (image) => {
     const uploadTask = storage.ref(`images/${image.name}`).put(image);

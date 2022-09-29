@@ -1,4 +1,4 @@
-export const host = `https://mirafzal-online-shop.herokuapp.com/`
+export const host = `https://mirafzal-online-shop.herokuapp.com`
 
 export const allProducts = "/all/products"
 export const selectedProduct = "/selected/product"
@@ -30,6 +30,19 @@ export const deleteAboutCompany = "/delete/about/company"
 export const createAboutCompany = "/create/about/company"
 export const updateAboutCompany = "/update/about/company"
 
+export const allSearchCategorys = "/all/categorys"
+export const selectedSearchCategory = "/selected/category"
+export const deleteSearchCategory = "/delete/category"
+export const createSearchCategory = "/create/category"
+export const updateSearchCategory = "/update/category"
+
+export const allFaqs = "/all/faqs"
+export const selectedFaq = "/selected/faq"
+export const deleteFaq = "/delete/faq"
+export const createFaq = "/create/faq"
+export const updateFaq = "/update/faq"
+
+export const userDetail = "/user"
 export const userLogin = "/user/login"
 export const userRegister = "/user/register"
 export const userUpdateAccount = "/user/update/account"

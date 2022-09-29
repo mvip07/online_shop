@@ -2169,6 +2169,7 @@ STRUCTURE
   text-transform: capitalize;
   border-radius: 3px;
   border: none;
+  cursor: pointer;
 }
 
 .button_grey:hover {
@@ -2644,7 +2645,7 @@ STRUCTURE
 
 .yt-content-slider--arrow1 .owl2-controls .owl2-nav div {
   position: absolute;
-  top: 30%;
+  top: 60%;
   outline: 0;
   width: 30px;
   height: 50px;
@@ -2655,7 +2656,13 @@ STRUCTURE
 
 @media (max-width: 768px) {
   .yt-content-slider--arrow1 .owl2-controls .owl2-nav div {
-    top: 20%;
+    top: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .yt-content-slider--arrow1 .owl2-controls .owl2-nav div {
+    top: 70%;
   }
 }
 
@@ -4391,6 +4398,9 @@ h2.title-category {
 
 .products-list .product-layout .left-block .quickview,
 div.tab-slider .ltabs-items-container .ltabs-items .product-layout .left-block .quickview {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
   cursor: pointer;
   display: block;
   text-align: center;
@@ -4400,13 +4410,10 @@ div.tab-slider .ltabs-items-container .ltabs-items .product-layout .left-block .
   font-size: 13px;
   height: 35px;
   line-height: 35px;
-  left: 50%;
-  margin: -21px 0 0 -53px;
   padding: 0;
-  position: absolute;
-  top: 50%;
   width: 107px;
   border-radius: 0;
+  z-index: 100;
 }
 
 .products-list .product-layout .left-block .quickview:hover,
@@ -5207,7 +5214,7 @@ div.tab-slider .ltabs-items-container .list.ltabs-items .product-layout .product
 }
 
 .producttab .tabsslider .nav-tabs li {
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 .producttab .tabsslider .nav-tabs li a {

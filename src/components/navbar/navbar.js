@@ -1,24 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cart from "../cart/cart";
+import API from "../../utils/axios"
+import { allSearchCategorys } from "../../utils/api";
 import {
 	Gb,
 	Lb,
 	Logo,
 } from "../../export/exportImg/exportImg";
-import Calculation from "../calculation/calculation";
 
-function Navbar() {
-	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || []);
-
-	useEffect(() => {
-		if (!localStorage.getItem("onlineShopCart")) {
-			setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
-			
-			
-		}
-	}, [cart])
-
+function Navbar({ setSearch }) {
+	const [cart, setCart] = useState(JSON.parse(localStorage.getItem("onlineShopCart")) || [])
 	const [languageMenu, setLanguageMenu] = useState("none")
 	const [currency, setCurrency] = useState("none")
 	const [more, setMore] = useState("none")
@@ -28,10 +20,15 @@ function Navbar() {
 	const [navbarLeft, setNavbarLeft] = useState(0)
 	const [features, setFeatures] = useState("none")
 	const [cartMenu, setCartMenu] = useState("none")
+	const [searchCategory, setSearchCategory] = useState([])
+	useEffect(() => {
+		setInterval(() => { if (cart) setCart(JSON.parse(localStorage.getItem("onlineShopCart")) || []) }, 1000)
+		API.get(allSearchCategorys)
+			.then(res => setSearchCategory(res.data))
+			.catch(err => console.log(err.data))
+	}, [])
 
-	// style
 	return (
-
 		<header id="header" className="variantleft type_6">
 			<div className="header-top compact-hidden">
 				<div className="container">
@@ -61,7 +58,6 @@ function Navbar() {
 								<form action="/" method="post" id="currency">
 									<Link to="#" className="btn dropdown-toggle" data-toggle="dropdown">
 										<span className="mr-1">US Dollar</span>
-
 										{
 											currency === "none" ?
 												<span className="caret mr-1" onClick={() => setCurrency("block")}></span>
@@ -81,7 +77,6 @@ function Navbar() {
 							<div className="currencies-block" style={{ marginTop: "5px" }}>
 								<Link to="#" className="btn dropdown-toggle" data-toggle="dropdown">
 									<span className="mr-1">More</span>
-
 									{
 										more === "none" ?
 											<span className="caret mr-1" onClick={() => setMore("block")}></span>
@@ -94,12 +89,9 @@ function Navbar() {
 										<li className="account"><Link to="/myAccount" className="top-link-account" title="My Account"> <i className="fa fa-user" ></i> My Account </Link></li>
 										<li className="wishlist"><Link to="/wishlist" className="top-link-wishlist" title="wishlist"><i className="fa fa-heart" ></i> My Wish List</Link></li>
 										<li className="checkout"><Link to="/checkout" className="top-link-checkout" title="Checkout"><i className="fa fa-check-square-o" ></i> Checkout</Link></li>
-										<li className="signin"><Link to="/login" className="top-link-checkout" title="login"><i className="fa fa-lock" ></i> Sign In</Link></li>
-
 									</ul>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
@@ -115,24 +107,19 @@ function Navbar() {
 							<form method="GET" action="/">
 								<div id="search0" className="search input-group">
 									<div className="select_category filter_type icon-select">
-										<select className="no-border" name="category_id">
-											<option value="0">All Categories</option>
-											<option value="78">Apparel</option>
-											<option value="77">Cables &amp; Connectors</option>
-											<option value="82">Cameras &amp; Photo</option>
-											<option value="80">Flashlights &amp; Lamps</option>
-											<option value="81">Mobile Accessories</option>
-											<option value="79">Video Games</option>
-											<option value="20">Jewelry &amp; Watches</option>
-											<option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earings</option>
-											<option value="26">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wedding Rings</option>
-											<option value="27">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Men Watches</option>
+										<select className="no-border" name="category_id p-1" onChange={({target}) => console.log(target.value)}>
+											<option value="allCategories">All Categories</option>
+											{
+												searchCategory.map((data, index) => (
+													<option value={data.categoryName} key={index}>{data.categoryName}</option>
+												))
+											}
 										</select>
 									</div>
 
-									<input className="autosearch-input form-control" type="text" size="50" autoComplete="off" placeholder="Enter keywords to search..." name="search" />
-									<span className="input-group-btn">
-										<button type="submit" className="button-search btn btn-primary" name="submit_search"><i className="fa fa-search"></i></button>
+									<input className="autosearch-input form-control" type="text" size="50" autoComplete="off" placeholder="Enter keywords to search..." name="search" onChange={({ target }) => setSearch(target.value)} />
+									<span className="input-group-btn" >
+										<div className="button-search btn btn-primary" name="submit_search"><i className="fa fa-search"></i></div>
 									</span>
 								</div>
 								<input type="hidden" name="route" value="product/search" />
@@ -149,7 +136,7 @@ function Navbar() {
 						<div className="col-md-2 col-sm-5 col-xs-12 shopping_cart pull-right">
 							<div id="cart" className=" btn-group btn-shopping-cart">
 								<Link
-									to="/"
+									to="#"
 									data-loading-text="Loading..."
 									className="top_cart dropdown-toggle"
 									data-toggle="dropdown"
@@ -175,25 +162,27 @@ function Navbar() {
 										<div>
 											<p className="text-right">
 												<Link className="btn mr-1" to="#" onClick={() => setCartMenu("none")}>
-													<i id="remove-vertical" className="fa fa-times"></i>
+													<i id="remove-vertical" className="fa fa-times"></i>Close
 												</Link>
 												{" "}
 												<Link className="btn view-cart" to="/shoppingCartPage">
-													<i className="fa fa-shopping-cart"> </i>View Cart
+													<i className="fa fa-shopping-cart"> </i>Cart
 												</Link>
 												{"  "}
-												<Link className="btn btn-mega checkout-cart" to="/checkout">
-													<i className="fa fa-share"> </i>Checkout
+												<Link className="btn btn-mega checkout-cart" to="#"
+													onClick={() => {
+														localStorage.removeItem("onlineShopCart");
+														cart([])
+													}}>
+													<i className="fas fa-trash-alt"></i>Delete
 												</Link>
 											</p>
 										</div>
 									</li>
-
 								</ul>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 			<div className="header-bottom">
@@ -219,13 +208,10 @@ function Navbar() {
 
 																	</div>
 																	:
-																	<span className="caret mr-1 bottom" onClick={() => setAllCategories("none")}></span>
+																	<span className="fas fa-times mr-1"style={{fontSize: "16px"}}  onClick={() => setAllCategories("none")}></span>
 															}
 															All Categories
-
 														</div>
-
-
 													</div>
 												</div>
 											</div>
@@ -256,97 +242,19 @@ function Navbar() {
 												<div className="megamenu-pattern">
 													<div className="container">
 														<ul className="megamenu">
-															<li className="item-vertical style1 with-sub-menu hover">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/9.png" alt="icon" />
-																	<span>Automotive &amp; Motocrycle</span>
-																</Link>
+															{
+																searchCategory.map((data) => (
+																	<li className="item-vertical style1 with-sub-menu hover" key={Math.random()}>
+																		<p className="close-menu"></p>
+																		<Link to="#" className="clearfix">
+																			<img src={data.icon} alt="icon" />
+																			<span>{data.categoryName}</span>
+																		</Link>
+																	</li>
+																))
+															}
 
-															</li>
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/10.png" alt="icon" />
-																	<span>Electronic</span>
 
-																</Link>
-															</li>
-															<li className="item-vertical with-sub-menu hover">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<span className="label"></span>
-																	<img src="image/theme/icons/3.png" alt="icon" />
-																	<span>Sports &amp; Outdoors</span>
-																</Link>
-
-															</li>
-															<li className="item-vertical with-sub-menu hover">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/2.png" alt="icon" />
-																	<span>Health &amp; Beauty</span>
-																</Link>
-
-															</li>
-															<li className="item-vertical css-menu with-sub-menu hover">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-
-																	<img src="image/theme/icons/2.png" alt="icon" />
-																	<span>Smartphone &amp; Tablets</span>
-																</Link>
-
-															</li>
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/11.png" alt="icon" />
-																	<span>Flashlights &amp; Lamps</span>
-
-																</Link>
-															</li>
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/4.png" alt="icon" />
-																	<span>Camera &amp; Photo</span>
-																</Link>
-															</li>
-
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/7.png" alt="icon" />
-																	<span>Outdoor &amp; Traveling Supplies</span>
-																</Link>
-															</li>
-
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/8.png" alt="icon" />
-																	<span>Toys &amp; Hobbies </span>
-																</Link>
-															</li>
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/12.png" alt="icon" />
-																	<span>Jewelry &amp; Watches</span>
-																</Link>
-															</li>
-															<li className="item-vertical">
-																<p className="close-menu"></p>
-																<Link to="#" className="clearfix">
-																	<img src="image/theme/icons/13.png" alt="icon" />
-																	<span>Bags, Holiday Supplies</span>
-																</Link>
-															</li>
-															<li className="loadmore">
-																<i className="fa fa-plus-square-o"></i>
-																<span className="more-view">More Categories</span>
-															</li>
 														</ul>
 													</div>
 												</div>
@@ -355,7 +263,6 @@ function Navbar() {
 									</nav>
 								</div>
 							</div>
-
 						</div>
 						<div className="megamenu-hori col-md-9 col-sm-6 col-xs-12 ">
 							<div className="responsive so-megamenu ">
@@ -402,12 +309,10 @@ function Navbar() {
 															<Link to="#" className="clearfix">
 																<strong className="mr-1">Features</strong>
 																{
-
 																	features === "none" ?
 																		<span className="caret mr-1" onClick={() => setFeatures("block")}></span>
 																		:
 																		<span className="caret mr-1 bottom" onClick={() => setFeatures("none")}></span>
-
 																}
 															</Link>
 															<div className="sub-menu" style={{ width: "100%", right: "auto", display: `${features}` }}>
@@ -419,8 +324,9 @@ function Navbar() {
 																				<div>
 																					<ul className="row-list">
 																						<li><Link to="/category">Category</Link></li>
+																						<li><Link to="/shoppingCartPage">Shopping Cart</Link></li>
+																						<li><Link to="/checkout">Checkout</Link></li>
 																					</ul>
-
 																				</div>
 																			</div>
 																		</div>
@@ -429,11 +335,9 @@ function Navbar() {
 																				<Link to="#" className="title-submenu">Shopping pages</Link>
 																				<div>
 																					<ul className="row-list">
-																						<li><Link to="/shoppingCartPage">Shopping Cart</Link></li>
-																						<li><Link to="/checkout">Checkout</Link></li>
+																						<li><Link to="/order-history">Order History</Link></li>
 																						<li><Link to="/compare">Compare</Link></li>
 																						<li><Link to="/wishlist">Wishlist</Link></li>
-
 																					</ul>
 																				</div>
 																			</div>
@@ -443,10 +347,6 @@ function Navbar() {
 																				<Link to="#" className="title-submenu">My Account pages</Link>
 																				<div>
 																					<ul className="row-list">
-																						<li><Link to="/login">Login</Link></li>
-																						<li><Link to="/register">Register</Link></li>
-																						<li><Link to="/myAccount">My Account</Link></li>
-																						<li><Link to="/order-history">Order History</Link></li>
 																						<li><Link to="/order-information">Order Information</Link></li>
 																						<li><Link to="/return">Product Returns</Link></li>
 																						<li><Link to="/gift-voucher">Gift Voucher</Link></li>
