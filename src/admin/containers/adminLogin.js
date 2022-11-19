@@ -66,7 +66,7 @@ function AdminLogin() {
 									<div className="bottom-form" style={bottomForm}>
 										<button
 											className="btn btn-default pull-right col-lg-4"
-											onClick={() => navigate("/adminSingUp")}
+											onClick={() => navigate("/adminSignUp")}
 										>
 											Register
 										</button>

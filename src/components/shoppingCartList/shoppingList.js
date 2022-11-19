@@ -11,7 +11,7 @@ function ShoppingList({ data }) {
 	}, [userId])
 
 	function SaveDatabase (data, choose) {
-		if (choose.quantity !== 0 && choose.totalPrice !== 0 && choose.colorCheck !== "") {
+		if (choose.quantity > 0 && choose.totalPrice > 0 && choose.colorCheck !== "") {
 			API.post(`/create/bag/${userId}`,{
 				userId: userId,
 				productId: data._id,
