@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { notify } from "../../containers/shoppingCartPage/shoppingCart";
 import API from "../../utils/axios";
 function ShoppingList({ data }) {
-	const [choose, setChoose] = useState({ quantity: 0, totalPrice: 0, colorCheck: "" })
+	const [choose, setChoose] = useState({ quantity: 1, totalPrice: 0, colorCheck: "" })
 	const [userId, setUserId] = useState(JSON.parse(localStorage.getItem("onlineShopUser"))?.user.id)
 
 	useEffect(() => {
@@ -11,6 +11,7 @@ function ShoppingList({ data }) {
 	}, [userId])
 
 	function SaveDatabase (data, choose) {
+
 		if (choose.quantity > 0 && choose.totalPrice > 0 && choose.colorCheck !== "") {
 			API.post(`/create/bag/${userId}`,{
 				userId: userId,
@@ -73,7 +74,7 @@ function ShoppingList({ data }) {
 			<td className="text-left" width="200px">
 				<div className="input-group btn-block quantity">
 					<input
-						type="text"
+						type="number"
 						name="quantity"
 						defaultValue={choose.quantity}
 						onChange={({ target }) => setChoose({ quantity: Number(target.value), totalPrice: data.price * target.value, colorCheck: choose.colorCheck })}
