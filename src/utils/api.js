@@ -1,4 +1,4 @@
-export const host = `https://mirafzal-online-shop.herokuapp.com`
+export const host = `https://mvip-online-shop-backend.vercel.app`
 
 export const allProducts = "/all/products"
 export const selectedProduct = "/selected/product"
